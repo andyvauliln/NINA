@@ -22,3 +22,5 @@
 check in a browser only if i asked
 http://localhost:3000/nina-bejo/admin admi panel
 http://localhost:3000/ main
+
+IF YOU UPDATE CODE MAKE RESTART USE ./restart

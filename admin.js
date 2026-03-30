@@ -68,7 +68,8 @@
     ".adm-svg-current{display:flex;gap:10px;margin-bottom:14px;align-items:stretch}",
     ".adm-svg-current-preview{width:40px;flex-shrink:0;background:#181818;border:1px solid #333;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}",
     ".adm-svg-current-preview svg{width:24px;height:auto}",
-    ".adm-svg-current textarea{flex:1;background:#111;border:1px solid #333;border-radius:4px;padding:8px 10px;color:#888;font-family:'Courier New',monospace;font-size:.76rem;resize:vertical;min-height:54px;box-sizing:border-box}",
+    ".adm-svg-current textarea{flex:1;background:#111;border:1px solid #333;border-radius:4px;padding:8px 10px;color:#e0e0e0;font-family:'Courier New',monospace;font-size:.76rem;resize:vertical;min-height:54px;box-sizing:border-box}",
+    ".adm-svg-current textarea:focus{outline:none;border-color:#d4af37}",
 
     ".adm-view-row{display:flex;gap:6px;align-items:center}",
     ".adm-view-row select{flex:1}",
@@ -111,7 +112,11 @@
     '  <div class="adm-field"><label for="adm-ttl">Title</label><input id="adm-ttl" type="text"/></div>',
     '  <div class="adm-field"><label for="adm-desc">Description</label><textarea id="adm-desc"></textarea></div>',
     '  <div class="adm-field"><label for="adm-view">Book View (SVG Style)</label><div class="adm-view-row"><select id="adm-view"></select><button type="button" class="adm-view-new-btn" id="adm-view-new" title="Create new view">+</button></div></div>',
-    '  <div class="adm-svg-current"><div class="adm-svg-current-preview" id="adm-svg-preview"></div><textarea id="adm-svg-code" readonly></textarea></div>',
+    '  <div class="adm-row">',
+    '    <div class="adm-field"><label for="adm-svg-unitw">Spine width (units)</label><input id="adm-svg-unitw" type="number" min="0" max="120" step="1" value="10" title="0 or empty = default 10"/></div>',
+    '    <div class="adm-field"><label for="adm-svg-unith">Spine height (units)</label><input id="adm-svg-unith" type="number" min="0" max="300" step="1" value="100" title="0 or empty = default 100"/></div>',
+    '  </div>',
+    '  <div class="adm-svg-current"><div class="adm-svg-current-preview" id="adm-svg-preview"></div><textarea id="adm-svg-code" spellcheck="false" placeholder="SVG spine; match width/height units above (defaults 10×100 if 0)"></textarea></div>',
     '  <div class="adm-img-section">',
     '    <h3>Main Image</h3>',
     '    <div class="adm-main-area">',
@@ -144,7 +149,9 @@
     '<div id="adm-view-modal">',
     '  <h3 id="adm-view-modal-title">New Book View</h3>',
     '  <div class="adm-view-field"><label for="adm-vn">Name</label><input id="adm-vn" type="text" placeholder="e.g. Crimson"/></div>',
-    '  <div class="adm-view-field"><label for="adm-vsvg">SVG Template</label><textarea id="adm-vsvg" placeholder="Paste SVG elements here (uses 10×100 coordinate space)"></textarea><div class="adm-view-hint">Coordinate space: width=10, height=100. Use rects, paths, circles etc.</div></div>',
+    '  <div class="adm-view-field"><label for="adm-vuw">Spine width (units)</label><input id="adm-vuw" type="number" min="0" max="120" step="1" value="10" title="0 = default 10"/></div>',
+    '  <div class="adm-view-field"><label for="adm-vuh">Spine height (units)</label><input id="adm-vuh" type="number" min="0" max="300" step="1" value="100" title="0 = default 100"/></div>',
+    '  <div class="adm-view-field"><label for="adm-vsvg">SVG Template</label><textarea id="adm-vsvg" placeholder="SVG spine in spine unit space"></textarea><div class="adm-view-hint">Set width/height units to match your SVG (0 uses defaults 10×100).</div></div>',
     '  <div class="adm-view-preview-box" id="adm-view-preview"></div>',
     '  <div class="adm-view-actions">',
     '    <button class="adm-btn adm-btn-save" id="adm-view-save" type="button">Save View</button>',
@@ -175,7 +182,9 @@
     status: document.getElementById("adm-status"),
     viewNewBtn: document.getElementById("adm-view-new"),
     svgPreview: document.getElementById("adm-svg-preview"),
-    svgCode: document.getElementById("adm-svg-code")
+    svgCode: document.getElementById("adm-svg-code"),
+    svgUnitW: document.getElementById("adm-svg-unitw"),
+    svgUnitH: document.getElementById("adm-svg-unith")
   };
 
   var viewEl = {
@@ -183,6 +192,8 @@
     title: document.getElementById("adm-view-modal-title"),
     name: document.getElementById("adm-vn"),
     svgInput: document.getElementById("adm-vsvg"),
+    unitW: document.getElementById("adm-vuw"),
+    unitH: document.getElementById("adm-vuh"),
     preview: document.getElementById("adm-view-preview"),
     saveBtn: document.getElementById("adm-view-save"),
     cancelBtn: document.getElementById("adm-view-cancel"),
@@ -193,6 +204,22 @@
   var editOrigId = "";
   var mainImg = { file: null, path: "", blobUrl: "" };
   var pageImgs = [];
+
+  function clampSvgUnitW(raw) {
+    var n = parseInt(raw, 10);
+    if (!Number.isFinite(n) || n <= 0) return 10;
+    if (n > 120) return 120;
+    if (n < 4) return 4;
+    return n;
+  }
+
+  function clampSvgUnitH(raw) {
+    var n = parseInt(raw, 10);
+    if (!Number.isFinite(n) || n <= 0) return 100;
+    if (n > 300) return 300;
+    if (n < 10) return 10;
+    return n;
+  }
 
   function loadData() {
     return fetch("/api/books-data").then(function (r) { return r.json(); }).then(function (d) {
@@ -216,6 +243,17 @@
     }
   }
 
+  function refreshSvgCodePreview() {
+    var uw = clampSvgUnitW(el.svgUnitW.value);
+    var uh = clampSvgUnitH(el.svgUnitH.value);
+    var svgStr = el.svgCode.value.trim();
+    if (svgStr) {
+      el.svgPreview.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + uw + " " + uh + '">' + svgStr + '</svg>';
+    } else {
+      el.svgPreview.innerHTML = "";
+    }
+  }
+
   function showCurrentViewSvg() {
     var viewId = el.view.value;
     var views = (data && Array.isArray(data.bookViews)) ? data.bookViews : [];
@@ -225,28 +263,61 @@
     }
     var svgStr = found && found.svg ? found.svg : "";
     el.svgCode.value = svgStr;
-    if (svgStr) {
-      el.svgPreview.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100">' + svgStr + '</svg>';
-    } else {
-      el.svgPreview.innerHTML = "";
-    }
+    el.svgUnitW.value = String(clampSvgUnitW(found && found.unitWidth != null ? found.unitWidth : 10));
+    el.svgUnitH.value = String(clampSvgUnitH(found && found.unitHeight != null ? found.unitHeight : 100));
+    refreshSvgCodePreview();
   }
 
   el.view.addEventListener("change", showCurrentViewSvg);
+  el.svgCode.addEventListener("input", refreshSvgCodePreview);
+  el.svgUnitW.addEventListener("input", refreshSvgCodePreview);
+  el.svgUnitW.addEventListener("change", refreshSvgCodePreview);
+  el.svgUnitH.addEventListener("input", refreshSvgCodePreview);
+  el.svgUnitH.addEventListener("change", refreshSvgCodePreview);
+
+  function syncBookViewSvgIfChanged() {
+    var viewId = el.view.value;
+    if (!viewId || !data || !Array.isArray(data.bookViews)) return Promise.resolve();
+    var found = null;
+    for (var i = 0; i < data.bookViews.length; i++) {
+      if (data.bookViews[i].id === viewId) { found = data.bookViews[i]; break; }
+    }
+    if (!found) return Promise.resolve();
+    var newSvg = el.svgCode.value.trim();
+    var newUw = clampSvgUnitW(el.svgUnitW.value);
+    var newUh = clampSvgUnitH(el.svgUnitH.value);
+    var storedUw = clampSvgUnitW(found.unitWidth != null ? found.unitWidth : 10);
+    var storedUh = clampSvgUnitH(found.unitHeight != null ? found.unitHeight : 100);
+    if (found.svg === newSvg && storedUw === newUw && storedUh === newUh) return Promise.resolve();
+    return fetch("/api/book-views/" + encodeURIComponent(viewId), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ svg: newSvg, unitWidth: newUw, unitHeight: newUh })
+    }).then(function (r) {
+      return r.json().then(function (j) {
+        if (!r.ok) throw new Error(j.error || "Failed to update book view template");
+        return j;
+      });
+    }).then(function () { return loadData(); });
+  }
 
   function updateViewPreview() {
+    var uw = clampSvgUnitW(viewEl.unitW.value);
+    var uh = clampSvgUnitH(viewEl.unitH.value);
     var raw = viewEl.svgInput.value.trim();
     if (!raw) {
       viewEl.preview.innerHTML = "";
       return;
     }
-    viewEl.preview.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100">' + raw + '</svg>';
+    viewEl.preview.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + uw + " " + uh + '">' + raw + '</svg>';
   }
 
   function openViewModal() {
     viewEl.title.textContent = "New Book View";
     viewEl.name.value = "";
     viewEl.svgInput.value = "";
+    viewEl.unitW.value = "10";
+    viewEl.unitH.value = "100";
     viewEl.status.textContent = "";
     viewEl.status.className = "adm-view-status";
     viewEl.saveBtn.disabled = false;
@@ -286,7 +357,7 @@
     fetch("/api/book-views", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, name: name, svg: svgContent })
+      body: JSON.stringify({ id: id, name: name, svg: svgContent, unitWidth: clampSvgUnitW(viewEl.unitW.value), unitHeight: clampSvgUnitH(viewEl.unitH.value) })
     })
       .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Save failed"); return j; }); })
       .then(function () {
@@ -306,6 +377,10 @@
   }
 
   viewEl.svgInput.addEventListener("input", updateViewPreview);
+  viewEl.unitW.addEventListener("input", updateViewPreview);
+  viewEl.unitW.addEventListener("change", updateViewPreview);
+  viewEl.unitH.addEventListener("input", updateViewPreview);
+  viewEl.unitH.addEventListener("change", updateViewPreview);
   viewEl.saveBtn.addEventListener("click", saveNewView);
   viewEl.cancelBtn.addEventListener("click", closeViewModal);
   viewOverlay.addEventListener("click", function (e) { if (e.target === viewOverlay) closeViewModal(); });
@@ -576,6 +651,8 @@
     });
 
     Promise.all(uploads).then(function () {
+      return syncBookViewSvgIfChanged();
+    }).then(function () {
       setStatus("Saving book data...", "");
 
       var mainImagePath = mainImg.path || "";
@@ -716,14 +793,59 @@
     "#adm-text-modal h2{font-family:'Fredericka the Great',serif;color:#4a9eff;font-size:1.25rem;margin:0 0 16px;letter-spacing:.08em}",
     "#adm-text-modal textarea{width:100%;min-height:120px;background:#111;border:1px solid #333;border-radius:4px;padding:10px;color:#e0e0e0;font:inherit;font-size:.95rem;resize:vertical;box-sizing:border-box}",
     "#adm-text-modal textarea:focus{outline:none;border-color:#4a9eff}",
-    ".adm-text-actions{display:flex;gap:10px;margin-top:16px}",
     ".adm-text-btn-save{padding:8px 20px;border:none;border-radius:4px;cursor:pointer;font-size:.86rem;font-weight:600;background:#4a9eff;color:#fff}",
     ".adm-text-btn-save:hover{background:#3a8eef}",
     ".adm-text-btn-cancel{padding:8px 20px;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:.86rem;background:none;color:#888}",
     ".adm-text-btn-cancel:hover{border-color:#888;color:#ccc}",
+    ".adm-text-actions-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}",
+    ".adm-text-actions-left{display:flex;gap:10px;flex-wrap:wrap}",
+    ".adm-text-btn-delete{padding:8px 16px;border:1px solid #662222;border-radius:4px;cursor:pointer;font-size:.86rem;background:none;color:#c44}",
+    ".adm-text-btn-delete:hover{border-color:#d4af37;color:#d4af37}",
     ".adm-text-status{margin-top:10px;font-size:.8rem;min-height:1.2em}",
     ".adm-text-status.ok{color:#4caf50}",
-    ".adm-text-status.error{color:#ff4444}"
+    ".adm-text-status.error{color:#ff4444}",
+    "#adm-cat-add-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:3700;display:none;align-items:center;justify-content:center}",
+    "#adm-cat-add-overlay.open{display:flex}",
+    ".adm-cat-modal{background:#1a1a1a;border:1px solid #333;border-radius:8px;width:100%;max-width:480px;padding:28px 24px 24px;position:relative;color:#e0e0e0;font-family:sans-serif}",
+    ".adm-cat-modal h2{font-family:'Fredericka the Great',serif;color:#d4af37;font-size:1.15rem;margin:0 0 16px;letter-spacing:.08em}",
+    ".adm-cat-field{margin-bottom:12px}",
+    ".adm-cat-field label{display:block;font-size:.75rem;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}",
+    ".adm-cat-field input,.adm-cat-field select{width:100%;background:#111;border:1px solid #333;border-radius:4px;padding:8px 10px;color:#e0e0e0;font:inherit;font-size:.9rem;box-sizing:border-box}",
+    ".adm-cat-field input:focus,.adm-cat-field select:focus{outline:none;border-color:#d4af37}",
+    ".adm-cat-actions{display:flex;gap:10px;margin-top:20px}",
+    ".adm-cat-btn-save{padding:8px 20px;border:none;border-radius:4px;cursor:pointer;font-size:.86rem;font-weight:600;background:#d4af37;color:#000}",
+    ".adm-cat-btn-save:hover{background:#e5c048}",
+    ".adm-cat-btn-cancel{padding:8px 20px;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:.86rem;background:none;color:#888}",
+    ".adm-cat-btn-cancel:hover{border-color:#888;color:#ccc}",
+    ".adm-cat-modal-status{margin-top:10px;font-size:.8rem;min-height:1.2em}",
+    ".adm-cat-modal-status.ok{color:#4caf50}",
+    ".adm-cat-modal-status.error{color:#ff4444}",
+    "#adm-ai-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:3600;display:none;align-items:center;justify-content:center}",
+    "#adm-ai-overlay.open{display:flex}",
+    "#adm-ai-modal{background:#1a1a1a;border:1px solid #333;border-radius:8px;width:100%;max-width:700px;padding:24px;color:#e0e0e0;font-family:sans-serif}",
+    "#adm-ai-modal h2{font-family:'Fredericka the Great',serif;color:#d4af37;font-size:1.2rem;margin:0 0 14px;letter-spacing:.08em}",
+    "#adm-ai-modal textarea{width:100%;min-height:170px;background:#111;border:1px solid #333;border-radius:4px;padding:10px;color:#e0e0e0;font:inherit;font-size:.95rem;resize:vertical;box-sizing:border-box}",
+    "#adm-ai-modal textarea:focus,#adm-ai-model:focus,#adm-ai-provider:focus{outline:none;border-color:#d4af37}",
+    "#adm-ai-provider,#adm-ai-model{background:#111;border:1px solid #333;border-radius:4px;padding:8px 10px;color:#e0e0e0;font:inherit;font-size:.9rem;margin-bottom:10px}",
+    ".adm-ai-check{display:flex;align-items:center;gap:8px;margin:2px 0 10px;color:#ccc;font-size:.86rem}",
+    ".adm-ai-check input{accent-color:#d4af37}",
+    ".adm-ai-actions{display:flex;gap:10px;margin-top:14px}",
+    ".adm-ai-run{padding:8px 20px;border:none;border-radius:4px;cursor:pointer;font-size:.86rem;font-weight:600;background:#d4af37;color:#000}",
+    ".adm-ai-run:hover{background:#e5c048}",
+    ".adm-ai-run:disabled{opacity:.55;cursor:default}",
+    ".adm-ai-cancel{padding:8px 20px;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:.86rem;background:none;color:#888}",
+    ".adm-ai-cancel:hover{border-color:#888;color:#ccc}",
+    "#adm-ai-status{margin-top:10px;font-size:.8rem;min-height:1.2em;white-space:pre-wrap}",
+    "#adm-ai-status.ok{color:#4caf50}",
+    "#adm-ai-status.error{color:#ff4444}",
+    "#adm-ai-log-wrap{margin-top:10px}",
+    "#adm-ai-log-pre{max-height:220px;overflow:auto;background:#0a0a0a;border:1px solid #333;border-radius:4px;padding:8px;font-size:.72rem;color:#bbb;white-space:pre-wrap;word-break:break-word;margin:0 0 10px}",
+    ".adm-ai-reload{padding:6px 14px;border:1px solid #d4af37;background:#222;color:#d4af37;border-radius:4px;cursor:pointer;font-size:.82rem}",
+    ".adm-ai-reload:hover{background:#d4af37;color:#000}",
+    ".adm-git-revert-row{margin-top:14px;padding-top:14px;border-top:1px solid #333;display:flex;align-items:center;gap:12px;flex-wrap:wrap}",
+    ".adm-git-revert-go{padding:6px 14px;border:1px solid #b8860b;background:#222;color:#d4af37;border-radius:4px;cursor:pointer;font-size:.82rem}",
+    ".adm-git-revert-go:hover:not(:disabled){background:#d4af37;color:#000}",
+    ".adm-git-revert-go:disabled{opacity:.45;cursor:default}"
   ].join("\n");
   document.head.appendChild(mainStyle);
 
@@ -733,26 +855,282 @@
     '<div id="adm-text-modal">',
     '  <h2 id="adm-text-title">Edit Text</h2>',
     '  <textarea id="adm-text-input"></textarea>',
-    '  <div class="adm-text-actions">',
-    '    <button class="adm-text-btn-save" id="adm-text-save" type="button">Save</button>',
-    '    <button class="adm-text-btn-cancel" id="adm-text-cancel" type="button">Cancel</button>',
+    '  <div class="adm-text-actions-row">',
+    '    <div class="adm-text-actions-left">',
+    '      <button class="adm-text-btn-save" id="adm-text-save" type="button">Save</button>',
+    '      <button class="adm-text-btn-cancel" id="adm-text-cancel" type="button">Cancel</button>',
+    '    </div>',
+    '    <button class="adm-text-btn-delete" id="adm-text-delete" type="button" style="display:none">Delete section</button>',
     '  </div>',
     '  <div class="adm-text-status" id="adm-text-status"></div>',
     '</div>'
   ].join("");
   document.body.appendChild(textOverlay);
 
+  var aiOverlay = document.createElement("div");
+  aiOverlay.id = "adm-ai-overlay";
+  aiOverlay.innerHTML = [
+    '<div id="adm-ai-modal">',
+    '  <h2>Change With AI</h2>',
+    '  <label for="adm-ai-provider" style="display:block;font-size:.75rem;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Engine</label>',
+    '  <select id="adm-ai-provider">',
+    '    <option value="cursor">Cursor</option>',
+    // OpenRouter disabled for now — Cursor only
+    // '    <option value="openrouter">OpenRouter</option>',
+    '  </select>',
+    '  <label for="adm-ai-model" style="display:block;font-size:.75rem;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Model</label>',
+    '  <select id="adm-ai-model">',
+    '    <option value="auto">Auto</option>',
+    '    <option value="gemini-3.1-pro">Gemini 3.1 Pro (Cursor)</option>',
+    '    <option value="claude">claude</option>',
+    '    <option value="gemini">gemini</option>',
+    '  </select>',
+    '  <label class="adm-ai-check"><input id="adm-ai-new-session" type="checkbox"/> New session</label>',
+    '  <label class="adm-ai-check"><input id="adm-ai-commit-after" type="checkbox" checked/> Create git checkpoint after agent finishes</label>',
+    '  <div class="adm-git-revert-row">',
+    '    <label class="adm-ai-check"><input id="adm-git-revert-confirm" type="checkbox"/> Revert last checkpoint (restore previous commit)</label>',
+    '    <button type="button" class="adm-git-revert-go" id="adm-git-revert-now" disabled>Revert now</button>',
+    '  </div>',
+    '  <label for="adm-ai-prompt" style="display:block;font-size:.75rem;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Prompt</label>',
+    '  <textarea id="adm-ai-prompt" placeholder="Describe exactly what should change..."></textarea>',
+    '  <div class="adm-ai-actions">',
+    '    <button class="adm-ai-run" id="adm-ai-run" type="button">Run</button>',
+    '    <button class="adm-ai-cancel" id="adm-ai-cancel" type="button">Cancel</button>',
+    '  </div>',
+    '  <div id="adm-ai-status"></div>',
+    '  <div id="adm-ai-log-wrap" style="display:none">',
+    '    <div style="font-size:.72rem;color:#888;margin-bottom:4px">Agent output (also appended to <code>logs/ai-agent.log</code> on the server)</div>',
+    '    <pre id="adm-ai-log-pre"></pre>',
+    '    <button type="button" class="adm-ai-reload" id="adm-ai-reload">Reload page</button>',
+    '  </div>',
+    '</div>'
+  ].join("");
+  document.body.appendChild(aiOverlay);
+
+  var catAddOverlay = document.createElement("div");
+  catAddOverlay.id = "adm-cat-add-overlay";
+  catAddOverlay.innerHTML = [
+    '<div class="adm-cat-modal">',
+    '  <h2>Add category</h2>',
+    '  <div class="adm-cat-field"><label for="adm-cat-id">Id (slug)</label><input id="adm-cat-id" type="text" placeholder="e.g. sculpture" autocomplete="off"/></div>',
+    '  <div class="adm-cat-field"><label for="adm-cat-title">Display title</label><input id="adm-cat-title" type="text" placeholder="Optional; defaults from id" autocomplete="off"/></div>',
+    '  <div class="adm-cat-actions">',
+    '    <button class="adm-cat-btn-save" id="adm-cat-add-save" type="button">Add</button>',
+    '    <button class="adm-cat-btn-cancel" id="adm-cat-add-cancel" type="button">Cancel</button>',
+    '  </div>',
+    '  <div class="adm-cat-modal-status" id="adm-cat-add-status"></div>',
+    '</div>'
+  ].join("");
+  document.body.appendChild(catAddOverlay);
+
   var textInput = document.getElementById("adm-text-input");
   var textSaveBtn = document.getElementById("adm-text-save");
   var textCancelBtn = document.getElementById("adm-text-cancel");
+  var textDeleteBtn = document.getElementById("adm-text-delete");
   var textTitle = document.getElementById("adm-text-title");
   var textStatusEl = document.getElementById("adm-text-status");
   var textCallback = null;
+  var textDeleteCallback = null;
 
-  function openTextEdit(title, currentValue, cb) {
+  var aiPromptInput = document.getElementById("adm-ai-prompt");
+  var aiProviderSelect = document.getElementById("adm-ai-provider");
+  var aiModelSelect = document.getElementById("adm-ai-model");
+  var aiNewSessionInput = document.getElementById("adm-ai-new-session");
+  var aiCommitAfterInput = document.getElementById("adm-ai-commit-after");
+  var aiGitRevertConfirm = document.getElementById("adm-git-revert-confirm");
+  var aiGitRevertBtn = document.getElementById("adm-git-revert-now");
+  var aiRunBtn = document.getElementById("adm-ai-run");
+  var gitRevertBusy = false;
+  var aiCancelBtn = document.getElementById("adm-ai-cancel");
+  var aiStatusEl = document.getElementById("adm-ai-status");
+  var aiLogWrap = document.getElementById("adm-ai-log-wrap");
+  var aiLogPre = document.getElementById("adm-ai-log-pre");
+  var aiReloadBtn = document.getElementById("adm-ai-reload");
+
+  function showAiLog(text) {
+    aiLogWrap.style.display = "block";
+    aiLogPre.textContent = text || "";
+  }
+
+  function hideAiLog() {
+    aiLogWrap.style.display = "none";
+    aiLogPre.textContent = "";
+  }
+
+  function setAiStatus(text, type) {
+    aiStatusEl.textContent = text || "";
+    aiStatusEl.className = type ? type : "";
+    if (type) aiStatusEl.classList.add(type);
+  }
+
+  function syncRevertUi() {
+    if (!aiGitRevertBtn) return;
+    aiGitRevertBtn.disabled =
+      !aiGitRevertConfirm.checked || gitRevertBusy || aiRunBtn.disabled;
+  }
+
+  function runGitRevert() {
+    if (!aiGitRevertConfirm.checked) {
+      setAiStatus("Check the box to confirm revert.", "error");
+      return;
+    }
+    gitRevertBusy = true;
+    syncRevertUi();
+    setAiStatus("Reverting to previous commit...", "");
+    fetch("/api/admin/git-revert-last", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ confirm: true })
+    })
+      .then(function (r) {
+        return r.text().then(function (text) {
+          var j = {};
+          try {
+            j = text ? JSON.parse(text) : {};
+          } catch (parseErr) {
+            var pe = new Error("Bad response from server (not JSON). First 500 chars:\n" + String(text || "").slice(0, 500));
+            pe.aiPayload = { stdout: text };
+            throw pe;
+          }
+          if (!r.ok) {
+            var e = new Error(j.error || j.stderr || "Revert failed");
+            e.aiPayload = j;
+            throw e;
+          }
+          return j;
+        });
+      })
+      .then(function (j) {
+        setAiStatus(String(j.message || "Reverted. Reloading."), "ok");
+        setTimeout(function () { window.location.reload(); }, 800);
+      })
+      .catch(function (err) {
+        var j = err.aiPayload;
+        var msg = String(err.message || err);
+        if (j && j.stderr) msg += "\n" + j.stderr;
+        setAiStatus(msg, "error");
+      })
+      .finally(function () {
+        gitRevertBusy = false;
+        syncRevertUi();
+      });
+  }
+
+  function openAiModal() {
+    hideAiLog();
+    aiPromptInput.value = "";
+    aiProviderSelect.value = "cursor";
+    aiModelSelect.value = "auto";
+    aiNewSessionInput.checked = false;
+    if (aiCommitAfterInput) aiCommitAfterInput.checked = true;
+    if (aiGitRevertConfirm) aiGitRevertConfirm.checked = false;
+    aiRunBtn.disabled = false;
+    syncRevertUi();
+    setAiStatus("", "");
+    aiOverlay.classList.add("open");
+    aiPromptInput.focus();
+  }
+
+  function closeAiModal() {
+    if (gitRevertBusy) return;
+    if (aiRunBtn.disabled) return;
+    aiOverlay.classList.remove("open");
+  }
+
+  function runAiChange() {
+    var prompt = aiPromptInput.value.trim();
+    var model = aiModelSelect.value || "auto";
+    var provider = aiProviderSelect.value || "cursor";
+    var newSession = aiNewSessionInput.checked;
+    if (!prompt) {
+      setAiStatus("Prompt is required", "error");
+      return;
+    }
+
+    aiRunBtn.disabled = true;
+    syncRevertUi();
+    setAiStatus("Running AI agent...", "");
+
+    fetch("/api/admin/ai-change", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt: prompt,
+        model: model,
+        provider: provider,
+        newSession: newSession,
+        commitAfter: aiCommitAfterInput ? aiCommitAfterInput.checked : true
+      })
+    })
+      .then(function (r) {
+        return r.text().then(function (text) {
+          var j = {};
+          try {
+            j = text ? JSON.parse(text) : {};
+          } catch (parseErr) {
+            var pe = new Error("Bad response from server (not JSON). First 500 chars:\n" + String(text || "").slice(0, 500));
+            pe.aiPayload = { stdout: text };
+            throw pe;
+          }
+          if (!r.ok) {
+            var e = new Error(j.error || j.stderr || "AI run failed");
+            e.aiPayload = j;
+            throw e;
+          }
+          return j;
+        });
+      })
+      .then(function (j) {
+        setAiStatus("Done. Review output below, then click Reload page.", "ok");
+        var gc = j.gitCheckpoint;
+        var gcLine = "";
+        if (gc) {
+          if (gc.ok) gcLine = "Committed: " + (gc.message || "") + ".";
+          else if (gc.skipped) gcLine = "Checkpoint skipped: " + (gc.reason || "") + ".";
+          else gcLine = "Checkpoint failed: " + (gc.error || gc.stderr || "") + ".";
+        }
+        var out = [
+          j.logFile ? "Log file (SSH): " + j.logFile : "",
+          gcLine ? "--- git checkpoint ---\n" + gcLine : "",
+          "--- agent stdout ---",
+          j.agentStdout || "",
+          "--- agent stderr ---",
+          j.agentStderr || "",
+          "--- restart stdout ---",
+          j.restartStdout || "",
+          "--- restart stderr ---",
+          j.restartStderr || ""
+        ].filter(Boolean).join("\n");
+        showAiLog(out);
+        aiRunBtn.disabled = false;
+        syncRevertUi();
+      })
+      .catch(function (err) {
+        var j = err.aiPayload;
+        var msg = String(err.message || err);
+        if (msg === "Failed to fetch" || (err && err.name === "TypeError" && msg.indexOf("fetch") !== -1)) {
+          msg = "Browser could not get a response (connection dropped, timeout, or server busy). The agent may still be running on the server.\n\nOn the server run: tail -f logs/ai-agent.log\n\nTo allow longer runs, set ADMIN_AI_AGENT_TIMEOUT_MS (ms) in the environment and restart.";
+          showAiLog(msg);
+        }
+        if (j && j.logFile) msg += "\nLog file: " + j.logFile;
+        setAiStatus(msg, "error");
+        if (j && (j.stdout || j.stderr)) {
+          showAiLog((j.stderr || "") + "\n" + (j.stdout || ""));
+        }
+        aiRunBtn.disabled = false;
+        syncRevertUi();
+      });
+  }
+
+  function openTextEdit(title, currentValue, cb, opts) {
+    opts = opts || {};
     textTitle.textContent = title;
     textInput.value = currentValue;
     textCallback = cb;
+    textDeleteCallback = typeof opts.onDelete === "function" ? opts.onDelete : null;
+    if (textDeleteBtn) {
+      textDeleteBtn.style.display = textDeleteCallback ? "" : "none";
+    }
     textStatusEl.textContent = "";
     textStatusEl.className = "adm-text-status";
     textOverlay.classList.add("open");
@@ -762,12 +1140,17 @@
   function closeTextEdit() {
     textOverlay.classList.remove("open");
     textCallback = null;
+    textDeleteCallback = null;
+    if (textDeleteBtn) textDeleteBtn.style.display = "none";
   }
 
   textSaveBtn.addEventListener("click", function () {
     if (textCallback) textCallback(textInput.value);
   });
   textCancelBtn.addEventListener("click", closeTextEdit);
+  textDeleteBtn.addEventListener("click", function () {
+    if (textDeleteCallback) textDeleteCallback();
+  });
   textOverlay.addEventListener("click", function (e) {
     if (e.target === textOverlay) closeTextEdit();
   });
@@ -775,6 +1158,69 @@
     if (e.key === "Escape" && textOverlay.classList.contains("open")) {
       e.stopPropagation();
       closeTextEdit();
+    }
+  }, true);
+
+  aiRunBtn.addEventListener("click", runAiChange);
+  if (aiGitRevertConfirm) aiGitRevertConfirm.addEventListener("change", syncRevertUi);
+  if (aiGitRevertBtn) aiGitRevertBtn.addEventListener("click", runGitRevert);
+  aiReloadBtn.addEventListener("click", function () { window.location.reload(); });
+  aiCancelBtn.addEventListener("click", closeAiModal);
+  aiOverlay.addEventListener("click", function (e) {
+    if (e.target === aiOverlay) closeAiModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && aiOverlay.classList.contains("open")) {
+      e.stopPropagation();
+      closeAiModal();
+    }
+  }, true);
+
+  var catAddStatusEl = document.getElementById("adm-cat-add-status");
+  function setCatAddStatus(msg, cls) {
+    catAddStatusEl.textContent = msg || "";
+    catAddStatusEl.className = "adm-cat-modal-status" + (cls ? " " + cls : "");
+  }
+  function openAddCategoryModal() {
+    document.getElementById("adm-cat-id").value = "";
+    document.getElementById("adm-cat-title").value = "";
+    setCatAddStatus("", "");
+    catAddOverlay.classList.add("open");
+    document.getElementById("adm-cat-id").focus();
+  }
+  function closeAddCategoryModal() {
+    catAddOverlay.classList.remove("open");
+  }
+  function submitAddCategory() {
+    var rawId = document.getElementById("adm-cat-id").value.trim().toLowerCase();
+    var title = document.getElementById("adm-cat-title").value.trim();
+    if (!rawId) {
+      setCatAddStatus("Id is required", "error");
+      return;
+    }
+    fetch("/api/categories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: rawId, title: title })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (x) {
+        if (x.ok && x.d.ok) {
+          closeAddCategoryModal();
+          window.location.reload();
+          return;
+        }
+        setCatAddStatus((x.d && x.d.error) || "Failed", "error");
+      })
+      .catch(function () { setCatAddStatus("Request failed", "error"); });
+  }
+  document.getElementById("adm-cat-add-save").addEventListener("click", submitAddCategory);
+  document.getElementById("adm-cat-add-cancel").addEventListener("click", closeAddCategoryModal);
+  catAddOverlay.addEventListener("click", function (e) { if (e.target === catAddOverlay) closeAddCategoryModal(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && catAddOverlay.classList.contains("open")) {
+      e.stopPropagation();
+      closeAddCategoryModal();
     }
   }, true);
 
@@ -896,7 +1342,7 @@
   }
 
   if (adminBar) {
-    adminBar.appendChild(makeAdminBtn("ACTION PHOTO", function (e) {
+    adminBar.appendChild(makeAdminBtn("CANGE RIGHT BOTTOM PHOTO", function (e) {
       e.preventDefault();
       e.stopPropagation();
       openFilePicker(function (file) {
@@ -905,7 +1351,7 @@
         });
       });
     }));
-    adminBar.appendChild(makeAdminBtn("HEADER", function (e) {
+    adminBar.appendChild(makeAdminBtn("CHANGE HEADER PHOTO", function (e) {
       e.preventDefault();
       e.stopPropagation();
       openFilePicker(function (file) {
@@ -914,7 +1360,7 @@
         });
       });
     }));
-    adminBar.appendChild(makeAdminBtn("LOGO", function (e) {
+    adminBar.appendChild(makeAdminBtn("CHANGE LOGO", function (e) {
       e.preventDefault();
       e.stopPropagation();
       openFilePicker(function (file) {
@@ -923,7 +1369,7 @@
         });
       });
     }));
-    adminBar.appendChild(makeAdminBtn("FLOOR", function (e) {
+    adminBar.appendChild(makeAdminBtn("CHANGE FLOOR", function (e) {
       e.preventDefault();
       e.stopPropagation();
       openFilePicker(function (file) {
@@ -931,6 +1377,16 @@
           if (floorImg) floorImg.src = "/" + p;
         });
       });
+    }));
+    adminBar.appendChild(makeAdminBtn("ADD SECTION", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openAddCategoryModal();
+    }));
+    adminBar.appendChild(makeAdminBtn("CHANGE SITE WITH AI", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openAiModal();
     }));
   }
 
@@ -1066,6 +1522,26 @@
           btn.textContent = newTitle;
           closeTextEdit();
         });
+      }, {
+        onDelete: function () {
+          var label = (btn.textContent || "").trim() || catKey;
+          if (!window.confirm("Remove " + label + "? All books in this section will be removed from the site.")) return;
+          fetch("/api/categories/" + encodeURIComponent(catKey), { method: "DELETE" })
+            .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+            .then(function (x) {
+              if (x.ok && x.d.ok) {
+                closeTextEdit();
+                window.location.reload();
+                return;
+              }
+              textStatusEl.textContent = (x.d && x.d.error) || "Failed";
+              textStatusEl.className = "adm-text-status error";
+            })
+            .catch(function () {
+              textStatusEl.textContent = "Request failed";
+              textStatusEl.className = "adm-text-status error";
+            });
+        }
       });
     });
 

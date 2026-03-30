@@ -3,7 +3,9 @@
     {
       "id": "obsidian",
       "name": "Obsidian",
-      "svg": "<rect width=\"10\" height=\"100\" rx=\"0.8\" fill=\"#1a1a1a\"/><rect width=\"1.6\" height=\"100\" fill=\"#000\" opacity=\"0.9\"/><rect x=\"9.2\" width=\"0.8\" height=\"100\" fill=\"#333\" opacity=\"0.65\"/><rect width=\"10\" height=\"3\" fill=\"#444\" opacity=\"0.45\"/>"
+      "svg": "<rect width=\"20\" height=\"100\" rx=\"0.8\" fill=\"#1a1a1a\"/><rect width=\"1.6\" height=\"100\" fill=\"#000\" opacity=\"0.9\"/><rect x=\"19.2\" width=\"0.8\" height=\"100\" fill=\"#333\" opacity=\"0.65\"/><rect width=\"20\" height=\"3\" fill=\"#444\" opacity=\"0.45\"/>",
+      "unitWidth": 20,
+      "unitHeight": 100
     },
     {
       "id": "charcoal",
@@ -32,9 +34,9 @@
     }
   ],
   "main": {
-    "logo": "assets/logo.png",
-    "headerImage": "assets/header.png",
-    "footerImage": "assets/floor.png",
+    "logo": "uploads/main/logo.png",
+    "headerImage": "uploads/main/headerImage.png",
+    "footerImage": "uploads/main/footerImage.png",
     "tattooOverlay": "assets/tattoo-overlay.png",
     "description": "Pause and dive into collections of symbolic illustrations and paintings that capture the energy of the present moment, alongside original tattoo art, murals, and more.",
     "description2": "Immerse yourself in the visual language of the heart, soul, and presence amid a fast-moving world....",
@@ -80,11 +82,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "painting",
-      "title": "Painting",
-      "books": []
     },
     {
       "id": "tattoo",
@@ -167,7 +164,7 @@
           "title": "BOOK #3",
           "style": "obsidian",
           "category": "illustration",
-          "description": "very COOL!",
+          "description": "very COOL! very COOL! very COOL!  very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL! very COOL!",
           "mainImage": "assets/book_cover3.png",
           "pageImages": [
             "assets/book3.page1.png",
@@ -179,14 +176,14 @@
         },
         {
           "id": "illustration-041",
-          "title": "tetest",
+          "title": "Tetest",
           "style": "obsidian",
           "category": "illustration",
-          "description": "test",
+          "description": "test @",
           "mainImage": "uploads/illustration-041/illustration-041.main.png",
           "pageImages": [
             "uploads/illustration-041/illustration-041.page1.mp4",
-            "assets/illustration-041.page.2.png"
+            "uploads/illustration-041/illustration-041.page2.png"
           ]
         }
       ]

@@ -30,6 +30,7 @@
       --floor-h: 210px;
       --header-h: 9.3vw;
       --header-max-h: 117px;
+      --shelf-columns: 5;
       position: relative;
       width: 100%;
       height: 100vh;
@@ -56,7 +57,7 @@
       top: 0;
       height: min(var(--header-max-h), var(--header-h));
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(var(--shelf-columns), 1fr);
       align-items: center;
       padding-top: clamp(10px, 1.6vw, 16px);
       gap: 0;
@@ -144,7 +145,7 @@
       top: min(var(--header-max-h), var(--header-h));
       bottom: calc(var(--floor-h) - 6px);
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(var(--shelf-columns), 1fr);
       align-items: stretch;
       gap: 0;
       width: 100%;
@@ -164,7 +165,7 @@
     .shelf-card::before {
       content: '';
       position: absolute;
-      inset: 0;
+      inset: 4.2% 5.5%;
       border: 1px solid transparent;
       opacity: 0;
       transition: opacity 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -178,25 +179,6 @@
       box-shadow:
         0 0 14px rgba(212, 175, 55, 0.5),
         inset 0 0 14px rgba(212, 175, 55, 0.2);
-    }
-
-    .shelf-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 55% 100% at 0%   50%, rgba(212, 175, 55, 0.22) 0%, transparent 100%),
-        radial-gradient(ellipse 55% 100% at 100% 50%, rgba(212, 175, 55, 0.22) 0%, transparent 100%),
-        radial-gradient(ellipse 100% 45% at 50%  0%,  rgba(245, 215, 120, 0.18) 0%, transparent 100%),
-        radial-gradient(ellipse 100% 45% at 50%  100%, rgba(245, 215, 120, 0.18) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .shelf-card:hover::after {
-      animation: gold-breathe 3s ease-in-out infinite;
     }
 
     @keyframes gold-breathe {
@@ -366,7 +348,7 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #d4af37;
-      text-align: center;
+      text-align: left;
       margin: 0 0 10px;
       padding: 0 6px 4px;
       text-shadow:
@@ -438,6 +420,12 @@
       font-size: 1.14rem;
     }
 
+    .contacts-description-lead {
+      font-family: "Cinzel", serif;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
     .contact-link {
       color: #f3f3f3;
       text-decoration: none;
@@ -468,17 +456,29 @@
       color: #d4af37;
     }
 
-    .book-hover-preview img {
-      display: block;
-      width: 150px;
-      height: 112px;
-      object-fit: cover;
-      border: 0;
-      box-shadow: none;
+    .book-hover-preview-thumb {
+      width: 120px;
+      height: 168px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: #121212;
     }
 
-    .book-hover-preview img.hidden {
+    .book-hover-preview-thumb img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .book-hover-preview-thumb img.hidden {
       display: none;
     }
 
@@ -699,7 +699,9 @@
       z-index: 1001;
       border-radius: 2px;
       pointer-events: none;
-      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      transform-origin: top left;
+      will-change: transform, border-radius;
+      transition: transform 0.62s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.62s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .tattoo-overlay {
@@ -741,13 +743,13 @@
       }
 
       .book-hover-preview-content {
-        grid-template-columns: 120px 1fr;
+        grid-template-columns: 100px 1fr;
         gap: 10px;
       }
 
-      .book-hover-preview img {
-        width: 120px;
-        height: 96px;
+      .book-hover-preview-thumb {
+        width: 100px;
+        height: 140px;
       }
 
       .book-hover-preview-title {
@@ -768,7 +770,9 @@
     <section class="shelves" id="shelves"></section>
     <div class="book-hover-preview" id="book-hover-preview" aria-hidden="true">
       <div class="book-hover-preview-content">
-        <img id="book-hover-preview-image" alt="" />
+        <div class="book-hover-preview-thumb">
+          <img id="book-hover-preview-image" alt="" />
+        </div>
         <div class="book-hover-preview-meta">
           <div class="book-hover-preview-title" id="book-hover-preview-title"></div>
           <div class="book-hover-preview-description" id="book-hover-preview-description"></div>
@@ -777,7 +781,7 @@
     </div>
     <section class="contacts-preview" id="contacts-preview" aria-label="Contact information">
       <div class="default-panel">
-        <p class="contacts-description">
+        <p class="contacts-description contacts-description-lead">
           Pause and dive into collections of symbolic illustrations and paintings that capture the energy of the present moment, alongside original tattoo art, murals, and more.
         </p>
         <p class="contacts-description">
@@ -802,9 +806,9 @@
             <path d="M2 6.5h7.1c2.7 0 4.3 1.3 4.3 3.4 0 1.5-.8 2.5-2 3 1.6.4 2.7 1.7 2.7 3.7 0 2.5-1.9 4-5 4H2V6.5Zm6.4 5.5c1.2 0 1.9-.5 1.9-1.5S9.6 9 8.4 9H5.1v3h3.3Zm.2 5.8c1.4 0 2.2-.6 2.2-1.8 0-1.2-.8-1.8-2.2-1.8H5.1v3.6h3.5ZM15.7 8.3h6.3v1.6h-6.3V8.3Zm.1 4.2c.2-2.8 2.2-4.5 5.1-4.5 3.2 0 5.1 2 5.1 5.5v.8h-6.9c.1 1.4.9 2.3 2.3 2.3 1 0 1.8-.4 2.1-1.2h2.3c-.4 2-2.2 3.4-4.5 3.4-3.3 0-5.7-2.2-5.5-6.3Zm2.4-.2h4.3c-.1-1.3-.8-2.1-2.1-2.1-1.2 0-2 .8-2.2 2.1Z" />
           </svg>
         </a>
-        <a class="social-icon" href="https://dribbble.com" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+        <a class="social-icon" href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm6.9 4.6a8.2 8.2 0 0 0-3.1-2.2 22.8 22.8 0 0 1 1.5 3.1c.5-.2 1-.5 1.6-.9ZM12 3.8c-.8 0-1.6.1-2.3.4.7 1 1.3 2.1 1.9 3.2 1.9-.2 3.7-.6 5.2-1.3a20.9 20.9 0 0 0-1.5-2.7A8.2 8.2 0 0 0 12 3.8Zm-4.7 1.5A8.2 8.2 0 0 0 4 9.9c2 .1 4-.1 5.9-.3-.6-1.1-1.2-2.2-1.9-3.2-.2-.4-.5-.8-.7-1.1ZM3.8 12v-.3c1.9 0 4.4-.2 7.1-.6.2.4.4.8.6 1.2-.3.1-.6.2-.9.3-2.2.8-3.7 2-4.5 3.6A8.1 8.1 0 0 1 3.8 12Zm3.7 5.4c.6-1.2 1.8-2.2 3.6-2.8.3-.1.6-.2.9-.3.5 1.3 1 2.6 1.3 3.9-.4.1-.9.1-1.3.1a8.2 8.2 0 0 1-4.5-1.3Zm6.2.9c-.3-1.3-.8-2.6-1.3-3.9 1.9-.5 4.1-.6 6.3-.2A8.2 8.2 0 0 1 13.7 18.3Zm5.5-5.8c-2.5-.5-4.9-.4-7 .2-.2-.4-.4-.8-.6-1.2l.1-.1c2.9-.4 5.4-1.1 7.3-2.2.8 1.1 1.2 2.4 1.2 3.8Z" />
+            <path d="M13.4 22v-8h2.7l.4-3.1h-3.1V9c0-.9.3-1.6 1.6-1.6h1.7V4.6c-.8-.1-1.6-.2-2.4-.2-2.4 0-4 1.4-4 4.1v2.3H8v3.1h2.3v8h3.1Z" />
           </svg>
         </a>
       </div>
@@ -915,6 +919,25 @@
       return FALLBACK_SVG;
     };
 
+    const getViewUnitWidth = (styleName) => {
+      const view = loadedBookViews.find(v => v.id === styleName);
+      let w = view && Number(view.unitWidth);
+      if (!Number.isFinite(w) || w <= 0) w = 10;
+      return Math.min(120, Math.max(4, Math.round(w)));
+    };
+
+    const getViewUnitHeight = (styleName) => {
+      const view = loadedBookViews.find(v => v.id === styleName);
+      let h = view && Number(view.unitHeight);
+      if (!Number.isFinite(h) || h <= 0) h = 100;
+      return Math.min(300, Math.max(10, Math.round(h)));
+    };
+
+    const getShelfColumnSpan = (styleName) => {
+      const unitW = getViewUnitWidth(styleName);
+      return Math.max(1, Math.min(6, Math.ceil(unitW / 10)));
+    };
+
     const getViewSpineColor = (styleName) => {
       const svgStr = getViewSvg(styleName);
       const m = svgStr.match(/fill="([^"]+)"/);
@@ -950,7 +973,6 @@
       svg += `</filter>`;
       svg += `</defs>`;
 
-      let bookIndex = 0;
       for (let row = 0; row < shelvesCount; row += 1) {
         const shelfY = innerY + row * rowH;
         const shelfLineY = shelfY + rowH - Math.max(5, Math.floor(height * 0.011));
@@ -959,11 +981,24 @@
 
         let cursorX = innerX + 3;
         const rowBottom = shelfLineY;
-        for (let col = 0; col < booksPerRow; col += 1) {
-          const slotIndex = bookIndex;
+        const bookW = Math.max(6, Math.floor(innerW / booksPerRow) - 1);
+        const gapBetween = 1;
+        const rowSkipped = new Set();
+        let col = 0;
+        while (col < booksPerRow) {
+          if (rowSkipped.has(col)) {
+            col += 1;
+            continue;
+          }
+          const slotIndex = row * booksPerRow + col;
           const b = books[slotIndex] || null;
-          bookIndex += 1;
-          const bookW = Math.max(6, Math.floor(innerW / booksPerRow) - 1);
+          const styleKey = b && b.style ? b.style : "";
+          const shelfSpan = getShelfColumnSpan(styleKey);
+          const spanCols = Math.min(shelfSpan, booksPerRow - col);
+          for (let k = 1; k < spanCols; k += 1) {
+            rowSkipped.add(col + k);
+          }
+          const totalW = spanCols * bookW + (spanCols - 1) * gapBetween;
           const sizeSeed = b && b.id ? `${b.id}:${row}:${col}` : `${row}:${col}:${slotIndex}`;
           const heightSeed = hashString(sizeSeed) % 1000;
           const bandSeed = hashString(sizeSeed + ":band") % 3;
@@ -971,9 +1006,11 @@
           const heightRatio = Math.max(0.5, Math.min(0.95, 0.58 + (heightSeed / 1000) * 0.34 + bandOffset));
           const bookH = Math.max(18, Math.floor(rowH * heightRatio));
           const bookY = rowBottom - bookH;
-          const viewSvg = getViewSvg(b && b.style ? b.style : "");
-          const scaleX = bookW / 10;
-          const scaleY = bookH / 100;
+          const viewSvg = getViewSvg(styleKey);
+          const spineUnitW = getViewUnitWidth(styleKey);
+          const spineUnitH = getViewUnitHeight(styleKey);
+          const scaleX = totalW / spineUnitW;
+          const scaleY = bookH / spineUnitH;
           const hasBook = Boolean(b && b.id && b.title);
           const hasId = Boolean(b && b.id);
           if (hasId) {
@@ -985,15 +1022,16 @@
           svg += `<g transform="translate(${cursorX},${bookY}) scale(${scaleX},${scaleY})">`;
           svg += viewSvg;
           svg += `</g>`;
-          if (hasBook && b.title && bookH > 30 && bookW > 10) {
+          if (hasBook && b.title && bookH > 30 && totalW > 10) {
             const safeTitle = escapeXml(String(b.title).toUpperCase());
-            const textX = cursorX + Math.floor(bookW * 0.55);
+            const textX = cursorX + Math.floor(totalW * 0.55);
             const textY = bookY + bookH - 4;
-            const titleSize = Math.max(3.2, Math.min(5, bookW * 0.33));
+            const titleSize = Math.max(3.2, Math.min(5, totalW * 0.33));
             svg += `<text x="${textX}" y="${textY}" fill="#d4af37" stroke="#3b2a08" stroke-width="0.2" font-size="${titleSize}" transform="rotate(-90,${textX},${textY})" font-family="Georgia,serif" opacity="0.96" filter="url(#book-title-shadow)" letter-spacing="0.2">${safeTitle}</text>`;
           }
           svg += `</g>`;
-          cursorX += bookW + 1;
+          cursorX += totalW + gapBetween;
+          col += spanCols;
         }
       }
 
@@ -1218,6 +1256,7 @@
       flyBook.style.top = sourceRect.top + "px";
       flyBook.style.width = sourceRect.width + "px";
       flyBook.style.height = sourceRect.height + "px";
+      flyBook.style.transform = "translate3d(0px, 0px, 0) scale(1, 1)";
       flyBook.style.background = spineColor;
       flyBook.style.boxShadow = "0 4px 24px rgba(0,0,0,0.5)";
       document.body.appendChild(flyBook);
@@ -1228,21 +1267,31 @@
       const targetH = Math.min(520, window.innerHeight * 0.6);
       const targetL = (window.innerWidth - targetW) / 2;
       const targetT = (window.innerHeight - targetH) / 2;
+      const deltaX = targetL - sourceRect.left;
+      const deltaY = targetT - sourceRect.top;
+      const scaleX = targetW / sourceRect.width;
+      const scaleY = targetH / sourceRect.height;
 
-      requestAnimationFrame(() => {
-        flyBook.style.left = targetL + "px";
-        flyBook.style.top = targetT + "px";
-        flyBook.style.width = targetW + "px";
-        flyBook.style.height = targetH + "px";
-        flyBook.style.borderRadius = "4px";
-      });
-
-      setTimeout(() => {
+      let finished = false;
+      const finishOpen = () => {
+        if (finished) return;
+        finished = true;
         flyBook.remove();
         renderBookView();
         bookViewer.viewer.classList.add("visible");
         bookViewer.animating = false;
-      }, 520);
+      };
+
+      flyBook.addEventListener("transitionend", (event) => {
+        if (event.propertyName === "transform") finishOpen();
+      }, { once: true });
+
+      requestAnimationFrame(() => {
+        flyBook.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scaleX}, ${scaleY})`;
+        flyBook.style.borderRadius = "4px";
+      });
+
+      setTimeout(finishOpen, 760);
     };
 
     const closeBookViewer = () => {
@@ -1380,7 +1429,7 @@
       if (main.instagram && socialIcons[0]) socialIcons[0].href = main.instagram;
       if (main.socialLink1 && socialIcons[1]) socialIcons[1].href = main.socialLink1;
       if (main.socialLink2 && socialIcons[2]) socialIcons[2].href = main.socialLink2;
-      if (main.cvLink && cvLink) cvLink.href = main.cvLink;
+      if (main.cvLink && cvLink) cvLink.href = absPath(main.cvLink);
     };
 
     const renderShelves = async () => {
@@ -1393,7 +1442,7 @@
           loadedBookViews = data.bookViews;
         }
         applyMainData(data.main);
-        const rawCategories = Array.isArray(data.categories) ? data.categories.slice(0, 5) : [];
+        const rawCategories = Array.isArray(data.categories) ? data.categories : [];
         const categories = rawCategories
           .map((item) => {
             const key = item.id || item.title || "";
@@ -1406,6 +1455,11 @@
           })
           .filter(Boolean);
 
+        const heroEl = document.querySelector(".hero");
+        if (heroEl) {
+          heroEl.style.setProperty("--shelf-columns", String(Math.max(1, categories.length)));
+        }
+
         createHeaderSections(categories);
 
         categories.forEach((category) => {
@@ -1414,6 +1468,8 @@
       } catch (_error) {
         shelvesRoot.innerHTML = "";
         headerSectionsRoot.innerHTML = "";
+        const heroEl = document.querySelector(".hero");
+        if (heroEl) heroEl.style.removeProperty("--shelf-columns");
       }
     };
 

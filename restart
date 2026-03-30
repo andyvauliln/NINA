@@ -5,17 +5,6 @@ cd "$(dirname "$0")"
 
 NO_UPDATE="${1:-}"
 
-if [[ "$NO_UPDATE" != "--no-update" ]]; then
-  if [[ -n "$(git status --porcelain)" ]]; then
-    echo "Working tree is not clean. Commit or stash changes before update."
-    echo "Or run: ./restart --no-update"
-    exit 1
-  fi
-
-  git fetch origin
-  git pull --ff-only origin main
-  npm install
-fi
 
 systemctl --user restart nina-bejo
 systemctl --user status nina-bejo --no-pager
