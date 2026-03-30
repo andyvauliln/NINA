@@ -41,6 +41,7 @@
     ".adm-page-row{display:flex;gap:10px;align-items:center;margin-bottom:10px;padding:8px;background:#111;border-radius:6px;border:1px solid #222}",
     ".adm-page-num{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:#d4af37;color:#000;font-weight:700;font-size:.82rem;border-radius:50%;flex-shrink:0}",
     ".adm-page-preview{width:100px;height:70px;object-fit:cover;border-radius:4px;background:#222;border:1px solid #333;flex-shrink:0}",
+    ".adm-page-preview video{width:100%;height:100%;object-fit:cover;display:block}",
     ".adm-page-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}",
     ".adm-page-name{font-size:.8rem;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
 
@@ -123,7 +124,7 @@
     '    </div>',
     '  </div>',
     '  <div class="adm-img-section">',
-    '    <h3>Page Images</h3>',
+    '    <h3>Page Media (Image, GIF, Video)</h3>',
     '    <div id="adm-pages"></div>',
     '    <button class="adm-add-page" id="adm-add-page" type="button">+ Add Page</button>',
     '  </div>',
@@ -393,6 +394,42 @@
     }
   }
 
+  function isVideoPath(path) {
+    if (!path) return false;
+    return /\.(mp4|webm|mov|m4v|ogg|ogv)(\?|#|$)/i.test(String(path));
+  }
+
+  function createPagePreview(pg) {
+    var src = pg.blobUrl || resolveImgPath(pg.path) || "";
+    var isVideo = isVideoPath(src) || (pg.file && String(pg.file.type || "").indexOf("video/") === 0);
+    if (isVideo) {
+      var video = document.createElement("video");
+      video.className = "adm-page-preview";
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      if (src) {
+        video.src = src;
+      } else {
+        video.style.display = "none";
+      }
+      video.onloadeddata = function () { this.play().catch(function () {}); };
+      video.onerror = function () { this.style.display = "none"; };
+      return video;
+    }
+
+    var img = document.createElement("img");
+    img.className = "adm-page-preview";
+    if (src) {
+      img.src = src;
+    } else {
+      img.style.display = "none";
+    }
+    img.onerror = function () { this.style.display = "none"; };
+    return img;
+  }
+
   function createPageRow(index) {
     var pg = pageImgs[index];
     var row = document.createElement("div");
@@ -402,11 +439,7 @@
     num.className = "adm-page-num";
     num.textContent = String(index + 1);
 
-    var preview = document.createElement("img");
-    preview.className = "adm-page-preview";
-    var src = pg.blobUrl || resolveImgPath(pg.path) || "";
-    if (src) { preview.src = src; } else { preview.style.display = "none"; }
-    preview.onerror = function () { this.style.display = "none"; };
+    var preview = createPagePreview(pg);
 
     var info = document.createElement("div");
     info.className = "adm-page-info";
@@ -416,7 +449,7 @@
     label.textContent = pg.file || pg.path ? "Replace" : "Choose file";
     var fileInput = document.createElement("input");
     fileInput.type = "file";
-    fileInput.accept = "image/*";
+    fileInput.accept = "image/*,video/*";
     (function (idx, lbl, prev) {
       fileInput.addEventListener("change", function () {
         if (!this.files || !this.files[0]) return;
@@ -424,8 +457,9 @@
         if (pageImgs[idx].blobUrl) URL.revokeObjectURL(pageImgs[idx].blobUrl);
         var url = URL.createObjectURL(f);
         pageImgs[idx] = { file: f, path: "", blobUrl: url };
-        prev.src = url;
-        prev.style.display = "";
+        var newPreview = createPagePreview(pageImgs[idx]);
+        row.replaceChild(newPreview, prev);
+        prev = newPreview;
         lbl.firstChild.textContent = "Replace";
         var nameEl = lbl.parentElement.querySelector(".adm-page-name");
         if (nameEl) nameEl.textContent = f.name;
@@ -523,7 +557,7 @@
     if (!category) { setStatus("Category is required", "error"); return; }
 
     el.saveBtn.disabled = true;
-    setStatus("Uploading images...", "");
+    setStatus("Uploading media...", "");
 
     var uploads = [];
 

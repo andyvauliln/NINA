@@ -248,7 +248,7 @@
       object-fit: cover;
       z-index: 7;
       pointer-events: none;
-      background: linear-gradient(to top, #9f7353 0%, #b98a67 100%);
+      background: #000000;
     }
 
     .floor-logo-right {
@@ -566,7 +566,7 @@
       cursor: pointer;
     }
 
-    .book-page-img {
+    .book-page-media {
       flex: 1;
       min-width: 0;
       height: 100%;
@@ -1063,16 +1063,37 @@
       animating: false
     };
 
+    const isVideoMediaPath = (src) => /\.(mp4|webm|mov|m4v|ogg|ogv)(\?|#|$)/i.test(String(src || ""));
+
+    const createBookPageMediaElement = (src, altText) => {
+      if (isVideoMediaPath(src)) {
+        const video = document.createElement("video");
+        video.src = src;
+        video.className = "book-page-media";
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.onloadeddata = () => video.play().catch(() => {});
+        return video;
+      }
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = altText;
+      img.className = "book-page-media";
+      return img;
+    };
+
     const buildBookViews = (book) => {
       const pages = book.pageImages || [];
       const views = [{
         type: "spread",
-        images: pages[0] ? [book.mainImage, pages[0]] : [book.mainImage]
+        media: pages[0] ? [book.mainImage, pages[0]] : [book.mainImage]
       }];
       for (let i = 1; i < pages.length; i += 2) {
         views.push({
           type: "spread",
-          images: pages[i + 1] ? [pages[i], pages[i + 1]] : [pages[i]]
+          media: pages[i + 1] ? [pages[i], pages[i + 1]] : [pages[i]]
         });
       }
       return views;
@@ -1083,17 +1104,14 @@
       const view = views[viewIndex];
       container.innerHTML = "";
 
-      view.images.forEach((src, i) => {
+      view.media.forEach((src, i) => {
         if (i > 0) {
           const spine = document.createElement("div");
           spine.className = "book-spine-line";
           container.appendChild(spine);
         }
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = book.title;
-        img.className = "book-page-img";
-        container.appendChild(img);
+        const media = createBookPageMediaElement(src, book.title);
+        container.appendChild(media);
       });
 
       hint.textContent = viewIndex < views.length - 1 ? "Click to turn page" : "Click to close";
@@ -1122,24 +1140,31 @@
       const currentView = views[viewIndex];
       const nextView = views[viewIndex + 1];
 
+      const currentHasVideo = currentView.media.some((src) => isVideoMediaPath(src));
+      const nextHasVideo = nextView.media.some((src) => isVideoMediaPath(src));
+      if (currentHasVideo || nextHasVideo) {
+        bookViewer.viewIndex++;
+        renderBookView();
+        bookViewer.animating = false;
+        return;
+      }
+
       const container = bookViewer.container;
       container.innerHTML = "";
-      nextView.images.forEach((src, i) => {
+      nextView.media.forEach((src, i) => {
         if (i > 0) {
           const spine = document.createElement("div");
           spine.className = "book-spine-line";
           container.appendChild(spine);
         }
-        const img = document.createElement("img");
-        img.src = src;
-        img.className = "book-page-img";
-        container.appendChild(img);
+        const media = createBookPageMediaElement(src, "");
+        container.appendChild(media);
       });
 
       const leftStatic = document.createElement("div");
       leftStatic.className = "flip-left-static";
       const leftImg = document.createElement("img");
-      leftImg.src = currentView.images[0];
+      leftImg.src = currentView.media[0];
       leftStatic.appendChild(leftImg);
       viewer.appendChild(leftStatic);
 
@@ -1149,13 +1174,13 @@
       const frontFace = document.createElement("div");
       frontFace.className = "flip-face flip-front";
       const frontImg = document.createElement("img");
-      frontImg.src = currentView.images[1] || currentView.images[0];
+      frontImg.src = currentView.media[1] || currentView.media[0];
       frontFace.appendChild(frontImg);
 
       const backFace = document.createElement("div");
       backFace.className = "flip-face flip-back";
       const backImg = document.createElement("img");
-      backImg.src = nextView.images[0];
+      backImg.src = nextView.media[0];
       backFace.appendChild(backImg);
 
       flipper.appendChild(frontFace);

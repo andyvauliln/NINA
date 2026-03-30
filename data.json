@@ -82,6 +82,11 @@
       ]
     },
     {
+      "id": "painting",
+      "title": "Painting",
+      "books": []
+    },
+    {
       "id": "tattoo",
       "title": "Tattoo",
       "books": [
@@ -170,6 +175,18 @@
             "uploads/illustration-035/illustration-035.page3.png",
             "uploads/illustration-035/illustration-035.page4.png",
             "uploads/illustration-035/illustration-035.page5.png"
+          ]
+        },
+        {
+          "id": "illustration-041",
+          "title": "tetest",
+          "style": "obsidian",
+          "category": "illustration",
+          "description": "test",
+          "mainImage": "uploads/illustration-041/illustration-041.main.png",
+          "pageImages": [
+            "uploads/illustration-041/illustration-041.page1.mp4",
+            "assets/illustration-041.page.2.png"
           ]
         }
       ]

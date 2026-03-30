@@ -2,15 +2,17 @@ const express = require("express");
 const fs = require("fs/promises");
 const path = require("path");
 const multer = require("multer");
+const os = require("os");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || "0.0.0.0";
 const ROOT_DIR = __dirname;
 const DATA_FILE = path.join(ROOT_DIR, "data.json");
 const UPLOADS_DIR = path.join(ROOT_DIR, "uploads");
 
 app.use(express.json());
-app.use(express.static(ROOT_DIR));
+app.use(express.static(ROOT_DIR, { redirect: false }));
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -29,7 +31,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 }
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter(req, file, cb) {
+    const mime = String(file.mimetype || "").toLowerCase();
+    if (mime.startsWith("image/") || mime.startsWith("video/")) {
+      cb(null, true);
+      return;
+    }
+    req.uploadValidationError = "Only image/video files are allowed";
+    cb(null, false);
+  }
 });
 
 const readData = async () => {
@@ -98,11 +109,11 @@ const removeBookFromAllCategories = (data, bookId) => {
   });
 };
 
-app.get("/nina-bejo", (_req, res) => {
+app.get(["/nina-bejo", "/nina-bejo/"], (_req, res) => {
   res.sendFile(path.join(ROOT_DIR, "index.html"));
 });
 
-app.get("/nina-bejo/admin", (_req, res) => {
+app.get(["/nina-bejo/admin", "/nina-bejo/admin/"], (_req, res) => {
   res.sendFile(path.join(ROOT_DIR, "index.html"));
 });
 
@@ -341,6 +352,9 @@ app.put("/api/categories/:id", async (req, res) => {
 
 app.post("/api/books/:id/upload", upload.single("file"), async (req, res) => {
   try {
+    if (req.uploadValidationError) {
+      return res.status(400).json({ error: req.uploadValidationError });
+    }
     if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
     const bookId = req.params.id;
@@ -425,6 +439,21 @@ app.delete("/api/book-views/:id", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}/nina-bejo`);
+app.listen(PORT, HOST, () => {
+  const interfaces = os.networkInterfaces();
+  const ipList = [];
+
+  Object.values(interfaces).forEach((entries) => {
+    (entries || []).forEach((entry) => {
+      if (entry && entry.family === "IPv4" && !entry.internal) {
+        ipList.push(entry.address);
+      }
+    });
+  });
+
+  console.log(`Server running on http://localhost:${PORT}/nina-bejo/`);
+  ipList.forEach((ip) => {
+    console.log(`LAN URL: http://${ip}:${PORT}/nina-bejo/`);
+    console.log(`Admin URL: http://${ip}:${PORT}/nina-bejo/admin/`);
+  });
 });
