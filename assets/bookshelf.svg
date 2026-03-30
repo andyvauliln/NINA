@@ -1,0 +1,716 @@
+<svg id="bookshelf" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 600" width="320" height="600">
+  <defs>
+    <!-- Wood grain texture for shelves -->
+    <pattern id="woodGrain" x="0" y="0" width="40" height="4" patternUnits="userSpaceOnUse">
+      <rect width="40" height="4" fill="#888"/>
+      <line x1="0" y1="1" x2="40" y2="1.5" stroke="#666" stroke-width="0.5" opacity="0.6"/>
+      <line x1="0" y1="2.5" x2="40" y2="2" stroke="#aaa" stroke-width="0.3" opacity="0.4"/>
+    </pattern>
+    <!-- Dark frame fill -->
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="100%" stop-color="#222"/>
+    </linearGradient>
+    <!-- Shelf shadow -->
+    <linearGradient id="shelfShadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <!-- Book page texture (top edge lines) -->
+    <pattern id="pageEdge" x="0" y="0" width="2" height="1" patternUnits="userSpaceOnUse">
+      <rect width="2" height="1" fill="#ddd"/>
+      <line x1="0" y1="0.5" x2="2" y2="0.5" stroke="#bbb" stroke-width="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Cabinet outer frame -->
+  <rect x="0" y="0" width="320" height="600" fill="#111" rx="2"/>
+  <!-- Cabinet inner background -->
+  <rect x="18" y="18" width="284" height="564" fill="#1a1a1a"/>
+
+  <!-- Left side panel -->
+  <rect x="0" y="0" width="22" height="600" fill="url(#frameGrad)"/>
+  <!-- Right side panel -->
+  <rect x="298" y="0" width="22" height="600" fill="url(#frameGrad)"/>
+  <!-- Top panel -->
+  <rect x="0" y="0" width="320" height="22" fill="#111"/>
+  <!-- Bottom panel -->
+  <rect x="0" y="578" width="320" height="22" fill="#111"/>
+
+  <!-- Frame edge highlights -->
+  <rect x="18" y="18" width="284" height="1" fill="#555" opacity="0.5"/>
+  <rect x="18" y="18" width="1" height="564" fill="#555" opacity="0.4"/>
+  <rect x="300" y="18" width="1" height="564" fill="#555" opacity="0.4"/>
+
+  <!-- Inner frame shadow lines -->
+  <rect x="18" y="18" width="284" height="3" fill="#000" opacity="0.6"/>
+  <rect x="18" y="18" width="3" height="564" fill="#000" opacity="0.4"/>
+  <rect x="299" y="18" width="3" height="564" fill="#000" opacity="0.4"/>
+
+  <!-- ===== SHELF 1 (top, y~110) ===== -->
+  <rect x="18" y="108" width="284" height="11" fill="url(#woodGrain)" filter="url(#softShadow)"/>
+  <rect x="18" y="108" width="284" height="3" fill="url(#shelfShadow)"/>
+  <rect x="18" y="116" width="284" height="1" fill="#aaa" opacity="0.15"/>
+
+  <!-- ===== SHELF 2 (y~210) ===== -->
+  <rect x="18" y="208" width="284" height="11" fill="url(#woodGrain)" filter="url(#softShadow)"/>
+  <rect x="18" y="208" width="284" height="3" fill="url(#shelfShadow)"/>
+  <rect x="18" y="216" width="284" height="1" fill="#aaa" opacity="0.15"/>
+
+  <!-- ===== SHELF 3 (y~308) ===== -->
+  <rect x="18" y="308" width="284" height="11" fill="url(#woodGrain)" filter="url(#softShadow)"/>
+  <rect x="18" y="308" width="284" height="3" fill="url(#shelfShadow)"/>
+  <rect x="18" y="316" width="284" height="1" fill="#aaa" opacity="0.15"/>
+
+  <!-- ===== SHELF 4 (y~408) ===== -->
+  <rect x="18" y="408" width="284" height="11" fill="url(#woodGrain)" filter="url(#softShadow)"/>
+  <rect x="18" y="408" width="284" height="3" fill="url(#shelfShadow)"/>
+  <rect x="18" y="416" width="284" height="1" fill="#aaa" opacity="0.15"/>
+
+  <!-- ===== SHELF 5 (y~508) ===== -->
+  <rect x="18" y="508" width="284" height="11" fill="url(#woodGrain)" filter="url(#softShadow)"/>
+  <rect x="18" y="508" width="284" height="3" fill="url(#shelfShadow)"/>
+  <rect x="18" y="516" width="284" height="1" fill="#aaa" opacity="0.15"/>
+
+  <!-- ============================================ -->
+  <!--              ROW 1 BOOKS (y: 25–108)         -->
+  <!-- ============================================ -->
+  <g id="row1">
+    <!-- Book 1 -->
+    <rect x="22" y="35" width="14" height="73" fill="#222" rx="1"/>
+    <rect x="22" y="35" width="2" height="73" fill="#111" opacity="0.9"/>
+    <rect x="35" y="35" width="1" height="73" fill="#444" opacity="0.6"/>
+    <rect x="22" y="35" width="14" height="2" fill="#555" opacity="0.5"/>
+    <line x1="29" y1="42" x2="29" y2="100" stroke="#555" stroke-width="0.4" opacity="0.5"/>
+    <text x="29" y="95" fill="#666" font-size="4.5" transform="rotate(-90,29,95)" font-family="Georgia,serif" opacity="0.7">ETHICS</text>
+    <!-- Book 2 -->
+    <rect x="37" y="40" width="11" height="68" fill="#555" rx="1"/>
+    <rect x="37" y="40" width="2" height="68" fill="#333" opacity="0.8"/>
+    <rect x="47" y="40" width="1" height="68" fill="#777" opacity="0.5"/>
+    <rect x="37" y="40" width="11" height="2" fill="#888" opacity="0.4"/>
+    <!-- Book 3 -->
+    <rect x="49" y="32" width="16" height="76" fill="#333" rx="1"/>
+    <rect x="49" y="32" width="2" height="76" fill="#111" opacity="0.8"/>
+    <rect x="64" y="32" width="1" height="76" fill="#555" opacity="0.5"/>
+    <rect x="49" y="32" width="16" height="2" fill="#666" opacity="0.4"/>
+    <line x1="57" y1="39" x2="57" y2="100" stroke="#666" stroke-width="0.3" opacity="0.5"/>
+    <text x="57" y="98" fill="#777" font-size="4.5" transform="rotate(-90,57,98)" font-family="Georgia,serif" opacity="0.7">COSMOS</text>
+    <!-- Book 4 -->
+    <rect x="66" y="45" width="10" height="63" fill="#1a1a1a" rx="1"/>
+    <rect x="66" y="45" width="1.5" height="63" fill="#000" opacity="0.9"/>
+    <rect x="75" y="45" width="1" height="63" fill="#333" opacity="0.5"/>
+    <rect x="66" y="45" width="10" height="2" fill="#444" opacity="0.4"/>
+    <!-- Book 5 -->
+    <rect x="77" y="30" width="18" height="78" fill="#444" rx="1"/>
+    <rect x="77" y="30" width="2.5" height="78" fill="#222" opacity="0.9"/>
+    <rect x="94" y="30" width="1" height="78" fill="#666" opacity="0.5"/>
+    <rect x="77" y="30" width="18" height="2" fill="#777" opacity="0.4"/>
+    <line x1="86" y1="37" x2="86" y2="100" stroke="#777" stroke-width="0.4" opacity="0.4"/>
+    <text x="86" y="100" fill="#888" font-size="4.5" transform="rotate(-90,86,100)" font-family="Georgia,serif" opacity="0.7">MEDITATIONS</text>
+    <!-- Book 6 -->
+    <rect x="96" y="38" width="12" height="70" fill="#2a2a2a" rx="1"/>
+    <rect x="96" y="38" width="2" height="70" fill="#111" opacity="0.8"/>
+    <rect x="107" y="38" width="1" height="70" fill="#444" opacity="0.5"/>
+    <rect x="96" y="38" width="12" height="2" fill="#555" opacity="0.4"/>
+    <!-- Book 7 -->
+    <rect x="109" y="33" width="15" height="75" fill="#666" rx="1"/>
+    <rect x="109" y="33" width="2" height="75" fill="#444" opacity="0.8"/>
+    <rect x="123" y="33" width="1" height="75" fill="#888" opacity="0.5"/>
+    <rect x="109" y="33" width="15" height="2" fill="#999" opacity="0.4"/>
+    <text x="117" y="97" fill="#333" font-size="4.5" transform="rotate(-90,117,97)" font-family="Georgia,serif" opacity="0.8">FABLES</text>
+    <!-- Book 8 (thick) -->
+    <rect x="125" y="36" width="22" height="72" fill="#1c1c1c" rx="1"/>
+    <rect x="125" y="36" width="3" height="72" fill="#000" opacity="0.9"/>
+    <rect x="146" y="36" width="1" height="72" fill="#333" opacity="0.5"/>
+    <rect x="125" y="36" width="22" height="2" fill="#444" opacity="0.4"/>
+    <line x1="136" y1="43" x2="136" y2="100" stroke="#555" stroke-width="0.3" opacity="0.4"/>
+    <text x="136" y="99" fill="#555" font-size="4.5" transform="rotate(-90,136,99)" font-family="Georgia,serif" opacity="0.7">THE REPUBLIC</text>
+    <!-- Book 9 -->
+    <rect x="148" y="42" width="11" height="66" fill="#3a3a3a" rx="1"/>
+    <rect x="148" y="42" width="1.5" height="66" fill="#222" opacity="0.8"/>
+    <rect x="158" y="42" width="1" height="66" fill="#555" opacity="0.4"/>
+    <rect x="148" y="42" width="11" height="2" fill="#666" opacity="0.4"/>
+    <!-- Book 10 -->
+    <rect x="160" y="34" width="14" height="74" fill="#555" rx="1"/>
+    <rect x="160" y="34" width="2" height="74" fill="#333" opacity="0.8"/>
+    <rect x="173" y="34" width="1" height="74" fill="#777" opacity="0.5"/>
+    <rect x="160" y="34" width="14" height="2" fill="#888" opacity="0.4"/>
+    <text x="167" y="97" fill="#333" font-size="4.5" transform="rotate(-90,167,97)" font-family="Georgia,serif" opacity="0.8">MYTHS</text>
+    <!-- Book 11 -->
+    <rect x="175" y="37" width="13" height="71" fill="#2e2e2e" rx="1"/>
+    <rect x="175" y="37" width="2" height="71" fill="#111" opacity="0.8"/>
+    <rect x="187" y="37" width="1" height="71" fill="#444" opacity="0.5"/>
+    <rect x="175" y="37" width="13" height="2" fill="#555" opacity="0.4"/>
+    <!-- Book 12 -->
+    <rect x="189" y="43" width="10" height="65" fill="#111" rx="1"/>
+    <rect x="189" y="43" width="1.5" height="65" fill="#000" opacity="0.9"/>
+    <rect x="198" y="43" width="1" height="65" fill="#333" opacity="0.4"/>
+    <rect x="189" y="43" width="10" height="2" fill="#444" opacity="0.4"/>
+    <!-- Book 13 -->
+    <rect x="200" y="30" width="17" height="78" fill="#444" rx="1"/>
+    <rect x="200" y="30" width="2" height="78" fill="#222" opacity="0.9"/>
+    <rect x="216" y="30" width="1" height="78" fill="#666" opacity="0.5"/>
+    <rect x="200" y="30" width="17" height="2" fill="#777" opacity="0.4"/>
+    <text x="209" y="98" fill="#222" font-size="4.5" transform="rotate(-90,209,98)" font-family="Georgia,serif" opacity="0.8">HISTORIES</text>
+    <!-- Book 14 -->
+    <rect x="218" y="38" width="12" height="70" fill="#262626" rx="1"/>
+    <rect x="218" y="38" width="2" height="70" fill="#111" opacity="0.8"/>
+    <rect x="229" y="38" width="1" height="70" fill="#444" opacity="0.5"/>
+    <rect x="218" y="38" width="12" height="2" fill="#555" opacity="0.4"/>
+    <!-- Book 15 -->
+    <rect x="231" y="35" width="16" height="73" fill="#777" rx="1"/>
+    <rect x="231" y="35" width="2" height="73" fill="#555" opacity="0.8"/>
+    <rect x="246" y="35" width="1" height="73" fill="#999" opacity="0.5"/>
+    <rect x="231" y="35" width="16" height="2" fill="#bbb" opacity="0.3"/>
+    <text x="239" y="96" fill="#333" font-size="4.5" transform="rotate(-90,239,96)" font-family="Georgia,serif" opacity="0.9">POEMS</text>
+    <!-- Book 16 -->
+    <rect x="248" y="40" width="11" height="68" fill="#1a1a1a" rx="1"/>
+    <rect x="248" y="40" width="1.5" height="68" fill="#000" opacity="0.9"/>
+    <rect x="258" y="40" width="1" height="68" fill="#333" opacity="0.4"/>
+    <rect x="248" y="40" width="11" height="2" fill="#444" opacity="0.4"/>
+    <!-- Book 17 -->
+    <rect x="260" y="32" width="15" height="76" fill="#333" rx="1"/>
+    <rect x="260" y="32" width="2" height="76" fill="#111" opacity="0.8"/>
+    <rect x="274" y="32" width="1" height="76" fill="#555" opacity="0.5"/>
+    <rect x="260" y="32" width="15" height="2" fill="#666" opacity="0.4"/>
+    <text x="268" y="97" fill="#666" font-size="4.5" transform="rotate(-90,268,97)" font-family="Georgia,serif" opacity="0.7">ATLAS</text>
+    <!-- Book 18 -->
+    <rect x="276" y="37" width="20" height="71" fill="#555" rx="1"/>
+    <rect x="276" y="37" width="2.5" height="71" fill="#333" opacity="0.9"/>
+    <rect x="295" y="37" width="1" height="71" fill="#777" opacity="0.5"/>
+    <rect x="276" y="37" width="20" height="2" fill="#888" opacity="0.4"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!--              ROW 2 BOOKS (y: 120–208)        -->
+  <!-- ============================================ -->
+  <g id="row2">
+    <rect x="22" y="125" width="16" height="83" fill="#444" rx="1"/>
+    <rect x="22" y="125" width="2" height="83" fill="#222" opacity="0.9"/>
+    <rect x="37" y="125" width="1" height="83" fill="#666" opacity="0.5"/>
+    <rect x="22" y="125" width="16" height="2" fill="#777" opacity="0.4"/>
+    <text x="30" y="195" fill="#777" font-size="4.5" transform="rotate(-90,30,195)" font-family="Georgia,serif" opacity="0.7">VOYAGE</text>
+
+    <rect x="39" y="130" width="12" height="78" fill="#222" rx="1"/>
+    <rect x="39" y="130" width="1.5" height="78" fill="#000" opacity="0.9"/>
+    <rect x="50" y="130" width="1" height="78" fill="#444" opacity="0.4"/>
+    <rect x="39" y="130" width="12" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="52" y="122" width="18" height="86" fill="#666" rx="1"/>
+    <rect x="52" y="122" width="2.5" height="86" fill="#444" opacity="0.8"/>
+    <rect x="69" y="122" width="1" height="86" fill="#888" opacity="0.5"/>
+    <rect x="52" y="122" width="18" height="2" fill="#999" opacity="0.4"/>
+    <text x="61" y="195" fill="#333" font-size="4.5" transform="rotate(-90,61,195)" font-family="Georgia,serif" opacity="0.8">TESTAMENT</text>
+
+    <rect x="71" y="132" width="10" height="76" fill="#1a1a1a" rx="1"/>
+    <rect x="71" y="132" width="1.5" height="76" fill="#000" opacity="0.9"/>
+    <rect x="80" y="132" width="1" height="76" fill="#333" opacity="0.4"/>
+    <rect x="71" y="132" width="10" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="82" y="124" width="20" height="84" fill="#333" rx="1"/>
+    <rect x="82" y="124" width="3" height="84" fill="#111" opacity="0.9"/>
+    <rect x="101" y="124" width="1" height="84" fill="#555" opacity="0.5"/>
+    <rect x="82" y="124" width="20" height="2" fill="#666" opacity="0.4"/>
+    <text x="92" y="195" fill="#666" font-size="4.5" transform="rotate(-90,92,195)" font-family="Georgia,serif" opacity="0.7">THE ORIGIN</text>
+
+    <rect x="103" y="128" width="14" height="80" fill="#555" rx="1"/>
+    <rect x="103" y="128" width="2" height="80" fill="#333" opacity="0.8"/>
+    <rect x="116" y="128" width="1" height="80" fill="#777" opacity="0.5"/>
+    <rect x="103" y="128" width="14" height="2" fill="#888" opacity="0.4"/>
+    <text x="110" y="196" fill="#333" font-size="4.5" transform="rotate(-90,110,196)" font-family="Georgia,serif" opacity="0.8">LOGIC</text>
+
+    <rect x="118" y="120" width="12" height="88" fill="#2a2a2a" rx="1"/>
+    <rect x="118" y="120" width="1.5" height="88" fill="#111" opacity="0.8"/>
+    <rect x="129" y="120" width="1" height="88" fill="#444" opacity="0.4"/>
+    <rect x="118" y="120" width="12" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="131" y="126" width="17" height="82" fill="#777" rx="1"/>
+    <rect x="131" y="126" width="2" height="82" fill="#555" opacity="0.8"/>
+    <rect x="147" y="126" width="1" height="82" fill="#999" opacity="0.5"/>
+    <rect x="131" y="126" width="17" height="2" fill="#aaa" opacity="0.3"/>
+    <text x="140" y="195" fill="#333" font-size="4.5" transform="rotate(-90,140,195)" font-family="Georgia,serif" opacity="0.9">PARABLES</text>
+
+    <rect x="149" y="131" width="11" height="77" fill="#111" rx="1"/>
+    <rect x="149" y="131" width="1.5" height="77" fill="#000" opacity="0.9"/>
+    <rect x="159" y="131" width="1" height="77" fill="#333" opacity="0.4"/>
+    <rect x="149" y="131" width="11" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="161" y="124" width="15" height="84" fill="#444" rx="1"/>
+    <rect x="161" y="124" width="2" height="84" fill="#222" opacity="0.9"/>
+    <rect x="175" y="124" width="1" height="84" fill="#666" opacity="0.5"/>
+    <rect x="161" y="124" width="15" height="2" fill="#777" opacity="0.4"/>
+    <text x="169" y="194" fill="#777" font-size="4.5" transform="rotate(-90,169,194)" font-family="Georgia,serif" opacity="0.7">RITES</text>
+
+    <rect x="177" y="129" width="13" height="79" fill="#222" rx="1"/>
+    <rect x="177" y="129" width="1.5" height="79" fill="#000" opacity="0.9"/>
+    <rect x="189" y="129" width="1" height="79" fill="#444" opacity="0.4"/>
+    <rect x="177" y="129" width="13" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="191" y="133" width="10" height="75" fill="#555" rx="1"/>
+    <rect x="191" y="133" width="1.5" height="75" fill="#333" opacity="0.8"/>
+    <rect x="200" y="133" width="1" height="75" fill="#777" opacity="0.4"/>
+    <rect x="191" y="133" width="10" height="2" fill="#888" opacity="0.4"/>
+
+    <rect x="202" y="122" width="19" height="86" fill="#333" rx="1"/>
+    <rect x="202" y="122" width="2.5" height="86" fill="#111" opacity="0.9"/>
+    <rect x="220" y="122" width="1" height="86" fill="#555" opacity="0.5"/>
+    <rect x="202" y="122" width="19" height="2" fill="#666" opacity="0.4"/>
+    <text x="212" y="195" fill="#666" font-size="4.5" transform="rotate(-90,212,195)" font-family="Georgia,serif" opacity="0.7">DISCOURSE</text>
+
+    <rect x="222" y="127" width="14" height="81" fill="#666" rx="1"/>
+    <rect x="222" y="127" width="2" height="81" fill="#444" opacity="0.8"/>
+    <rect x="235" y="127" width="1" height="81" fill="#888" opacity="0.5"/>
+    <rect x="222" y="127" width="14" height="2" fill="#999" opacity="0.4"/>
+    <text x="229" y="195" fill="#333" font-size="4.5" transform="rotate(-90,229,195)" font-family="Georgia,serif" opacity="0.8">ANNALS</text>
+
+    <rect x="237" y="123" width="16" height="85" fill="#1c1c1c" rx="1"/>
+    <rect x="237" y="123" width="2" height="85" fill="#000" opacity="0.9"/>
+    <rect x="252" y="123" width="1" height="85" fill="#333" opacity="0.4"/>
+    <rect x="237" y="123" width="16" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="254" y="130" width="11" height="78" fill="#444" rx="1"/>
+    <rect x="254" y="130" width="1.5" height="78" fill="#222" opacity="0.8"/>
+    <rect x="264" y="130" width="1" height="78" fill="#666" opacity="0.5"/>
+    <rect x="254" y="130" width="11" height="2" fill="#777" opacity="0.4"/>
+
+    <rect x="266" y="125" width="15" height="83" fill="#888" rx="1"/>
+    <rect x="266" y="125" width="2" height="83" fill="#666" opacity="0.8"/>
+    <rect x="280" y="125" width="1" height="83" fill="#aaa" opacity="0.5"/>
+    <rect x="266" y="125" width="15" height="2" fill="#bbb" opacity="0.3"/>
+    <text x="274" y="195" fill="#333" font-size="4.5" transform="rotate(-90,274,195)" font-family="Georgia,serif" opacity="0.9">LETTERS</text>
+
+    <rect x="282" y="128" width="14" height="80" fill="#2a2a2a" rx="1"/>
+    <rect x="282" y="128" width="2" height="80" fill="#111" opacity="0.9"/>
+    <rect x="295" y="128" width="1" height="80" fill="#444" opacity="0.4"/>
+    <rect x="282" y="128" width="14" height="2" fill="#555" opacity="0.4"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!--              ROW 3 BOOKS (y: 220–308)        -->
+  <!-- ============================================ -->
+  <g id="row3">
+    <rect x="22" y="225" width="18" height="83" fill="#555" rx="1"/>
+    <rect x="22" y="225" width="2.5" height="83" fill="#333" opacity="0.9"/>
+    <rect x="39" y="225" width="1" height="83" fill="#777" opacity="0.5"/>
+    <rect x="22" y="225" width="18" height="2" fill="#888" opacity="0.4"/>
+    <text x="31" y="294" fill="#333" font-size="4.5" transform="rotate(-90,31,294)" font-family="Georgia,serif" opacity="0.8">SAGAS</text>
+
+    <rect x="41" y="230" width="11" height="78" fill="#1c1c1c" rx="1"/>
+    <rect x="41" y="230" width="1.5" height="78" fill="#000" opacity="0.9"/>
+    <rect x="51" y="230" width="1" height="78" fill="#333" opacity="0.4"/>
+    <rect x="41" y="230" width="11" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="53" y="222" width="15" height="86" fill="#333" rx="1"/>
+    <rect x="53" y="222" width="2" height="86" fill="#111" opacity="0.9"/>
+    <rect x="67" y="222" width="1" height="86" fill="#555" opacity="0.5"/>
+    <rect x="53" y="222" width="15" height="2" fill="#666" opacity="0.4"/>
+    <text x="61" y="294" fill="#666" font-size="4.5" transform="rotate(-90,61,294)" font-family="Georgia,serif" opacity="0.7">SHADOWS</text>
+
+    <rect x="69" y="228" width="13" height="80" fill="#666" rx="1"/>
+    <rect x="69" y="228" width="2" height="80" fill="#444" opacity="0.8"/>
+    <rect x="81" y="228" width="1" height="80" fill="#888" opacity="0.5"/>
+    <rect x="69" y="228" width="13" height="2" fill="#999" opacity="0.4"/>
+    <text x="76" y="296" fill="#333" font-size="4.5" transform="rotate(-90,76,296)" font-family="Georgia,serif" opacity="0.8">RUINS</text>
+
+    <rect x="83" y="221" width="20" height="87" fill="#222" rx="1"/>
+    <rect x="83" y="221" width="3" height="87" fill="#000" opacity="0.9"/>
+    <rect x="102" y="221" width="1" height="87" fill="#444" opacity="0.5"/>
+    <rect x="83" y="221" width="20" height="2" fill="#555" opacity="0.4"/>
+    <text x="93" y="294" fill="#555" font-size="4.5" transform="rotate(-90,93,294)" font-family="Georgia,serif" opacity="0.7">THE ODYSSEY</text>
+
+    <rect x="104" y="226" width="12" height="82" fill="#444" rx="1"/>
+    <rect x="104" y="226" width="2" height="82" fill="#222" opacity="0.8"/>
+    <rect x="115" y="226" width="1" height="82" fill="#666" opacity="0.5"/>
+    <rect x="104" y="226" width="12" height="2" fill="#777" opacity="0.4"/>
+    <text x="110" y="295" fill="#777" font-size="4.5" transform="rotate(-90,110,295)" font-family="Georgia,serif" opacity="0.7">ORACLE</text>
+
+    <rect x="117" y="223" width="14" height="85" fill="#888" rx="1"/>
+    <rect x="117" y="223" width="2" height="85" fill="#666" opacity="0.8"/>
+    <rect x="130" y="223" width="1" height="85" fill="#aaa" opacity="0.5"/>
+    <rect x="117" y="223" width="14" height="2" fill="#bbb" opacity="0.3"/>
+    <text x="124" y="295" fill="#333" font-size="4.5" transform="rotate(-90,124,295)" font-family="Georgia,serif" opacity="0.9">CANTOS</text>
+
+    <!-- Featured book -->
+    <rect x="132" y="220" width="20" height="88" fill="#ddd" rx="1"/>
+    <rect x="132" y="220" width="3" height="88" fill="#aaa" opacity="0.9"/>
+    <rect x="151" y="220" width="1" height="88" fill="#fff" opacity="0.6"/>
+    <rect x="132" y="220" width="20" height="2" fill="#fff" opacity="0.5"/>
+    <line x1="136" y1="228" x2="136" y2="305" stroke="#999" stroke-width="0.4" opacity="0.4"/>
+    <text x="143" y="294" fill="#111" font-size="5" transform="rotate(-90,143,294)" font-family="Georgia,serif" font-weight="bold" opacity="0.9">CLASSICS</text>
+
+    <rect x="153" y="228" width="11" height="80" fill="#1a1a1a" rx="1"/>
+    <rect x="153" y="228" width="1.5" height="80" fill="#000" opacity="0.9"/>
+    <rect x="163" y="228" width="1" height="80" fill="#333" opacity="0.4"/>
+    <rect x="153" y="228" width="11" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="165" y="224" width="15" height="84" fill="#555" rx="1"/>
+    <rect x="165" y="224" width="2" height="84" fill="#333" opacity="0.8"/>
+    <rect x="179" y="224" width="1" height="84" fill="#777" opacity="0.5"/>
+    <rect x="165" y="224" width="15" height="2" fill="#888" opacity="0.4"/>
+    <text x="173" y="294" fill="#888" font-size="4.5" transform="rotate(-90,173,294)" font-family="Georgia,serif" opacity="0.7">TOMES</text>
+
+    <rect x="181" y="230" width="12" height="78" fill="#2a2a2a" rx="1"/>
+    <rect x="181" y="230" width="2" height="78" fill="#111" opacity="0.8"/>
+    <rect x="192" y="230" width="1" height="78" fill="#444" opacity="0.4"/>
+    <rect x="181" y="230" width="12" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="194" y="223" width="17" height="85" fill="#777" rx="1"/>
+    <rect x="194" y="223" width="2" height="85" fill="#555" opacity="0.8"/>
+    <rect x="210" y="223" width="1" height="85" fill="#999" opacity="0.5"/>
+    <rect x="194" y="223" width="17" height="2" fill="#aaa" opacity="0.3"/>
+    <text x="203" y="294" fill="#333" font-size="4.5" transform="rotate(-90,203,294)" font-family="Georgia,serif" opacity="0.9">EDICTS</text>
+
+    <rect x="212" y="227" width="10" height="81" fill="#333" rx="1"/>
+    <rect x="212" y="227" width="1.5" height="81" fill="#111" opacity="0.9"/>
+    <rect x="221" y="227" width="1" height="81" fill="#555" opacity="0.4"/>
+    <rect x="212" y="227" width="10" height="2" fill="#666" opacity="0.4"/>
+
+    <rect x="223" y="222" width="16" height="86" fill="#444" rx="1"/>
+    <rect x="223" y="222" width="2" height="86" fill="#222" opacity="0.9"/>
+    <rect x="238" y="222" width="1" height="86" fill="#666" opacity="0.5"/>
+    <rect x="223" y="222" width="16" height="2" fill="#777" opacity="0.4"/>
+    <text x="231" y="294" fill="#777" font-size="4.5" transform="rotate(-90,231,294)" font-family="Georgia,serif" opacity="0.7">SCROLLS</text>
+
+    <rect x="240" y="228" width="13" height="80" fill="#666" rx="1"/>
+    <rect x="240" y="228" width="2" height="80" fill="#444" opacity="0.8"/>
+    <rect x="252" y="228" width="1" height="80" fill="#888" opacity="0.5"/>
+    <rect x="240" y="228" width="13" height="2" fill="#999" opacity="0.4"/>
+    <text x="247" y="295" fill="#333" font-size="4.5" transform="rotate(-90,247,295)" font-family="Georgia,serif" opacity="0.8">LAWS</text>
+
+    <rect x="254" y="224" width="15" height="84" fill="#222" rx="1"/>
+    <rect x="254" y="224" width="2" height="84" fill="#000" opacity="0.9"/>
+    <rect x="268" y="224" width="1" height="84" fill="#444" opacity="0.4"/>
+    <rect x="254" y="224" width="15" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="270" y="230" width="11" height="78" fill="#555" rx="1"/>
+    <rect x="270" y="230" width="1.5" height="78" fill="#333" opacity="0.8"/>
+    <rect x="280" y="230" width="1" height="78" fill="#777" opacity="0.4"/>
+    <rect x="270" y="230" width="11" height="2" fill="#888" opacity="0.4"/>
+
+    <rect x="282" y="225" width="14" height="83" fill="#333" rx="1"/>
+    <rect x="282" y="225" width="2" height="83" fill="#111" opacity="0.9"/>
+    <rect x="295" y="225" width="1" height="83" fill="#555" opacity="0.5"/>
+    <rect x="282" y="225" width="14" height="2" fill="#666" opacity="0.4"/>
+    <text x="289" y="294" fill="#666" font-size="4.5" transform="rotate(-90,289,294)" font-family="Georgia,serif" opacity="0.7">MYTHS</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!--              ROW 4 BOOKS (y: 320–408)        -->
+  <!-- ============================================ -->
+  <g id="row4">
+    <rect x="22" y="326" width="15" height="82" fill="#333" rx="1"/>
+    <rect x="22" y="326" width="2" height="82" fill="#111" opacity="0.9"/>
+    <rect x="36" y="326" width="1" height="82" fill="#555" opacity="0.5"/>
+    <rect x="22" y="326" width="15" height="2" fill="#666" opacity="0.4"/>
+    <text x="30" y="393" fill="#666" font-size="4.5" transform="rotate(-90,30,393)" font-family="Georgia,serif" opacity="0.7">VERSE</text>
+
+    <rect x="38" y="330" width="12" height="78" fill="#111" rx="1"/>
+    <rect x="38" y="330" width="1.5" height="78" fill="#000" opacity="0.9"/>
+    <rect x="49" y="330" width="1" height="78" fill="#333" opacity="0.4"/>
+    <rect x="38" y="330" width="12" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="51" y="323" width="18" height="85" fill="#666" rx="1"/>
+    <rect x="51" y="323" width="2.5" height="85" fill="#444" opacity="0.8"/>
+    <rect x="68" y="323" width="1" height="85" fill="#888" opacity="0.5"/>
+    <rect x="51" y="323" width="18" height="2" fill="#999" opacity="0.4"/>
+    <text x="60" y="394" fill="#333" font-size="4.5" transform="rotate(-90,60,394)" font-family="Georgia,serif" opacity="0.8">CHRONICLES</text>
+
+    <rect x="70" y="328" width="11" height="80" fill="#1a1a1a" rx="1"/>
+    <rect x="70" y="328" width="1.5" height="80" fill="#000" opacity="0.9"/>
+    <rect x="80" y="328" width="1" height="80" fill="#333" opacity="0.4"/>
+    <rect x="70" y="328" width="11" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="82" y="322" width="21" height="86" fill="#444" rx="1"/>
+    <rect x="82" y="322" width="3" height="86" fill="#222" opacity="0.9"/>
+    <rect x="102" y="322" width="1" height="86" fill="#666" opacity="0.5"/>
+    <rect x="82" y="322" width="21" height="2" fill="#777" opacity="0.4"/>
+    <text x="93" y="394" fill="#777" font-size="4.5" transform="rotate(-90,93,394)" font-family="Georgia,serif" opacity="0.7">TESTAMENT II</text>
+
+    <rect x="104" y="327" width="13" height="81" fill="#888" rx="1"/>
+    <rect x="104" y="327" width="2" height="81" fill="#666" opacity="0.8"/>
+    <rect x="116" y="327" width="1" height="81" fill="#aaa" opacity="0.5"/>
+    <rect x="104" y="327" width="13" height="2" fill="#bbb" opacity="0.3"/>
+    <text x="111" y="395" fill="#333" font-size="4.5" transform="rotate(-90,111,395)" font-family="Georgia,serif" opacity="0.9">SONNETS</text>
+
+    <rect x="118" y="325" width="14" height="83" fill="#222" rx="1"/>
+    <rect x="118" y="325" width="2" height="83" fill="#000" opacity="0.9"/>
+    <rect x="131" y="325" width="1" height="83" fill="#444" opacity="0.4"/>
+    <rect x="118" y="325" width="14" height="2" fill="#555" opacity="0.4"/>
+    <text x="125" y="394" fill="#555" font-size="4.5" transform="rotate(-90,125,394)" font-family="Georgia,serif" opacity="0.7">APOCRYPHA</text>
+
+    <rect x="133" y="328" width="10" height="80" fill="#555" rx="1"/>
+    <rect x="133" y="328" width="1.5" height="80" fill="#333" opacity="0.8"/>
+    <rect x="142" y="328" width="1" height="80" fill="#777" opacity="0.4"/>
+    <rect x="133" y="328" width="10" height="2" fill="#888" opacity="0.4"/>
+
+    <!-- Featured white book -->
+    <rect x="144" y="321" width="16" height="87" fill="#eee" rx="1"/>
+    <rect x="144" y="321" width="2" height="87" fill="#ccc" opacity="0.9"/>
+    <rect x="159" y="321" width="1" height="87" fill="#fff" opacity="0.7"/>
+    <rect x="144" y="321" width="16" height="2" fill="#fff" opacity="0.6"/>
+    <text x="152" y="393" fill="#111" font-size="5" transform="rotate(-90,152,393)" font-family="Georgia,serif" font-weight="bold" opacity="0.9">DEVOTIONS</text>
+
+    <rect x="161" y="325" width="14" height="83" fill="#3a3a3a" rx="1"/>
+    <rect x="161" y="325" width="2" height="83" fill="#111" opacity="0.9"/>
+    <rect x="174" y="325" width="1" height="83" fill="#555" opacity="0.5"/>
+    <rect x="161" y="325" width="14" height="2" fill="#666" opacity="0.4"/>
+    <text x="168" y="394" fill="#666" font-size="4.5" transform="rotate(-90,168,394)" font-family="Georgia,serif" opacity="0.7">RELICS</text>
+
+    <rect x="176" y="329" width="11" height="79" fill="#111" rx="1"/>
+    <rect x="176" y="329" width="1.5" height="79" fill="#000" opacity="0.9"/>
+    <rect x="186" y="329" width="1" height="79" fill="#333" opacity="0.4"/>
+    <rect x="176" y="329" width="11" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="188" y="323" width="18" height="85" fill="#777" rx="1"/>
+    <rect x="188" y="323" width="2.5" height="85" fill="#555" opacity="0.8"/>
+    <rect x="205" y="323" width="1" height="85" fill="#999" opacity="0.5"/>
+    <rect x="188" y="323" width="18" height="2" fill="#aaa" opacity="0.3"/>
+    <text x="197" y="394" fill="#333" font-size="4.5" transform="rotate(-90,197,394)" font-family="Georgia,serif" opacity="0.9">PROPHECY</text>
+
+    <rect x="207" y="327" width="12" height="81" fill="#2a2a2a" rx="1"/>
+    <rect x="207" y="327" width="2" height="81" fill="#111" opacity="0.8"/>
+    <rect x="218" y="327" width="1" height="81" fill="#444" opacity="0.4"/>
+    <rect x="207" y="327" width="12" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="220" y="322" width="15" height="86" fill="#444" rx="1"/>
+    <rect x="220" y="322" width="2" height="86" fill="#222" opacity="0.9"/>
+    <rect x="234" y="322" width="1" height="86" fill="#666" opacity="0.5"/>
+    <rect x="220" y="322" width="15" height="2" fill="#777" opacity="0.4"/>
+    <text x="228" y="394" fill="#777" font-size="4.5" transform="rotate(-90,228,394)" font-family="Georgia,serif" opacity="0.7">CODEX</text>
+
+    <rect x="236" y="328" width="13" height="80" fill="#666" rx="1"/>
+    <rect x="236" y="328" width="2" height="80" fill="#444" opacity="0.8"/>
+    <rect x="248" y="328" width="1" height="80" fill="#888" opacity="0.5"/>
+    <rect x="236" y="328" width="13" height="2" fill="#999" opacity="0.4"/>
+    <text x="243" y="394" fill="#333" font-size="4.5" transform="rotate(-90,243,394)" font-family="Georgia,serif" opacity="0.8">TABLETS</text>
+
+    <rect x="250" y="324" width="11" height="84" fill="#1c1c1c" rx="1"/>
+    <rect x="250" y="324" width="1.5" height="84" fill="#000" opacity="0.9"/>
+    <rect x="260" y="324" width="1" height="84" fill="#333" opacity="0.4"/>
+    <rect x="250" y="324" width="11" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="262" y="326" width="17" height="82" fill="#333" rx="1"/>
+    <rect x="262" y="326" width="2" height="82" fill="#111" opacity="0.9"/>
+    <rect x="278" y="326" width="1" height="82" fill="#555" opacity="0.5"/>
+    <rect x="262" y="326" width="17" height="2" fill="#666" opacity="0.4"/>
+    <text x="271" y="393" fill="#666" font-size="4.5" transform="rotate(-90,271,393)" font-family="Georgia,serif" opacity="0.7">LAMENTS</text>
+
+    <rect x="280" y="329" width="16" height="79" fill="#555" rx="1"/>
+    <rect x="280" y="329" width="2" height="79" fill="#333" opacity="0.8"/>
+    <rect x="295" y="329" width="1" height="79" fill="#777" opacity="0.5"/>
+    <rect x="280" y="329" width="16" height="2" fill="#888" opacity="0.4"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!--              ROW 5 BOOKS (y: 420–508)        -->
+  <!-- ============================================ -->
+  <g id="row5">
+    <rect x="22" y="425" width="17" height="83" fill="#444" rx="1"/>
+    <rect x="22" y="425" width="2" height="83" fill="#222" opacity="0.9"/>
+    <rect x="38" y="425" width="1" height="83" fill="#666" opacity="0.5"/>
+    <rect x="22" y="425" width="17" height="2" fill="#777" opacity="0.4"/>
+    <text x="31" y="494" fill="#777" font-size="4.5" transform="rotate(-90,31,494)" font-family="Georgia,serif" opacity="0.7">RELIQUARY</text>
+
+    <rect x="40" y="430" width="12" height="78" fill="#111" rx="1"/>
+    <rect x="40" y="430" width="1.5" height="78" fill="#000" opacity="0.9"/>
+    <rect x="51" y="430" width="1" height="78" fill="#333" opacity="0.4"/>
+    <rect x="40" y="430" width="12" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="53" y="422" width="16" height="86" fill="#666" rx="1"/>
+    <rect x="53" y="422" width="2" height="86" fill="#444" opacity="0.8"/>
+    <rect x="68" y="422" width="1" height="86" fill="#888" opacity="0.5"/>
+    <rect x="53" y="422" width="16" height="2" fill="#999" opacity="0.4"/>
+    <text x="61" y="493" fill="#333" font-size="4.5" transform="rotate(-90,61,493)" font-family="Georgia,serif" opacity="0.8">REQUIEM</text>
+
+    <rect x="70" y="428" width="11" height="80" fill="#222" rx="1"/>
+    <rect x="70" y="428" width="1.5" height="80" fill="#000" opacity="0.9"/>
+    <rect x="80" y="428" width="1" height="80" fill="#444" opacity="0.4"/>
+    <rect x="70" y="428" width="11" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="82" y="421" width="20" height="87" fill="#333" rx="1"/>
+    <rect x="82" y="421" width="3" height="87" fill="#111" opacity="0.9"/>
+    <rect x="101" y="421" width="1" height="87" fill="#555" opacity="0.5"/>
+    <rect x="82" y="421" width="20" height="2" fill="#666" opacity="0.4"/>
+    <text x="92" y="494" fill="#666" font-size="4.5" transform="rotate(-90,92,494)" font-family="Georgia,serif" opacity="0.7">ILLUMINATIONS</text>
+
+    <rect x="103" y="426" width="13" height="82" fill="#888" rx="1"/>
+    <rect x="103" y="426" width="2" height="82" fill="#666" opacity="0.8"/>
+    <rect x="115" y="426" width="1" height="82" fill="#aaa" opacity="0.5"/>
+    <rect x="103" y="426" width="13" height="2" fill="#bbb" opacity="0.3"/>
+    <text x="110" y="494" fill="#333" font-size="4.5" transform="rotate(-90,110,494)" font-family="Georgia,serif" opacity="0.9">GLOSSARY</text>
+
+    <rect x="117" y="424" width="15" height="84" fill="#1a1a1a" rx="1"/>
+    <rect x="117" y="424" width="2" height="84" fill="#000" opacity="0.9"/>
+    <rect x="131" y="424" width="1" height="84" fill="#333" opacity="0.4"/>
+    <rect x="117" y="424" width="15" height="2" fill="#444" opacity="0.4"/>
+    <text x="125" y="493" fill="#444" font-size="4.5" transform="rotate(-90,125,493)" font-family="Georgia,serif" opacity="0.6">CONCORDANCE</text>
+
+    <rect x="133" y="429" width="10" height="79" fill="#555" rx="1"/>
+    <rect x="133" y="429" width="1.5" height="79" fill="#333" opacity="0.8"/>
+    <rect x="142" y="429" width="1" height="79" fill="#777" opacity="0.4"/>
+    <rect x="133" y="429" width="10" height="2" fill="#888" opacity="0.4"/>
+
+    <rect x="144" y="423" width="18" height="85" fill="#444" rx="1"/>
+    <rect x="144" y="423" width="2.5" height="85" fill="#222" opacity="0.9"/>
+    <rect x="161" y="423" width="1" height="85" fill="#666" opacity="0.5"/>
+    <rect x="144" y="423" width="18" height="2" fill="#777" opacity="0.4"/>
+    <text x="153" y="493" fill="#777" font-size="4.5" transform="rotate(-90,153,493)" font-family="Georgia,serif" opacity="0.7">DOCTRINES</text>
+
+    <!-- Featured white tall book -->
+    <rect x="163" y="420" width="22" height="88" fill="#e0e0e0" rx="1"/>
+    <rect x="163" y="420" width="3" height="88" fill="#bbb" opacity="0.9"/>
+    <rect x="184" y="420" width="1" height="88" fill="#fff" opacity="0.7"/>
+    <rect x="163" y="420" width="22" height="2" fill="#fff" opacity="0.6"/>
+    <line x1="167" y1="428" x2="167" y2="504" stroke="#999" stroke-width="0.3" opacity="0.4"/>
+    <text x="174" y="493" fill="#111" font-size="5" transform="rotate(-90,174,493)" font-family="Georgia,serif" font-weight="bold" opacity="0.9">BENEDICTIONS</text>
+
+    <rect x="186" y="426" width="12" height="82" fill="#2a2a2a" rx="1"/>
+    <rect x="186" y="426" width="2" height="82" fill="#111" opacity="0.8"/>
+    <rect x="197" y="426" width="1" height="82" fill="#444" opacity="0.4"/>
+    <rect x="186" y="426" width="12" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="199" y="423" width="15" height="85" fill="#777" rx="1"/>
+    <rect x="199" y="423" width="2" height="85" fill="#555" opacity="0.8"/>
+    <rect x="213" y="423" width="1" height="85" fill="#999" opacity="0.5"/>
+    <rect x="199" y="423" width="15" height="2" fill="#aaa" opacity="0.3"/>
+    <text x="207" y="493" fill="#333" font-size="4.5" transform="rotate(-90,207,493)" font-family="Georgia,serif" opacity="0.9">HOMILIES</text>
+
+    <rect x="215" y="428" width="11" height="80" fill="#333" rx="1"/>
+    <rect x="215" y="428" width="1.5" height="80" fill="#111" opacity="0.9"/>
+    <rect x="225" y="428" width="1" height="80" fill="#555" opacity="0.4"/>
+    <rect x="215" y="428" width="11" height="2" fill="#666" opacity="0.4"/>
+
+    <rect x="227" y="422" width="17" height="86" fill="#555" rx="1"/>
+    <rect x="227" y="422" width="2" height="86" fill="#333" opacity="0.8"/>
+    <rect x="243" y="422" width="1" height="86" fill="#777" opacity="0.5"/>
+    <rect x="227" y="422" width="17" height="2" fill="#888" opacity="0.4"/>
+    <text x="236" y="493" fill="#888" font-size="4.5" transform="rotate(-90,236,493)" font-family="Georgia,serif" opacity="0.7">SERMONS</text>
+
+    <rect x="245" y="427" width="12" height="81" fill="#1c1c1c" rx="1"/>
+    <rect x="245" y="427" width="2" height="81" fill="#000" opacity="0.9"/>
+    <rect x="256" y="427" width="1" height="81" fill="#333" opacity="0.4"/>
+    <rect x="245" y="427" width="12" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="258" y="424" width="14" height="84" fill="#444" rx="1"/>
+    <rect x="258" y="424" width="2" height="84" fill="#222" opacity="0.9"/>
+    <rect x="271" y="424" width="1" height="84" fill="#666" opacity="0.5"/>
+    <rect x="258" y="424" width="14" height="2" fill="#777" opacity="0.4"/>
+    <text x="265" y="493" fill="#777" font-size="4.5" transform="rotate(-90,265,493)" font-family="Georgia,serif" opacity="0.7">VESPERS</text>
+
+    <rect x="273" y="428" width="11" height="80" fill="#666" rx="1"/>
+    <rect x="273" y="428" width="1.5" height="80" fill="#444" opacity="0.8"/>
+    <rect x="283" y="428" width="1" height="80" fill="#888" opacity="0.4"/>
+    <rect x="273" y="428" width="11" height="2" fill="#999" opacity="0.4"/>
+
+    <rect x="285" y="425" width="11" height="83" fill="#222" rx="1"/>
+    <rect x="285" y="425" width="1.5" height="83" fill="#000" opacity="0.9"/>
+    <rect x="295" y="425" width="1" height="83" fill="#444" opacity="0.4"/>
+    <rect x="285" y="425" width="11" height="2" fill="#555" opacity="0.4"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!--              ROW 6 BOOKS (y: 520–578)        -->
+  <!-- ============================================ -->
+  <g id="row6">
+    <rect x="22" y="524" width="20" height="54" fill="#333" rx="1"/>
+    <rect x="22" y="524" width="3" height="54" fill="#111" opacity="0.9"/>
+    <rect x="41" y="524" width="1" height="54" fill="#555" opacity="0.5"/>
+    <rect x="22" y="524" width="20" height="2" fill="#666" opacity="0.4"/>
+
+    <rect x="43" y="528" width="14" height="50" fill="#666" rx="1"/>
+    <rect x="43" y="528" width="2" height="50" fill="#444" opacity="0.8"/>
+    <rect x="56" y="528" width="1" height="50" fill="#888" opacity="0.5"/>
+    <rect x="43" y="528" width="14" height="2" fill="#999" opacity="0.4"/>
+
+    <rect x="58" y="522" width="17" height="56" fill="#111" rx="1"/>
+    <rect x="58" y="522" width="2" height="56" fill="#000" opacity="0.9"/>
+    <rect x="74" y="522" width="1" height="56" fill="#333" opacity="0.4"/>
+    <rect x="58" y="522" width="17" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="76" y="526" width="12" height="52" fill="#555" rx="1"/>
+    <rect x="76" y="526" width="2" height="52" fill="#333" opacity="0.8"/>
+    <rect x="87" y="526" width="1" height="52" fill="#777" opacity="0.5"/>
+    <rect x="76" y="526" width="12" height="2" fill="#888" opacity="0.4"/>
+
+    <rect x="89" y="521" width="22" height="57" fill="#222" rx="1"/>
+    <rect x="89" y="521" width="3" height="57" fill="#000" opacity="0.9"/>
+    <rect x="110" y="521" width="1" height="57" fill="#444" opacity="0.5"/>
+    <rect x="89" y="521" width="22" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="112" y="525" width="13" height="53" fill="#777" rx="1"/>
+    <rect x="112" y="525" width="2" height="53" fill="#555" opacity="0.8"/>
+    <rect x="124" y="525" width="1" height="53" fill="#999" opacity="0.5"/>
+    <rect x="112" y="525" width="13" height="2" fill="#aaa" opacity="0.3"/>
+
+    <rect x="126" y="523" width="15" height="55" fill="#1a1a1a" rx="1"/>
+    <rect x="126" y="523" width="2" height="55" fill="#000" opacity="0.9"/>
+    <rect x="140" y="523" width="1" height="55" fill="#333" opacity="0.4"/>
+    <rect x="126" y="523" width="15" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="142" y="527" width="11" height="51" fill="#444" rx="1"/>
+    <rect x="142" y="527" width="1.5" height="51" fill="#222" opacity="0.9"/>
+    <rect x="152" y="527" width="1" height="51" fill="#666" opacity="0.4"/>
+    <rect x="142" y="527" width="11" height="2" fill="#777" opacity="0.4"/>
+
+    <!-- Featured white short book -->
+    <rect x="154" y="522" width="18" height="56" fill="#ddd" rx="1"/>
+    <rect x="154" y="522" width="2.5" height="56" fill="#bbb" opacity="0.9"/>
+    <rect x="171" y="522" width="1" height="56" fill="#fff" opacity="0.6"/>
+    <rect x="154" y="522" width="18" height="2" fill="#fff" opacity="0.6"/>
+
+    <rect x="173" y="525" width="12" height="53" fill="#333" rx="1"/>
+    <rect x="173" y="525" width="2" height="53" fill="#111" opacity="0.9"/>
+    <rect x="184" y="525" width="1" height="53" fill="#555" opacity="0.5"/>
+    <rect x="173" y="525" width="12" height="2" fill="#666" opacity="0.4"/>
+
+    <rect x="186" y="521" width="16" height="57" fill="#888" rx="1"/>
+    <rect x="186" y="521" width="2" height="57" fill="#666" opacity="0.8"/>
+    <rect x="201" y="521" width="1" height="57" fill="#aaa" opacity="0.5"/>
+    <rect x="186" y="521" width="16" height="2" fill="#bbb" opacity="0.3"/>
+
+    <rect x="203" y="526" width="10" height="52" fill="#111" rx="1"/>
+    <rect x="203" y="526" width="1.5" height="52" fill="#000" opacity="0.9"/>
+    <rect x="212" y="526" width="1" height="52" fill="#333" opacity="0.4"/>
+    <rect x="203" y="526" width="10" height="2" fill="#444" opacity="0.4"/>
+
+    <rect x="214" y="522" width="18" height="56" fill="#555" rx="1"/>
+    <rect x="214" y="522" width="2.5" height="56" fill="#333" opacity="0.8"/>
+    <rect x="231" y="522" width="1" height="56" fill="#777" opacity="0.5"/>
+    <rect x="214" y="522" width="18" height="2" fill="#888" opacity="0.4"/>
+
+    <rect x="233" y="524" width="13" height="54" fill="#222" rx="1"/>
+    <rect x="233" y="524" width="2" height="54" fill="#000" opacity="0.9"/>
+    <rect x="245" y="524" width="1" height="54" fill="#444" opacity="0.4"/>
+    <rect x="233" y="524" width="13" height="2" fill="#555" opacity="0.4"/>
+
+    <rect x="247" y="523" width="15" height="55" fill="#666" rx="1"/>
+    <rect x="247" y="523" width="2" height="55" fill="#444" opacity="0.8"/>
+    <rect x="261" y="523" width="1" height="55" fill="#888" opacity="0.5"/>
+    <rect x="247" y="523" width="15" height="2" fill="#999" opacity="0.4"/>
+
+    <rect x="263" y="527" width="11" height="51" fill="#333" rx="1"/>
+    <rect x="263" y="527" width="1.5" height="51" fill="#111" opacity="0.9"/>
+    <rect x="273" y="527" width="1" height="51" fill="#555" opacity="0.4"/>
+    <rect x="263" y="527" width="11" height="2" fill="#666" opacity="0.4"/>
+
+    <rect x="275" y="522" width="20" height="56" fill="#111" rx="1"/>
+    <rect x="275" y="522" width="3" height="56" fill="#000" opacity="0.9"/>
+    <rect x="294" y="522" width="1" height="56" fill="#333" opacity="0.5"/>
+    <rect x="275" y="522" width="20" height="2" fill="#444" opacity="0.4"/>
+  </g>
+
+  <!-- Ambient overlay to add depth -->
+  <rect x="18" y="18" width="284" height="564" fill="#000" opacity="0.06"/>
+
+  <!-- Subtle vignette overlay -->
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="60%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="320" height="600" fill="url(#vignette)"/>
+</svg>

@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "id": "painting",
+      "title": "Painting"
+    },
+    {
+      "id": "tattoo",
+      "title": "Tattoo"
+    },
+    {
+      "id": "illustration",
+      "title": "Illustration"
+    },
+    {
+      "id": "batik",
+      "title": "Batik"
+    },
+    {
+      "id": "mural",
+      "title": "Mural"
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NINA BEJO | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
+    <style>
+        body { margin: 0; background: #fff; font-family: 'Inter', sans-serif; color: #111; overflow-x: hidden; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        
+        /* Hero Section */
+        #hero-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            pointer-events: none;
+        }
+        #hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; transform-origin: center center;
+        }
+        
+        .diamond-logo {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            background: white; color: black; display: flex; align-items: center; justify-content: center;
+            width: 200px; height: 200px; margin-top: 5vh; font-weight: 900; font-size: 2rem;
+            text-align: center; line-height: 1; text-transform: uppercase; border: 2px solid black;
+            pointer-events: auto;
+        }
+        .hero-desc {
+            background: white; border: 2px solid black; border-radius: 2rem; padding: 2rem;
+            max-width: 800px; text-align: center; margin-top: 2rem; font-size: 1.1rem;
+            pointer-events: auto;
+        }
+
+        /* Catalog Layout */
+        #catalog-wrapper {
+            position: relative; z-index: 10; padding-top: 100vh; /* space for scroll */
+            background: transparent;
+        }
+        .catalog-content {
+            background: white; min-height: 100vh; padding: 10vh 5vw; border-top: 2px solid #eee;
+        }
+        
+        .grid-item {
+            position: relative; overflow: hidden; border: 2px solid black;
+            cursor: pointer; background: #eee; transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .grid-item img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%); transition: filter 0.5s, transform 0.5s;
+        }
+        .grid-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+        .grid-label {
+            position: absolute; top: 1rem; left: 1rem; background: rgba(255,255,255,0.9);
+            padding: 0.5rem 1rem; font-weight: bold; text-transform: uppercase; font-family: 'Space Grotesk';
+            border: 1px solid black; opacity: 0; transform: translateY(10px); transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .grid-item:hover .grid-label { opacity: 1; transform: translateY(0); }
+
+        /* Fullscreen Gallery */
+        #gallery-view {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #fff; z-index: 100; display: none; flex-direction: column;
+        }
+        .gallery-header {
+            padding: 2rem; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .close-btn { font-size: 2rem; cursor: pointer; font-family: 'Space Grotesk'; transition: transform 0.3s; }
+        .close-btn:hover { transform: rotate(90deg); }
+        
+        .gallery-scroll {
+            flex: 1; display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            padding: 2rem; gap: 4rem; align-items: center; scrollbar-width: none;
+        }
+        .gallery-scroll::-webkit-scrollbar { display: none; }
+        .gallery-slide {
+            flex: 0 0 80vw; height: 80vh; scroll-snap-align: center;
+            display: flex; gap: 4rem; align-items: center; justify-content: center;
+        }
+        .gallery-slide img {
+            max-width: 60%; max-height: 90%; object-fit: contain; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        .gallery-desc {
+            max-width: 300px; font-size: 1.1rem; line-height: 1.6; font-family: 'Space Grotesk';
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Overlay -->
+    <div id="hero-container">
+        <img id="hero-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVzD_QNNx1ocur0eHnorh0GBLeTvo51703f4yau0MEHsqh5tU8keVZ74nuC0EVA1FZtcDxf6notwWW8zY8WBoKLno3FVI5fcqawqEb-0wl1cSnxKlMqNRhLN73QXgC3YPCOTCrZsx2b3gzWxlY2yGsemzMOAsGX9zMOeGCOpy5wOK3OtI6NpcMel4_Mj-hUn2FjDt8Kaz_0-MYJMDfQKy1ybS6xfBWMu7cOQt_sVZpBg_W4AHflg8NYuV44IqsU0MYqh7ZjRcjvJA" alt="Hero Photo">
+        <div class="diamond-logo font-headline">NINA<br>BEJO</div>
+        <div class="hero-desc">
+            <p>Pause & dive in collections of symbols in illustrations, paintings capturing the energy of the present moment, original tattoo art, murals & more...</p>
+            <p class="mt-4 italic text-gray-600">Immerse in the visual language of ones heart, soul & presence in fast running world around.</p>
+        </div>
+    </div>
+
+    <!-- Scroll Content -->
+    <div id="catalog-wrapper">
+        <div class="catalog-content">
+            <div class="flex flex-col md:flex-row gap-8 justify-between max-w-7xl mx-auto w-full">
+                <!-- Left Col -->
+                <div class="flex flex-col gap-8 w-full md:w-1/3">
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase mb-2">Painting</div>
+                        <div class="grid-item aspect-[3/4]" data-category="painting">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvDAsHRJkKQQ5UhJDESVsIUUJgZ0Xo5g16gKUN95I7E0FwMP7BM_ymleKvZQNz9v8_D3SIfP9y5Wdos-WNqnDcYw-3YeCUdcgcesZYBQBtNol2O0-SPIRq1wx0ckFX6FQ-un96mWYzNBnUQeuJ3kbmHDtq54QkUbtaG4CpJpXBnQ7S2nn2tJjTkE60Aszok0gF5ZW_cvNcLIdiXQObrSa0yO6Md4XVauh4gXDe5xi4vLbeBx06ClMNiKmTwSmBhx2RM9g7EQSafq4" alt="Painting">
+                            <div class="grid-label">Painting Gallery →</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase mb-2 mt-8">Batik & Textile Art</div>
+                        <div class="grid-item aspect-square rounded-[3rem]" data-category="batik">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD64b5JzqQ35bYG77IOvlZWwpTLA1zUi4nwG9b_19nZojQHQt_1eB_qPGT0WdO71DhmFQei2ZiVcM35aQeqYawMcb9SpB-pf3KEBSm2PuZrx9EyKgDL2GnAkFa2A-OYMs1sY1y5NrCJ7IqordDMBnXWLoSqf7lh9btMXCGyz3XES2QCROlSAngPN51DOoB2yt5EPws-vlawFbt6iDaKyUUsdgr_8e-4GTAonj2LaKJCb8t9pj6K7VUmblfK_zf3kWP3xr08hu9DumM" alt="Batik">
+                            <div class="grid-label">Batik Gallery →</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase mb-2 mt-8">Sketches</div>
+                        <div class="grid-item aspect-square rounded-full" data-category="sketches">
+                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Sketches">
+                            <div class="grid-label">Sketches →</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mid Col -->
+                <div class="flex flex-col gap-8 w-full md:w-1/3">
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase mb-2">Illustration</div>
+                        <div class="grid-item aspect-[1/2.6]" data-category="illustration">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj95HAQ5hIXwmCvTYqpyUwakqZUjglR0A39QMS0EhlX-uZ3KvGgRJnUTRoadsYqIslOfNInz_JkSEv4hYZ9DtiF_25srlNxL6NkaXSeyJT2qHFF5tC3jepp26iG-J5v8T3WV35EeaZquvAu2eq74f48N9raVE1ZERO5V3VWcUMcpqfZ9eO0-ZU0F3Mwd6M8WrsjooythF8Mn81Fs6RI4RuErfdhTioKE7jI53TDCw_8UKV1pRBbLPgGEtNL9loM6GW_1e8ASeUT0M" alt="Illustration">
+                            <div class="grid-label">Illustration Gallery →</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase text-center mb-2 mt-8">Contact</div>
+                        <div class="grid-item aspect-square rounded-full w-2/3 mx-auto bg-black text-white hover:bg-white hover:text-black transition-colors" data-category="contact">
+                            <div class="text-6xl material-symbols-outlined">mail</div>
+                            <div class="grid-label text-black">Say Hello</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Col -->
+                <div class="flex flex-col gap-8 w-full md:w-1/3">
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase mb-2">Tattoo Art</div>
+                        <div class="grid-item aspect-[4/3]" data-category="tattoo">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1NPTWHUsL2Na899vL2yO80lI4K8AtYfnNcfgqUJTu-Fy988bVniUQoGynREtXyV0kYqUjGsgr9-pTGcn11BxK1zozpeEYzckZ81olnB8jzVEuIlVV8uEudi_C1tWJlPfVe_5O7G0XY7pLz9faJgkW8IhP_J2jUGpvML0ZWZUTr4ZaeA9C0Isp20loollVdaF8tbecZPHYopda0zk2SUY7AnKabp0bVorO6W29bSFvXXEQfh4HKnlmvUnejh53sypIM3ZYyVKRsqg" alt="Tattoo Art">
+                            <div class="grid-label">Tattoo Gallery →</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase mb-2 mt-8">Mural</div>
+                        <div class="grid-item aspect-[3/4] rounded-[3rem]" data-category="mural">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLNRASGBUVmwTri29SxWwE9aW_25wumTJM1f96k49K7IEy0B-T8buORBd3H7NYlxOZEZ6DSmkWjgZGPHgu6zcD10PDpoUm1TX_DrghS0pxjuDXEGGFYuw65OKG5-h5V-iMWznSqbnRrGhihn-SP_f41_n3-53utolVw28_4MwsenHAk83XeaXclXKYx6Jug90DQpa8g0HbmOI_xpGVptYAkMx5nASAn-2TqL4l-nplL453-bx7ySLKYdAsmgkz9oJjPMVDrw4rOBo" alt="Mural">
+                            <div class="grid-label">Mural Gallery →</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-headline font-bold text-xl uppercase text-center mb-2 mt-8">About Me | CV</div>
+                        <div class="grid-item aspect-square rounded-full w-3/4 mx-auto bg-black text-white hover:bg-white hover:text-black transition-colors" data-category="about">
+                            <div class="font-bold text-4xl">CV</div>
+                            <div class="grid-label text-black">Download</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery View -->
+    <div id="gallery-view">
+        <div class="gallery-header">
+            <h2 id="gallery-title" class="font-headline font-bold text-4xl uppercase tracking-tighter">Collection</h2>
+            <div class="close-btn" id="close-gallery">✕</div>
+        </div>
+        <div class="gallery-scroll" id="gallery-scroll">
+            <!-- Dynamically injected -->
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, Flip);
+
+        // 1. Scroll Zoom Animation
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#catalog-wrapper",
+                start: "top bottom",
+                end: "top top",
+                scrub: 1,
+            }
+        });
+
+        tl.to("#hero-bg", { scale: 3, filter: "blur(20px)", opacity: 0, duration: 1 })
+          .to(".diamond-logo, .hero-desc", { opacity: 0, y: -50, scale: 0.9, duration: 0.5 }, 0);
+
+        // 2. Magnetic Hover Effect on Grid Items
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+                const rect = item.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg tilt
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                gsap.to(item, {
+                    rotationX: rotateX,
+                    rotationY: rotateY,
+                    transformPerspective: 1000,
+                    ease: "power2.out",
+                    duration: 0.5
+                });
+            });
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, { rotationX: 0, rotationY: 0, ease: "elastic.out(1, 0.3)", duration: 1 });
+            });
+        });
+
+        // 3. Test Gallery Data
+        const galleryData = {
+            painting: [
+                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvDAsHRJkKQQ5UhJDESVsIUUJgZ0Xo5g16gKUN95I7E0FwMP7BM_ymleKvZQNz9v8_D3SIfP9y5Wdos-WNqnDcYw-3YeCUdcgcesZYBQBtNol2O0-SPIRq1wx0ckFX6FQ-un96mWYzNBnUQeuJ3kbmHDtq54QkUbtaG4CpJpXBnQ7S2nn2tJjTkE60Aszok0gF5ZW_cvNcLIdiXQObrSa0yO6Md4XVauh4gXDe5xi4vLbeBx06ClMNiKmTwSmBhx2RM9g7EQSafq4", desc: "Abstract monochrome oil painting. Heavy impasto brushstrokes and dramatic contrast of deep black." },
+                { img: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&q=80&w=1000", desc: "" } // No description example
+            ],
+            tattoo: [
+                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1NPTWHUsL2Na899vL2yO80lI4K8AtYfnNcfgqUJTu-Fy988bVniUQoGynREtXyV0kYqUjGsgr9-pTGcn11BxK1zozpeEYzckZ81olnB8jzVEuIlVV8uEudi_C1tWJlPfVe_5O7G0XY7pLz9faJgkW8IhP_J2jUGpvML0ZWZUTr4ZaeA9C0Isp20loollVdaF8tbecZPHYopda0zk2SUY7AnKabp0bVorO6W29bSFvXXEQfh4HKnlmvUnejh53sypIM3ZYyVKRsqg", desc: "Delicate monochrome botanical fine line work on skin." },
+                { img: "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&q=80&w=1000", desc: "Symbolic shading technique." }
+            ],
+            illustration: [
+                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDj95HAQ5hIXwmCvTYqpyUwakqZUjglR0A39QMS0EhlX-uZ3KvGgRJnUTRoadsYqIslOfNInz_JkSEv4hYZ9DtiF_25srlNxL6NkaXSeyJT2qHFF5tC3jepp26iG-J5v8T3WV35EeaZquvAu2eq74f48N9raVE1ZERO5V3VWcUMcpqfZ9eO0-ZU0F3Mwd6M8WrsjooythF8Mn81Fs6RI4RuErfdhTioKE7jI53TDCw_8UKV1pRBbLPgGEtNL9loM6GW_1e8ASeUT0M", desc: "Surreal digital illustration featuring geometric shapes." },
+            ],
+            batik: [
+                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD64b5JzqQ35bYG77IOvlZWwpTLA1zUi4nwG9b_19nZojQHQt_1eB_qPGT0WdO71DhmFQei2ZiVcM35aQeqYawMcb9SpB-pf3KEBSm2PuZrx9EyKgDL2GnAkFa2A-OYMs1sY1y5NrCJ7IqordDMBnXWLoSqf7lh9btMXCGyz3XES2QCROlSAngPN51DOoB2yt5EPws-vlawFbt6iDaKyUUsdgr_8e-4GTAonj2LaKJCb8t9pj6K7VUmblfK_zf3kWP3xr08hu9DumM", desc: "Intricate black and white textile pattern." },
+            ],
+            mural: [
+                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDLNRASGBUVmwTri29SxWwE9aW_25wumTJM1f96k49K7IEy0B-T8buORBd3H7NYlxOZEZ6DSmkWjgZGPHgu6zcD10PDpoUm1TX_DrghS0pxjuDXEGGFYuw65OKG5-h5V-iMWznSqbnRrGhihn-SP_f41_n3-53utolVw28_4MwsenHAk83XeaXclXKYx6Jug90DQpa8g0HbmOI_xpGVptYAkMx5nASAn-2TqL4l-nplL453-bx7ySLKYdAsmgkz9oJjPMVDrw4rOBo", desc: "Large scale black and white wall mural painting with sweeping curves." },
+            ],
+            // Add fallback generic data for others like sketches
+            default: [
+                { img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=1000", desc: "Exploring form and negative space." },
+                { img: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&q=80&w=1000", desc: "" },
+                { img: "https://images.unsplash.com/photo-1560064603-60580eb5c792?auto=format&fit=crop&q=80&w=1000", desc: "A deeper look into the intricate details." }
+            ]
+        };
+
+        // 4. Bad Ass Gallery Transition
+        const galleryView = document.getElementById('gallery-view');
+        const galleryScroll = document.getElementById('gallery-scroll');
+        const galleryTitle = document.getElementById('gallery-title');
+
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                // If it's a contact or about circle, don't open gallery for now (or handle differently)
+                if(item.dataset.category === 'contact' || item.dataset.category === 'about') return;
+
+                const category = item.dataset.category;
+                const data = galleryData[category] || galleryData.default;
+                
+                // Populate gallery
+                galleryTitle.innerText = category.replace('-', ' ');
+                galleryScroll.innerHTML = data.map(d => `
+                    <div class="gallery-slide">
+                        <img src="${d.img}" alt="Artwork">
+                        ${d.desc ? `<div class="gallery-desc">${d.desc}</div>` : ''}
+                    </div>
+                `).join('');
+
+                // Ensure scroll is at the start
+                galleryScroll.scrollLeft = 0;
+
+                // Animation
+                galleryView.style.display = 'flex';
+                gsap.fromTo(galleryView, 
+                    { opacity: 0, y: 50 }, 
+                    { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }
+                );
+            });
+        });
+
+        document.getElementById('close-gallery').addEventListener('click', () => {
+            gsap.to(galleryView, { 
+                opacity: 0, y: 50, duration: 0.4, ease: "power2.in",
+                onComplete: () => { galleryView.style.display = 'none'; }
+            });
+        });
+
+    </script>
+</body>
+</html>
