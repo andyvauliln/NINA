@@ -11,7 +11,7 @@
           "category": "painting",
           "description": "A set of color and texture studies for canvas concepts.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         },
         {
           "id": "painting-002",
@@ -20,7 +20,7 @@
           "category": "painting",
           "description": "Early portrait sketches with mood exploration.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         }
       ]
     },
@@ -35,7 +35,7 @@
           "category": "tattoo",
           "description": "Linework motifs for sleeve and backpiece ideas.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         },
         {
           "id": "tattoo-002",
@@ -44,7 +44,7 @@
           "category": "tattoo",
           "description": "Flash collection focused on contrast and symbols.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         }
       ]
     },
@@ -59,7 +59,7 @@
           "category": "illustration",
           "description": "Storyboard-like frames for editorial sequences.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         },
         {
           "id": "illustration-002",
@@ -68,7 +68,7 @@
           "category": "illustration",
           "description": "Character turnaround and expression studies.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         }
       ]
     },
@@ -83,7 +83,7 @@
           "category": "batik",
           "description": "Repeating organic patterns for fabric trials.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         },
         {
           "id": "batik-002",
@@ -92,7 +92,7 @@
           "category": "batik",
           "description": "Process notes on wax resist and dye layers.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         }
       ]
     },
@@ -107,7 +107,7 @@
           "category": "mural",
           "description": "Large wall composition blocks and color notes.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         },
         {
           "id": "mural-002",
@@ -116,7 +116,7 @@
           "category": "mural",
           "description": "Placement mockups adapted to different spaces.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
         }
       ]
     }

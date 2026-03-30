@@ -8,3 +8,5 @@
 - `index.html` is used as the first portfolio page entry point.
 - `data.json` currently contains five categories: painting, tattoo, illustration, batik, mural.
 - `assets/bookshelf.svg` exists and is used for bookshelf visuals.
+
+don't open html site on a http://127.0.0.1:5193/

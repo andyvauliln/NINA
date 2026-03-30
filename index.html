@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Aubrey&display=swap" rel="stylesheet">
   <title>NINA BEJO | Portfolio</title>
   <style>
     * {
@@ -19,6 +20,10 @@
       min-height: 100vh;
       font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: #000000;
+    }
+
+    body.right-bottom-connect-zone {
+      cursor: pointer;
     }
 
     .hero {
@@ -68,14 +73,68 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-align: center;
-      padding: 0 6px;
+      padding: 0 6px 4px;
       cursor: pointer;
-      transition: color 120ms ease, text-shadow 120ms ease;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.35s ease, text-shadow 0.35s ease, filter 0.35s ease;
+    }
+
+    .header-section-title::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(245, 215, 120, 0.25), transparent);
+      pointer-events: none;
+    }
+
+    .header-section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #d4af37, #f5d778, #d4af37, transparent);
+      transform: translateX(-50%);
+      transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none;
+    }
+
+    .header-section-title:hover {
+      color: #f5d778;
+      text-shadow:
+        0 0 8px rgba(212, 175, 55, 0.7),
+        0 0 22px rgba(212, 175, 55, 0.3),
+        0 0 44px rgba(212, 175, 55, 0.1);
+      filter: brightness(1.15);
+    }
+
+    .header-section-title:hover::before {
+      animation: title-shimmer 0.7s ease forwards;
+    }
+
+    .header-section-title:hover::after {
+      width: 90%;
+    }
+
+    @keyframes title-shimmer {
+      0% { left: -60%; }
+      100% { left: 120%; }
     }
 
     .header-section-title.is-active {
       color: #d4af37;
-      text-shadow: 0 1px 8px rgba(212, 175, 55, 0.42);
+      text-shadow:
+        0 1px 8px rgba(212, 175, 55, 0.42),
+        0 0 18px rgba(212, 175, 55, 0.2);
+    }
+
+    .header-section-title.is-active::after {
+      width: 70%;
     }
 
     .shelves {
@@ -99,6 +158,22 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      position: relative;
+    }
+
+    .shelf-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.06), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .shelf-card:hover::after {
+      opacity: 1;
     }
 
     .shelf-svg {
@@ -123,19 +198,56 @@
     .floor-logo-right {
       position: absolute;
       right: clamp(20px, 4vw, 56px);
-      bottom: 18px;
+      bottom: clamp(22px, 3vh, 40px);
       width: min(260px, 28vw);
       height: auto;
       object-fit: contain;
       object-position: left center;
-      filter: grayscale(1) contrast(1.25) brightness(0.9);
-      opacity: 0.85;
-      z-index: 10;
+      filter: contrast(1.08) brightness(1.02);
+      opacity: 0.98;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .floor-logo-left {
+      position: absolute;
+      left: clamp(18px, 3.6vw, 52px);
+      bottom: clamp(22px, 3vh, 40px);
+      width: min(240px, 26vw);
+      height: auto;
+      object-fit: contain;
+      object-position: right center;
+      filter: contrast(1.08) brightness(1.02);
+      opacity: 0.96;
+      z-index: 20;
       pointer-events: none;
     }
 
     .book-shape {
       cursor: pointer;
+      transition: filter 0.35s ease, transform 0.3s ease;
+      transform-origin: bottom center;
+      transform-box: fill-box;
+    }
+
+    .book-shape:hover {
+      animation: golden-aura 1.8s ease-in-out infinite;
+      transform: scaleX(1.35) scaleY(1.18);
+      z-index: 50;
+    }
+
+    @keyframes golden-aura {
+      0%, 100% {
+        filter:
+          drop-shadow(0 0 3px rgba(212, 175, 55, 0.55))
+          drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+      }
+      50% {
+        filter:
+          drop-shadow(0 0 6px rgba(245, 215, 120, 0.8))
+          drop-shadow(0 0 16px rgba(212, 175, 55, 0.45))
+          drop-shadow(0 0 28px rgba(212, 175, 55, 0.15));
+      }
     }
 
     .book-hover-preview {
@@ -168,21 +280,42 @@
       border: 0;
       color: #f3f3f3;
       z-index: 11;
-      opacity: 0;
-      transition: opacity 120ms ease;
+      opacity: 1;
       pointer-events: auto;
     }
 
-    .contacts-preview.visible {
-      opacity: 1;
+    .default-panel {
+      display: block;
+    }
+
+    .connect-panel {
+      display: none;
+    }
+
+    .contacts-preview.show-connect .default-panel {
+      display: none;
+    }
+
+    .contacts-preview.show-connect .connect-panel {
+      display: block;
+    }
+
+    .contacts-preview.hide-for-book-hover {
+      display: none;
     }
 
     .contacts-title {
-      font-family: "Cinzel", serif;
-      font-size: 1.45rem;
-      letter-spacing: 0.07em;
+      font-family: "Fredericka the Great", serif;
+      font-size: clamp(0.9rem, 1.3vw, 1.12rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #d4af37;
+      text-align: center;
       margin: 0 0 10px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      padding: 0 6px 4px;
+      text-shadow:
+        0 1px 8px rgba(212, 175, 55, 0.42),
+        0 0 18px rgba(212, 175, 55, 0.2);
     }
 
     .contacts-icons {
@@ -225,6 +358,27 @@
       line-height: 1.55;
       font-size: 0.94rem;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .contacts-description {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      font-family: "Aubrey", serif;
+      font-size: 1.24rem;
+      color: #f3f3f3;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      max-width: min(920px, 94vw);
+      margin-left: clamp(-42px, -3.4vw, -14px);
+    }
+
+    .default-panel .contacts-description:last-child {
+      font-size: 1.32rem;
+      color: #d4af37;
+      line-height: 1.55;
+    }
+
+    .default-panel .contacts-description:first-child {
+      font-size: 1.36rem;
     }
 
     .contact-link {
@@ -313,76 +467,182 @@
       justify-content: center;
     }
 
-    .book-modal {
+    .book-viewer-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.72);
-      display: none;
+      background: rgba(0, 0, 0, 0);
+      z-index: 999;
+      display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 999;
-      padding: 16px;
+      pointer-events: none;
+      transition: background 0.4s ease;
     }
 
-    .book-modal.open {
+    .book-viewer-overlay.active {
+      background: rgba(0, 0, 0, 0.88);
+      pointer-events: auto;
+    }
+
+    .book-viewer {
+      position: relative;
+      width: min(780px, 88vw);
+      height: min(520px, 60vh);
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .book-viewer.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .book-pages-container {
+      width: 100%;
+      height: 100%;
       display: flex;
-    }
-
-    .book-modal-card {
-      width: min(860px, 100%);
-      max-height: 92vh;
-      overflow: auto;
-      background: #181818;
-      color: #f1f1f1;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 16px;
-    }
-
-    .book-modal-close {
-      float: right;
-      background: #2a2a2a;
-      color: #f1f1f1;
-      border: 1px solid #474747;
-      padding: 6px 10px;
+      background: #0e0e0e;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.08);
       cursor: pointer;
     }
 
-    .book-modal h2 {
-      margin: 0 0 10px;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .book-kv {
-      margin: 6px 0;
-      font-size: 0.95rem;
-    }
-
-    .book-kv span {
-      color: #a4a4a4;
-      margin-right: 8px;
-    }
-
-    .book-main-image {
-      width: 100%;
-      max-height: 280px;
+    .book-page-img {
+      flex: 1;
+      min-width: 0;
+      height: 100%;
       object-fit: cover;
-      border: 1px solid #2c2c2c;
-      margin: 10px 0 14px;
+      display: block;
     }
 
-    .book-pages {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 8px;
+    .book-spine-line {
+      width: 2px;
+      flex-shrink: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(40, 40, 40, 0.3), rgba(0, 0, 0, 0.6));
     }
 
-    .book-pages img {
+    .book-close-btn {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: #999;
+      font-size: 1.6rem;
+      cursor: pointer;
+      z-index: 30;
+      line-height: 1;
+      transition: color 0.15s;
+      background: none;
+      border: none;
+      padding: 4px 8px;
+    }
+
+    .book-close-btn:hover {
+      color: #fff;
+    }
+
+    .book-nav-hint {
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #666;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .book-page-counter {
+      position: absolute;
+      bottom: -32px;
+      right: 0;
+      color: #555;
+      font-size: 0.78rem;
+    }
+
+    .page-flipper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .page-flipper.flipping {
+      animation: pageFlip 0.6s ease-in-out forwards;
+    }
+
+    @keyframes pageFlip {
+      0% {
+        transform: perspective(2500px) rotateY(0deg);
+      }
+      100% {
+        transform: perspective(2500px) rotateY(-180deg);
+      }
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      overflow: hidden;
+      background: #0e0e0e;
+    }
+
+    .flip-face img {
       width: 100%;
-      height: 120px;
+      height: 100%;
       object-fit: cover;
-      border: 1px solid #2c2c2c;
+      display: block;
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front.cover-half img {
+      width: 200%;
+      max-width: none;
+      margin-left: -100%;
+    }
+
+    .flip-left-static {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 10;
+      overflow: hidden;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .flip-left-static img {
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .flip-left-static.cover-half img {
+      width: 200%;
+      max-width: none;
+    }
+
+    .flip-left-static:not(.cover-half) img {
+      width: 100%;
+    }
+
+    .fly-book {
+      position: fixed;
+      z-index: 1001;
+      border-radius: 2px;
+      pointer-events: none;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .tattoo-overlay {
@@ -413,6 +673,12 @@
         bottom: 10px;
       }
 
+      .floor-logo-left {
+        width: min(160px, 40vw);
+        left: 12px;
+        bottom: 10px;
+      }
+
       .book-hover-preview {
         width: min(92vw, 520px);
       }
@@ -440,7 +706,7 @@
 
 <body>
   <main class="hero">
-    <img alt="Header ornament" class="hero-header" src="assets/header.png" />
+    <img alt="NINA BEJO logo" class="hero-header" src="assets/logo.png" />
     <section class="header-sections" id="header-sections" aria-label="Bookshelf sections"></section>
     <section class="shelves" id="shelves"></section>
     <div class="book-hover-preview" id="book-hover-preview" aria-hidden="true">
@@ -452,7 +718,16 @@
         </div>
       </div>
     </div>
-    <section class="contacts-preview visible" id="contacts-preview" aria-label="Contact information">
+    <section class="contacts-preview" id="contacts-preview" aria-label="Contact information">
+      <div class="default-panel">
+        <p class="contacts-description">
+          Pause and dive into collections of symbolic illustrations and paintings that capture the energy of the present moment, alongside original tattoo art, murals, and more.
+        </p>
+        <p class="contacts-description">
+          Immerse yourself in the visual language of the heart, soul, and presence amid a fast-moving world.
+        </p>
+      </div>
+      <div class="connect-panel">
       <h2 class="contacts-title">Connect</h2>
       <p class="contact-info">
         <a class="contact-link" href="mailto:hello@nina-portfolio.com">hello@nina-portfolio.com</a><br>
@@ -476,14 +751,18 @@
           </svg>
         </a>
       </div>
+      </div>
     </section>
     <img alt="Floor" class="floor" id="floor" src="assets/floor.png" />
+    <img alt="Black and white floor logo left" class="floor-logo-left" src="assets/header2.png" />
     <img alt="Black and white floor logo" class="floor-logo-right" src="assets/header2.png" />
   </main>
-  <div class="book-modal" id="book-modal">
-    <div class="book-modal-card">
-      <button class="book-modal-close" id="book-modal-close" type="button">Close</button>
-      <div id="book-modal-content"></div>
+  <div class="book-viewer-overlay" id="book-viewer-overlay">
+    <div class="book-viewer" id="book-viewer">
+      <button class="book-close-btn" id="book-close-btn" type="button">&times;</button>
+      <div class="book-pages-container" id="book-pages-container" role="button" tabindex="0" aria-label="Book page"></div>
+      <div class="book-nav-hint" id="book-nav-hint"></div>
+      <div class="book-page-counter" id="book-page-counter"></div>
     </div>
   </div>
   <img alt="Tattoo scene overlay" class="tattoo-overlay" src="assets/tattoo-overlay.png" />
@@ -492,9 +771,6 @@
     const shelvesRoot = document.getElementById("shelves");
     const headerSectionsRoot = document.getElementById("header-sections");
     const floorElement = document.getElementById("floor");
-    const modal = document.getElementById("book-modal");
-    const modalClose = document.getElementById("book-modal-close");
-    const modalContent = document.getElementById("book-modal-content");
     const hoverPreview = document.getElementById("book-hover-preview");
     const contactsPreview = document.getElementById("contacts-preview");
     const hoverPreviewImage = document.getElementById("book-hover-preview-image");
@@ -666,12 +942,12 @@
     };
 
     const showContactsPreview = () => {
-      contactsPreview.classList.add("visible");
+      contactsPreview.classList.add("show-connect");
       positionFloorPreview();
     };
 
     const hideContactsPreview = () => {
-      contactsPreview.classList.remove("visible");
+      contactsPreview.classList.remove("show-connect");
     };
 
     const showFloorPreview = (book) => {
@@ -680,6 +956,7 @@
         return;
       }
       hideContactsPreview();
+      contactsPreview.classList.add("hide-for-book-hover");
       if (book.mainImage) {
         hoverPreviewImage.src = book.mainImage;
         hoverPreviewImage.alt = book.title;
@@ -697,7 +974,7 @@
 
     const hideHoverPreview = () => {
       hoverPreview.classList.remove("visible");
-      showContactsPreview();
+      contactsPreview.classList.remove("hide-for-book-hover");
     };
 
     const positionFloorPreview = () => {
@@ -711,22 +988,193 @@
       contactsPreview.style.top = `${centerY}px`;
     };
 
-    const openBookModal = (book) => {
-      modalContent.innerHTML = "";
-      const pages = (book.pageImages || [])
-        .map((img) => `<img src="${img}" alt="${book.title} page image">`)
-        .join("");
-      modalContent.innerHTML = `
-        <h2>${book.title}</h2>
-        <div class="book-kv"><span>ID:</span>${book.id}</div>
-        <div class="book-kv"><span>Style:</span>${book.style}</div>
-        <div class="book-kv"><span>Category:</span>${book.category}</div>
-        <div class="book-kv"><span>Description:</span>${book.description}</div>
-        <img class="book-main-image" src="${book.mainImage}" alt="${book.title} main image">
-        <div class="book-kv"><span>Page images:</span></div>
-        <div class="book-pages">${pages}</div>
-      `;
-      modal.classList.add("open");
+    const bookViewer = {
+      overlay: document.getElementById("book-viewer-overlay"),
+      viewer: document.getElementById("book-viewer"),
+      container: document.getElementById("book-pages-container"),
+      hint: document.getElementById("book-nav-hint"),
+      counter: document.getElementById("book-page-counter"),
+      book: null,
+      views: [],
+      viewIndex: 0,
+      animating: false
+    };
+
+    const buildBookViews = (book) => {
+      const views = [{ type: "cover", images: [book.mainImage] }];
+      const pages = book.pageImages || [];
+      for (let i = 0; i < pages.length; i += 2) {
+        views.push({
+          type: "spread",
+          images: pages[i + 1] ? [pages[i], pages[i + 1]] : [pages[i]]
+        });
+      }
+      return views;
+    };
+
+    const renderBookView = () => {
+      const { container, views, viewIndex, book, hint, counter } = bookViewer;
+      const view = views[viewIndex];
+      container.innerHTML = "";
+
+      if (view.type === "cover") {
+        const img = document.createElement("img");
+        img.src = view.images[0];
+        img.alt = book.title;
+        img.className = "book-page-img";
+        container.appendChild(img);
+      } else {
+        view.images.forEach((src, i) => {
+          if (i > 0) {
+            const spine = document.createElement("div");
+            spine.className = "book-spine-line";
+            container.appendChild(spine);
+          }
+          const img = document.createElement("img");
+          img.src = src;
+          img.className = "book-page-img";
+          container.appendChild(img);
+        });
+      }
+
+      const totalPages = (views.length - 1) * 2;
+      const currentPage = viewIndex === 0 ? 0 : (viewIndex - 1) * 2 + 1;
+      hint.textContent = viewIndex < views.length - 1 ? "Click to turn page" : "Click to close";
+      counter.textContent = viewIndex === 0 ? "Cover" : currentPage + "\u2013" + Math.min(currentPage + 1, totalPages) + " / " + totalPages;
+    };
+
+    const finishFlip = (leftStatic, flipper) => {
+      if (leftStatic && leftStatic.parentNode) leftStatic.remove();
+      if (flipper && flipper.parentNode) flipper.remove();
+      if (!bookViewer.book) return;
+      bookViewer.viewIndex++;
+      renderBookView();
+      bookViewer.animating = false;
+    };
+
+    const flipPage = () => {
+      if (bookViewer.animating) return;
+      const { views, viewIndex, viewer } = bookViewer;
+
+      if (viewIndex >= views.length - 1) {
+        closeBookViewer();
+        return;
+      }
+
+      bookViewer.animating = true;
+      const currentView = views[viewIndex];
+      const nextView = views[viewIndex + 1];
+
+      const container = bookViewer.container;
+      container.innerHTML = "";
+      nextView.images.forEach((src, i) => {
+        if (i > 0) {
+          const spine = document.createElement("div");
+          spine.className = "book-spine-line";
+          container.appendChild(spine);
+        }
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "book-page-img";
+        container.appendChild(img);
+      });
+
+      const leftStatic = document.createElement("div");
+      leftStatic.className = "flip-left-static" + (currentView.type === "cover" ? " cover-half" : "");
+      const leftImg = document.createElement("img");
+      leftImg.src = currentView.images[0];
+      leftStatic.appendChild(leftImg);
+      viewer.appendChild(leftStatic);
+
+      const flipper = document.createElement("div");
+      flipper.className = "page-flipper";
+
+      const frontFace = document.createElement("div");
+      frontFace.className = "flip-face flip-front" + (currentView.type === "cover" ? " cover-half" : "");
+      const frontImg = document.createElement("img");
+      frontImg.src = currentView.type === "cover"
+        ? currentView.images[0]
+        : (currentView.images[1] || currentView.images[0]);
+      frontFace.appendChild(frontImg);
+
+      const backFace = document.createElement("div");
+      backFace.className = "flip-face flip-back";
+      const backImg = document.createElement("img");
+      backImg.src = nextView.images[0];
+      backFace.appendChild(backImg);
+
+      flipper.appendChild(frontFace);
+      flipper.appendChild(backFace);
+      viewer.appendChild(flipper);
+
+      let finished = false;
+      const onDone = () => {
+        if (finished) return;
+        finished = true;
+        finishFlip(leftStatic, flipper);
+      };
+
+      flipper.addEventListener("animationend", onDone, { once: true });
+      setTimeout(onDone, 700);
+
+      requestAnimationFrame(() => {
+        flipper.classList.add("flipping");
+      });
+    };
+
+    const openBookViewer = (book, sourceEl) => {
+      bookViewer.book = book;
+      bookViewer.views = buildBookViews(book);
+      bookViewer.viewIndex = 0;
+      bookViewer.animating = true;
+      hideHoverPreview();
+
+      const palette = stylePalette(book.style);
+      const sourceRect = sourceEl.getBoundingClientRect();
+
+      const flyBook = document.createElement("div");
+      flyBook.className = "fly-book";
+      flyBook.style.left = sourceRect.left + "px";
+      flyBook.style.top = sourceRect.top + "px";
+      flyBook.style.width = sourceRect.width + "px";
+      flyBook.style.height = sourceRect.height + "px";
+      flyBook.style.background = palette.spine;
+      flyBook.style.boxShadow = "0 4px 24px rgba(0,0,0,0.5)";
+      document.body.appendChild(flyBook);
+
+      bookViewer.overlay.classList.add("active");
+
+      const targetW = Math.min(780, window.innerWidth * 0.88);
+      const targetH = Math.min(520, window.innerHeight * 0.6);
+      const targetL = (window.innerWidth - targetW) / 2;
+      const targetT = (window.innerHeight - targetH) / 2;
+
+      requestAnimationFrame(() => {
+        flyBook.style.left = targetL + "px";
+        flyBook.style.top = targetT + "px";
+        flyBook.style.width = targetW + "px";
+        flyBook.style.height = targetH + "px";
+        flyBook.style.borderRadius = "4px";
+      });
+
+      setTimeout(() => {
+        flyBook.remove();
+        renderBookView();
+        bookViewer.viewer.classList.add("visible");
+        bookViewer.animating = false;
+      }, 520);
+    };
+
+    const closeBookViewer = () => {
+      bookViewer.animating = false;
+      bookViewer.viewer.classList.remove("visible");
+      setTimeout(() => {
+        bookViewer.overlay.classList.remove("active");
+        bookViewer.container.innerHTML = "";
+        bookViewer.book = null;
+        bookViewer.views = [];
+        bookViewer.viewIndex = 0;
+      }, 320);
     };
 
     const setActiveHeaderSection = (categoryKey) => {
@@ -807,7 +1255,7 @@
           const book = id ? booksById.get(id) : null;
           if (!book) return;
           showFloorPreview(book);
-          openBookModal(book);
+          openBookViewer(book, target);
         });
       };
 
@@ -854,13 +1302,25 @@
       }
     });
 
-    modalClose.addEventListener("click", () => {
-      modal.classList.remove("open");
+    bookViewer.viewer.addEventListener("click", (e) => {
+      if (e.target.closest("#book-close-btn")) {
+        closeBookViewer();
+        return;
+      }
+      if (e.target.closest(".book-pages-container") || e.target.closest(".flip-left-static")) {
+        flipPage();
+      }
     });
 
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.classList.remove("open");
+    bookViewer.overlay.addEventListener("click", (e) => {
+      if (e.target === bookViewer.overlay) {
+        closeBookViewer();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && bookViewer.book) {
+        closeBookViewer();
       }
     });
 
@@ -875,6 +1335,25 @@
 
     floorElement.addEventListener("load", positionFloorPreview);
     window.addEventListener("resize", positionFloorPreview);
+    positionFloorPreview();
+
+    const isInRightBottomConnectZone = (event) =>
+      event.clientX >= window.innerWidth * 0.7 &&
+      event.clientY >= window.innerHeight * 0.55;
+
+    document.addEventListener("mousemove", (event) => {
+      if (hoverPreview.classList.contains("visible")) {
+        document.body.classList.remove("right-bottom-connect-zone");
+        return;
+      }
+      const inRightBottomZone = isInRightBottomConnectZone(event);
+      document.body.classList.toggle("right-bottom-connect-zone", inRightBottomZone);
+      if (inRightBottomZone) {
+        showContactsPreview();
+      } else {
+        hideContactsPreview();
+      }
+    });
   </script>
 </body>
 </html>
