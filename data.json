@@ -1,4 +1,45 @@
 {
+  "bookViews": [
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "svg": "<rect width=\"10\" height=\"100\" rx=\"0.8\" fill=\"#1a1a1a\"/><rect width=\"1.6\" height=\"100\" fill=\"#000\" opacity=\"0.9\"/><rect x=\"9.2\" width=\"0.8\" height=\"100\" fill=\"#333\" opacity=\"0.65\"/><rect width=\"10\" height=\"3\" fill=\"#444\" opacity=\"0.45\"/>"
+    },
+    {
+      "id": "charcoal",
+      "name": "Charcoal",
+      "svg": "<rect width=\"10\" height=\"100\" rx=\"0.8\" fill=\"#2a2a2a\"/><rect width=\"1.6\" height=\"100\" fill=\"#111\" opacity=\"0.9\"/><rect x=\"9.2\" width=\"0.8\" height=\"100\" fill=\"#444\" opacity=\"0.65\"/><rect width=\"10\" height=\"3\" fill=\"#555\" opacity=\"0.45\"/>"
+    },
+    {
+      "id": "graphite",
+      "name": "Graphite",
+      "svg": "<rect width=\"10\" height=\"100\" rx=\"0.8\" fill=\"#333\"/><rect width=\"1.6\" height=\"100\" fill=\"#1a1a1a\" opacity=\"0.9\"/><rect x=\"9.2\" width=\"0.8\" height=\"100\" fill=\"#555\" opacity=\"0.65\"/><rect width=\"10\" height=\"3\" fill=\"#666\" opacity=\"0.45\"/>"
+    },
+    {
+      "id": "slate",
+      "name": "Slate",
+      "svg": "<rect width=\"10\" height=\"100\" rx=\"0.8\" fill=\"#444\"/><rect width=\"1.6\" height=\"100\" fill=\"#222\" opacity=\"0.9\"/><rect x=\"9.2\" width=\"0.8\" height=\"100\" fill=\"#666\" opacity=\"0.65\"/><rect width=\"10\" height=\"3\" fill=\"#777\" opacity=\"0.45\"/>"
+    },
+    {
+      "id": "pewter",
+      "name": "Pewter",
+      "svg": "<rect width=\"10\" height=\"100\" rx=\"0.8\" fill=\"#666\"/><rect width=\"1.6\" height=\"100\" fill=\"#444\" opacity=\"0.9\"/><rect x=\"9.2\" width=\"0.8\" height=\"100\" fill=\"#888\" opacity=\"0.65\"/><rect width=\"10\" height=\"3\" fill=\"#999\" opacity=\"0.45\"/>"
+    },
+    {
+      "id": "ivory",
+      "name": "Ivory",
+      "svg": "<rect width=\"10\" height=\"100\" rx=\"0.8\" fill=\"#ddd\"/><rect width=\"1.6\" height=\"100\" fill=\"#bbb\" opacity=\"0.9\"/><rect x=\"9.2\" width=\"0.8\" height=\"100\" fill=\"#fff\" opacity=\"0.65\"/><rect width=\"10\" height=\"3\" fill=\"#fff\" opacity=\"0.45\"/>"
+    }
+  ],
+  "main": {
+    "logo": "assets/logo.png",
+    "headerImage": "assets/header.png",
+    "footerImage": "assets/floor.png",
+    "tattooOverlay": "assets/tattoo-overlay.png",
+    "description": "Pause and dive into collections of symbolic illustrations and paintings that capture the energy of the present moment, alongside original tattoo art, murals, and more.",
+    "description2": "Immerse yourself in the visual language of the heart, soul, and presence amid a fast-moving world....",
+    "cvLink": "assets/cv.pdf"
+  },
   "categories": [
     {
       "id": "painting",
@@ -11,7 +52,14 @@
           "category": "painting",
           "description": "A set of color and texture studies for canvas concepts.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         },
         {
           "id": "painting-002",
@@ -20,7 +68,16 @@
           "category": "painting",
           "description": "Early portrait sketches with mood exploration.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         }
       ]
     },
@@ -35,7 +92,14 @@
           "category": "tattoo",
           "description": "Linework motifs for sleeve and backpiece ideas.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         },
         {
           "id": "tattoo-002",
@@ -44,7 +108,16 @@
           "category": "tattoo",
           "description": "Flash collection focused on contrast and symbols.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         }
       ]
     },
@@ -53,22 +126,51 @@
       "title": "Illustration",
       "books": [
         {
-          "id": "illustration-001",
-          "title": "Narrative Frames",
-          "style": "graphite",
-          "category": "illustration",
-          "description": "Storyboard-like frames for editorial sequences.",
-          "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
-        },
-        {
           "id": "illustration-002",
           "title": "Character Sheets",
           "style": "slate",
           "category": "illustration",
           "description": "Character turnaround and expression studies.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
+        },
+        {
+          "id": "illustration-001",
+          "title": "Narrative Frames!!",
+          "style": "graphite",
+          "category": "illustration",
+          "description": "Storyboard-like frames for editorial sequences.!!",
+          "mainImage": "assets/book1.png",
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
+        },
+        {
+          "id": "illustration-035",
+          "title": "BOOK #3",
+          "style": "obsidian",
+          "category": "illustration",
+          "description": "very COOL!",
+          "mainImage": "assets/book_cover3.png",
+          "pageImages": [
+            "assets/book3.page1.png",
+            "assets/book3.page2.png",
+            "uploads/illustration-035/illustration-035.page3.png",
+            "uploads/illustration-035/illustration-035.page4.png",
+            "uploads/illustration-035/illustration-035.page5.png"
+          ]
         }
       ]
     },
@@ -83,7 +185,14 @@
           "category": "batik",
           "description": "Repeating organic patterns for fabric trials.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         },
         {
           "id": "batik-002",
@@ -92,7 +201,16 @@
           "category": "batik",
           "description": "Process notes on wax resist and dye layers.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         }
       ]
     },
@@ -107,7 +225,14 @@
           "category": "mural",
           "description": "Large wall composition blocks and color notes.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         },
         {
           "id": "mural-002",
@@ -116,7 +241,16 @@
           "category": "mural",
           "description": "Placement mockups adapted to different spaces.",
           "mainImage": "assets/book1.png",
-          "pageImages": ["assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png", "assets/page1.png"]
+          "pageImages": [
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png",
+            "assets/page1.png"
+          ]
         }
       ]
     }
