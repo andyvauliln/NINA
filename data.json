@@ -2,23 +2,123 @@
   "categories": [
     {
       "id": "painting",
-      "title": "Painting"
+      "title": "Painting",
+      "books": [
+        {
+          "id": "painting-001",
+          "title": "Color Studies",
+          "style": "pewter",
+          "category": "painting",
+          "description": "A set of color and texture studies for canvas concepts.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+        },
+        {
+          "id": "painting-002",
+          "title": "Portrait Drafts",
+          "style": "charcoal",
+          "category": "painting",
+          "description": "Early portrait sketches with mood exploration.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+        }
+      ]
     },
     {
       "id": "tattoo",
-      "title": "Tattoo"
+      "title": "Tattoo",
+      "books": [
+        {
+          "id": "tattoo-001",
+          "title": "Ink Motifs",
+          "style": "obsidian",
+          "category": "tattoo",
+          "description": "Linework motifs for sleeve and backpiece ideas.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+        },
+        {
+          "id": "tattoo-002",
+          "title": "Flash Set A",
+          "style": "ivory",
+          "category": "tattoo",
+          "description": "Flash collection focused on contrast and symbols.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+        }
+      ]
     },
     {
       "id": "illustration",
-      "title": "Illustration"
+      "title": "Illustration",
+      "books": [
+        {
+          "id": "illustration-001",
+          "title": "Narrative Frames",
+          "style": "graphite",
+          "category": "illustration",
+          "description": "Storyboard-like frames for editorial sequences.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+        },
+        {
+          "id": "illustration-002",
+          "title": "Character Sheets",
+          "style": "slate",
+          "category": "illustration",
+          "description": "Character turnaround and expression studies.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+        }
+      ]
     },
     {
       "id": "batik",
-      "title": "Batik"
+      "title": "Batik",
+      "books": [
+        {
+          "id": "batik-001",
+          "title": "Pattern Lab",
+          "style": "pewter",
+          "category": "batik",
+          "description": "Repeating organic patterns for fabric trials.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+        },
+        {
+          "id": "batik-002",
+          "title": "Wax Process",
+          "style": "ivory",
+          "category": "batik",
+          "description": "Process notes on wax resist and dye layers.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+        }
+      ]
     },
     {
       "id": "mural",
-      "title": "Mural"
+      "title": "Mural",
+      "books": [
+        {
+          "id": "mural-001",
+          "title": "Wall Concepts",
+          "style": "charcoal",
+          "category": "mural",
+          "description": "Large wall composition blocks and color notes.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/bookshelf.svg", "assets/floor.png"]
+        },
+        {
+          "id": "mural-002",
+          "title": "Site Mockups",
+          "style": "graphite",
+          "category": "mural",
+          "description": "Placement mockups adapted to different spaces.",
+          "mainImage": "assets/book1.png",
+          "pageImages": ["assets/floor.png", "assets/bookshelf.svg"]
+        }
+      ]
     }
   ]
 }

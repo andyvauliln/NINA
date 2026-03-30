@@ -1,303 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>NINA BEJO | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
-    <style>
-        body { margin: 0; background: #fff; font-family: 'Inter', sans-serif; color: #111; overflow-x: hidden; }
-        .font-headline { font-family: 'Space Grotesk', sans-serif; }
-        
-        /* Hero Section */
-        #hero-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-            pointer-events: none;
-        }
-        #hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -1; transform-origin: center center;
-        }
-        
-        .diamond-logo {
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            background: white; color: black; display: flex; align-items: center; justify-content: center;
-            width: 200px; height: 200px; margin-top: 5vh; font-weight: 900; font-size: 2rem;
-            text-align: center; line-height: 1; text-transform: uppercase; border: 2px solid black;
-            pointer-events: auto;
-        }
-        .hero-desc {
-            background: white; border: 2px solid black; border-radius: 2rem; padding: 2rem;
-            max-width: 800px; text-align: center; margin-top: 2rem; font-size: 1.1rem;
-            pointer-events: auto;
-        }
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+  <title>NINA BEJO | Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        /* Catalog Layout */
-        #catalog-wrapper {
-            position: relative; z-index: 10; padding-top: 100vh; /* space for scroll */
-            background: transparent;
-        }
-        .catalog-content {
-            background: white; min-height: 100vh; padding: 10vh 5vw; border-top: 2px solid #eee;
-        }
-        
-        .grid-item {
-            position: relative; overflow: hidden; border: 2px solid black;
-            cursor: pointer; background: #eee; transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .grid-item img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-            filter: grayscale(100%); transition: filter 0.5s, transform 0.5s;
-        }
-        .grid-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
-        .grid-label {
-            position: absolute; top: 1rem; left: 1rem; background: rgba(255,255,255,0.9);
-            padding: 0.5rem 1rem; font-weight: bold; text-transform: uppercase; font-family: 'Space Grotesk';
-            border: 1px solid black; opacity: 0; transform: translateY(10px); transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        .grid-item:hover .grid-label { opacity: 1; transform: translateY(0); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #000000;
+    }
 
-        /* Fullscreen Gallery */
-        #gallery-view {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: #fff; z-index: 100; display: none; flex-direction: column;
-        }
-        .gallery-header {
-            padding: 2rem; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid #eee;
-        }
-        .close-btn { font-size: 2rem; cursor: pointer; font-family: 'Space Grotesk'; transition: transform 0.3s; }
-        .close-btn:hover { transform: rotate(90deg); }
-        
-        .gallery-scroll {
-            flex: 1; display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 2rem; gap: 4rem; align-items: center; scrollbar-width: none;
-        }
-        .gallery-scroll::-webkit-scrollbar { display: none; }
-        .gallery-slide {
-            flex: 0 0 80vw; height: 80vh; scroll-snap-align: center;
-            display: flex; gap: 4rem; align-items: center; justify-content: center;
-        }
-        .gallery-slide img {
-            max-width: 60%; max-height: 90%; object-fit: contain; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-        }
-        .gallery-desc {
-            max-width: 300px; font-size: 1.1rem; line-height: 1.6; font-family: 'Space Grotesk';
-        }
-    </style>
+    .hero {
+      --floor-h: 210px;
+      --header-h: 9.3vw;
+      --header-max-h: 117px;
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .hero-header {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: min(var(--header-max-h), var(--header-h));
+      display: block;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .header-sections {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: min(var(--header-max-h), var(--header-h));
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      padding-top: clamp(10px, 1.6vw, 16px);
+      gap: 0;
+      z-index: 11;
+      pointer-events: auto;
+    }
+
+    .header-section-title {
+      border: 0;
+      background: transparent;
+      color: #ececec;
+      font-family: "Fredericka the Great", serif;
+      font-size: clamp(0.82rem, 1.22vw, 1.06rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0 6px;
+      cursor: pointer;
+      transition: color 120ms ease, text-shadow 120ms ease;
+    }
+
+    .header-section-title.is-active {
+      color: #d4af37;
+      text-shadow: 0 1px 8px rgba(212, 175, 55, 0.42);
+    }
+
+    .shelves {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: min(var(--header-max-h), var(--header-h));
+      bottom: calc(var(--floor-h) - 6px);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: stretch;
+      gap: 0;
+      width: 100%;
+      margin: 0;
+      border-top: 10px solid #000000;
+      z-index: 8;
+      overflow: hidden;
+    }
+
+    .shelf-card {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .shelf-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .floor {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      width: 100%;
+      height: calc(var(--floor-h) + 12px);
+      object-fit: cover;
+      z-index: 7;
+      pointer-events: none;
+      background: linear-gradient(to top, #9f7353 0%, #b98a67 100%);
+    }
+
+    .floor-logo-right {
+      position: absolute;
+      right: clamp(20px, 4vw, 56px);
+      bottom: 18px;
+      width: min(260px, 28vw);
+      height: auto;
+      object-fit: contain;
+      object-position: left center;
+      filter: grayscale(1) contrast(1.25) brightness(0.9);
+      opacity: 0.85;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .book-shape {
+      cursor: pointer;
+    }
+
+    .book-hover-preview {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%) translateY(14px);
+      width: fit-content;
+      max-width: min(560px, 76vw);
+      pointer-events: none;
+      z-index: 12;
+      opacity: 0;
+      transition: opacity 120ms ease, transform 120ms ease;
+      padding: 0;
+    }
+
+    .book-hover-preview.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+
+    .contacts-preview {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      width: fit-content;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      color: #f3f3f3;
+      z-index: 11;
+      opacity: 0;
+      transition: opacity 120ms ease;
+      pointer-events: auto;
+    }
+
+    .contacts-preview.visible {
+      opacity: 1;
+    }
+
+    .contacts-title {
+      font-family: "Cinzel", serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.07em;
+      margin: 0 0 10px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .contacts-icons {
+      display: inline-flex;
+      gap: 12px;
+      margin: 0 0 10px 10px;
+      vertical-align: middle;
+    }
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.44);
+      border-radius: 50%;
+      color: #f3f3f3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background: rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(1px);
+      transition: transform 120ms ease, border-color 120ms ease, color 120ms ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-2px) scale(1.04);
+      border-color: #d4af37;
+      color: #d4af37;
+    }
+
+    .social-icon svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+      fill: currentColor;
+    }
+
+    .contact-info {
+      margin: 0 0 10px;
+      line-height: 1.55;
+      font-size: 0.94rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .contact-link {
+      color: #f3f3f3;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+
+    .contact-link:hover {
+      color: #d4af37;
+      border-color: #d4af37;
+    }
+
+    .download-cv {
+      display: inline-block;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.86rem;
+      letter-spacing: 0.03em;
+      background: rgba(0, 0, 0, 0.2);
+      transition: transform 120ms ease, border-color 120ms ease;
+    }
+
+    .download-cv:hover {
+      transform: translateY(-1px);
+      border-color: #d4af37;
+      color: #d4af37;
+    }
+
+    .book-hover-preview img {
+      display: block;
+      width: 150px;
+      height: 112px;
+      object-fit: cover;
+      border: 0;
+      box-shadow: none;
+      background: #121212;
+    }
+
+    .book-hover-preview img.hidden {
+      display: none;
+    }
+
+    .book-hover-preview-title {
+      margin-top: 0;
+      color: #d4af37;
+      padding: 0;
+      font-family: "Fredericka the Great", serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: left;
+      letter-spacing: 0.01em;
+      
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .book-hover-preview-description {
+      margin-top: 0;
+      color: #eeeeee;
+      padding: 0;
+      font-size: 0.92rem;
+      line-height: 1.35;
+      text-align: center;
+      max-height: 2.7em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .book-hover-preview-content {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .book-hover-preview-meta {
+      min-width: 0;
+      max-width: min(380px, 48vw);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .book-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 16px;
+    }
+
+    .book-modal.open {
+      display: flex;
+    }
+
+    .book-modal-card {
+      width: min(860px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: #181818;
+      color: #f1f1f1;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .book-modal-close {
+      float: right;
+      background: #2a2a2a;
+      color: #f1f1f1;
+      border: 1px solid #474747;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .book-modal h2 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .book-kv {
+      margin: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .book-kv span {
+      color: #a4a4a4;
+      margin-right: 8px;
+    }
+
+    .book-main-image {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border: 1px solid #2c2c2c;
+      margin: 10px 0 14px;
+    }
+
+    .book-pages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .book-pages img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border: 1px solid #2c2c2c;
+    }
+
+    .tattoo-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center;
+      z-index: 9;
+      pointer-events: none;
+    }
+
+    @media (max-width: 1024px) {
+      .shelves {
+        bottom: calc(var(--floor-h) - 6px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        --floor-h: 160px;
+      }
+
+      .floor-logo-right {
+        width: min(180px, 42vw);
+        right: 14px;
+        bottom: 10px;
+      }
+
+      .book-hover-preview {
+        width: min(92vw, 520px);
+      }
+
+      .book-hover-preview-content {
+        grid-template-columns: 120px 1fr;
+        gap: 10px;
+      }
+
+      .book-hover-preview img {
+        width: 120px;
+        height: 96px;
+      }
+
+      .book-hover-preview-title {
+        font-size: 1.2rem;
+      }
+
+      .shelves {
+        bottom: calc(var(--floor-h) - 6px);
+      }
+    }
+  </style>
 </head>
+
 <body>
-
-    <!-- Hero Overlay -->
-    <div id="hero-container">
-        <img id="hero-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVzD_QNNx1ocur0eHnorh0GBLeTvo51703f4yau0MEHsqh5tU8keVZ74nuC0EVA1FZtcDxf6notwWW8zY8WBoKLno3FVI5fcqawqEb-0wl1cSnxKlMqNRhLN73QXgC3YPCOTCrZsx2b3gzWxlY2yGsemzMOAsGX9zMOeGCOpy5wOK3OtI6NpcMel4_Mj-hUn2FjDt8Kaz_0-MYJMDfQKy1ybS6xfBWMu7cOQt_sVZpBg_W4AHflg8NYuV44IqsU0MYqh7ZjRcjvJA" alt="Hero Photo">
-        <div class="diamond-logo font-headline">NINA<br>BEJO</div>
-        <div class="hero-desc">
-            <p>Pause & dive in collections of symbols in illustrations, paintings capturing the energy of the present moment, original tattoo art, murals & more...</p>
-            <p class="mt-4 italic text-gray-600">Immerse in the visual language of ones heart, soul & presence in fast running world around.</p>
+  <main class="hero">
+    <img alt="Header ornament" class="hero-header" src="assets/header.png" />
+    <section class="header-sections" id="header-sections" aria-label="Bookshelf sections"></section>
+    <section class="shelves" id="shelves"></section>
+    <div class="book-hover-preview" id="book-hover-preview" aria-hidden="true">
+      <div class="book-hover-preview-content">
+        <img id="book-hover-preview-image" alt="" />
+        <div class="book-hover-preview-meta">
+          <div class="book-hover-preview-title" id="book-hover-preview-title"></div>
+          <div class="book-hover-preview-description" id="book-hover-preview-description"></div>
         </div>
+      </div>
     </div>
-
-    <!-- Scroll Content -->
-    <div id="catalog-wrapper">
-        <div class="catalog-content">
-            <div class="flex flex-col md:flex-row gap-8 justify-between max-w-7xl mx-auto w-full">
-                <!-- Left Col -->
-                <div class="flex flex-col gap-8 w-full md:w-1/3">
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase mb-2">Painting</div>
-                        <div class="grid-item aspect-[3/4]" data-category="painting">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvDAsHRJkKQQ5UhJDESVsIUUJgZ0Xo5g16gKUN95I7E0FwMP7BM_ymleKvZQNz9v8_D3SIfP9y5Wdos-WNqnDcYw-3YeCUdcgcesZYBQBtNol2O0-SPIRq1wx0ckFX6FQ-un96mWYzNBnUQeuJ3kbmHDtq54QkUbtaG4CpJpXBnQ7S2nn2tJjTkE60Aszok0gF5ZW_cvNcLIdiXQObrSa0yO6Md4XVauh4gXDe5xi4vLbeBx06ClMNiKmTwSmBhx2RM9g7EQSafq4" alt="Painting">
-                            <div class="grid-label">Painting Gallery →</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase mb-2 mt-8">Batik & Textile Art</div>
-                        <div class="grid-item aspect-square rounded-[3rem]" data-category="batik">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD64b5JzqQ35bYG77IOvlZWwpTLA1zUi4nwG9b_19nZojQHQt_1eB_qPGT0WdO71DhmFQei2ZiVcM35aQeqYawMcb9SpB-pf3KEBSm2PuZrx9EyKgDL2GnAkFa2A-OYMs1sY1y5NrCJ7IqordDMBnXWLoSqf7lh9btMXCGyz3XES2QCROlSAngPN51DOoB2yt5EPws-vlawFbt6iDaKyUUsdgr_8e-4GTAonj2LaKJCb8t9pj6K7VUmblfK_zf3kWP3xr08hu9DumM" alt="Batik">
-                            <div class="grid-label">Batik Gallery →</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase mb-2 mt-8">Sketches</div>
-                        <div class="grid-item aspect-square rounded-full" data-category="sketches">
-                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Sketches">
-                            <div class="grid-label">Sketches →</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Mid Col -->
-                <div class="flex flex-col gap-8 w-full md:w-1/3">
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase mb-2">Illustration</div>
-                        <div class="grid-item aspect-[1/2.6]" data-category="illustration">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj95HAQ5hIXwmCvTYqpyUwakqZUjglR0A39QMS0EhlX-uZ3KvGgRJnUTRoadsYqIslOfNInz_JkSEv4hYZ9DtiF_25srlNxL6NkaXSeyJT2qHFF5tC3jepp26iG-J5v8T3WV35EeaZquvAu2eq74f48N9raVE1ZERO5V3VWcUMcpqfZ9eO0-ZU0F3Mwd6M8WrsjooythF8Mn81Fs6RI4RuErfdhTioKE7jI53TDCw_8UKV1pRBbLPgGEtNL9loM6GW_1e8ASeUT0M" alt="Illustration">
-                            <div class="grid-label">Illustration Gallery →</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase text-center mb-2 mt-8">Contact</div>
-                        <div class="grid-item aspect-square rounded-full w-2/3 mx-auto bg-black text-white hover:bg-white hover:text-black transition-colors" data-category="contact">
-                            <div class="text-6xl material-symbols-outlined">mail</div>
-                            <div class="grid-label text-black">Say Hello</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Right Col -->
-                <div class="flex flex-col gap-8 w-full md:w-1/3">
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase mb-2">Tattoo Art</div>
-                        <div class="grid-item aspect-[4/3]" data-category="tattoo">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1NPTWHUsL2Na899vL2yO80lI4K8AtYfnNcfgqUJTu-Fy988bVniUQoGynREtXyV0kYqUjGsgr9-pTGcn11BxK1zozpeEYzckZ81olnB8jzVEuIlVV8uEudi_C1tWJlPfVe_5O7G0XY7pLz9faJgkW8IhP_J2jUGpvML0ZWZUTr4ZaeA9C0Isp20loollVdaF8tbecZPHYopda0zk2SUY7AnKabp0bVorO6W29bSFvXXEQfh4HKnlmvUnejh53sypIM3ZYyVKRsqg" alt="Tattoo Art">
-                            <div class="grid-label">Tattoo Gallery →</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase mb-2 mt-8">Mural</div>
-                        <div class="grid-item aspect-[3/4] rounded-[3rem]" data-category="mural">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLNRASGBUVmwTri29SxWwE9aW_25wumTJM1f96k49K7IEy0B-T8buORBd3H7NYlxOZEZ6DSmkWjgZGPHgu6zcD10PDpoUm1TX_DrghS0pxjuDXEGGFYuw65OKG5-h5V-iMWznSqbnRrGhihn-SP_f41_n3-53utolVw28_4MwsenHAk83XeaXclXKYx6Jug90DQpa8g0HbmOI_xpGVptYAkMx5nASAn-2TqL4l-nplL453-bx7ySLKYdAsmgkz9oJjPMVDrw4rOBo" alt="Mural">
-                            <div class="grid-label">Mural Gallery →</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="font-headline font-bold text-xl uppercase text-center mb-2 mt-8">About Me | CV</div>
-                        <div class="grid-item aspect-square rounded-full w-3/4 mx-auto bg-black text-white hover:bg-white hover:text-black transition-colors" data-category="about">
-                            <div class="font-bold text-4xl">CV</div>
-                            <div class="grid-label text-black">Download</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="contacts-preview visible" id="contacts-preview" aria-label="Contact information">
+      <h2 class="contacts-title">Connect</h2>
+      <p class="contact-info">
+        <a class="contact-link" href="mailto:hello@nina-portfolio.com">hello@nina-portfolio.com</a><br>
+        <a class="contact-link" href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">+62 812-3456-7890 (WhatsApp)</a>
+      </p>
+      <a class="download-cv" href="assets/cv.pdf" download>Download CV</a>
+      <div class="contacts-icons">
+        <a class="social-icon" href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5A3.95 3.95 0 0 0 7.75 20.2h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.95 1.55a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z" />
+          </svg>
+        </a>
+        <a class="social-icon" href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2 6.5h7.1c2.7 0 4.3 1.3 4.3 3.4 0 1.5-.8 2.5-2 3 1.6.4 2.7 1.7 2.7 3.7 0 2.5-1.9 4-5 4H2V6.5Zm6.4 5.5c1.2 0 1.9-.5 1.9-1.5S9.6 9 8.4 9H5.1v3h3.3Zm.2 5.8c1.4 0 2.2-.6 2.2-1.8 0-1.2-.8-1.8-2.2-1.8H5.1v3.6h3.5ZM15.7 8.3h6.3v1.6h-6.3V8.3Zm.1 4.2c.2-2.8 2.2-4.5 5.1-4.5 3.2 0 5.1 2 5.1 5.5v.8h-6.9c.1 1.4.9 2.3 2.3 2.3 1 0 1.8-.4 2.1-1.2h2.3c-.4 2-2.2 3.4-4.5 3.4-3.3 0-5.7-2.2-5.5-6.3Zm2.4-.2h4.3c-.1-1.3-.8-2.1-2.1-2.1-1.2 0-2 .8-2.2 2.1Z" />
+          </svg>
+        </a>
+        <a class="social-icon" href="https://dribbble.com" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm6.9 4.6a8.2 8.2 0 0 0-3.1-2.2 22.8 22.8 0 0 1 1.5 3.1c.5-.2 1-.5 1.6-.9ZM12 3.8c-.8 0-1.6.1-2.3.4.7 1 1.3 2.1 1.9 3.2 1.9-.2 3.7-.6 5.2-1.3a20.9 20.9 0 0 0-1.5-2.7A8.2 8.2 0 0 0 12 3.8Zm-4.7 1.5A8.2 8.2 0 0 0 4 9.9c2 .1 4-.1 5.9-.3-.6-1.1-1.2-2.2-1.9-3.2-.2-.4-.5-.8-.7-1.1ZM3.8 12v-.3c1.9 0 4.4-.2 7.1-.6.2.4.4.8.6 1.2-.3.1-.6.2-.9.3-2.2.8-3.7 2-4.5 3.6A8.1 8.1 0 0 1 3.8 12Zm3.7 5.4c.6-1.2 1.8-2.2 3.6-2.8.3-.1.6-.2.9-.3.5 1.3 1 2.6 1.3 3.9-.4.1-.9.1-1.3.1a8.2 8.2 0 0 1-4.5-1.3Zm6.2.9c-.3-1.3-.8-2.6-1.3-3.9 1.9-.5 4.1-.6 6.3-.2A8.2 8.2 0 0 1 13.7 18.3Zm5.5-5.8c-2.5-.5-4.9-.4-7 .2-.2-.4-.4-.8-.6-1.2l.1-.1c2.9-.4 5.4-1.1 7.3-2.2.8 1.1 1.2 2.4 1.2 3.8Z" />
+          </svg>
+        </a>
+      </div>
+    </section>
+    <img alt="Floor" class="floor" id="floor" src="assets/floor.png" />
+    <img alt="Black and white floor logo" class="floor-logo-right" src="assets/header2.png" />
+  </main>
+  <div class="book-modal" id="book-modal">
+    <div class="book-modal-card">
+      <button class="book-modal-close" id="book-modal-close" type="button">Close</button>
+      <div id="book-modal-content"></div>
     </div>
+  </div>
+  <img alt="Tattoo scene overlay" class="tattoo-overlay" src="assets/tattoo-overlay.png" />
 
-    <!-- Gallery View -->
-    <div id="gallery-view">
-        <div class="gallery-header">
-            <h2 id="gallery-title" class="font-headline font-bold text-4xl uppercase tracking-tighter">Collection</h2>
-            <div class="close-btn" id="close-gallery">✕</div>
-        </div>
-        <div class="gallery-scroll" id="gallery-scroll">
-            <!-- Dynamically injected -->
-        </div>
-    </div>
+  <script>
+    const shelvesRoot = document.getElementById("shelves");
+    const headerSectionsRoot = document.getElementById("header-sections");
+    const floorElement = document.getElementById("floor");
+    const modal = document.getElementById("book-modal");
+    const modalClose = document.getElementById("book-modal-close");
+    const modalContent = document.getElementById("book-modal-content");
+    const hoverPreview = document.getElementById("book-hover-preview");
+    const contactsPreview = document.getElementById("contacts-preview");
+    const hoverPreviewImage = document.getElementById("book-hover-preview-image");
+    const hoverPreviewTitle = document.getElementById("book-hover-preview-title");
+    const hoverPreviewDescription = document.getElementById("book-hover-preview-description");
+    const escapeXml = (value) =>
+      String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&apos;");
 
-    <script>
-        gsap.registerPlugin(ScrollTrigger, Flip);
+    const hashString = (value) => {
+      const source = String(value || "");
+      let hash = 0;
+      for (let i = 0; i < source.length; i += 1) {
+        hash = (hash * 31 + source.charCodeAt(i)) >>> 0;
+      }
+      return hash;
+    };
 
-        // 1. Scroll Zoom Animation
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#catalog-wrapper",
-                start: "top bottom",
-                end: "top top",
-                scrub: 1,
-            }
+    const DEFAULT_BOOK_STYLES = [
+      "obsidian",
+      "charcoal",
+      "graphite",
+      "slate",
+      "pewter",
+      "ivory"
+    ];
+
+    const randomBookStyle = () => {
+      const index = Math.floor(Math.random() * DEFAULT_BOOK_STYLES.length);
+      return DEFAULT_BOOK_STYLES[index];
+    };
+
+    const resolveBookStyle = (styleName) => {
+      if (typeof styleName === "string" && DEFAULT_BOOK_STYLES.includes(styleName)) {
+        return styleName;
+      }
+      return randomBookStyle();
+    };
+
+    const normalizeBook = (source, categoryName) => ({
+      id: source.id || "",
+      title: source.title || "",
+      style: resolveBookStyle(source.style),
+      category: source.category || categoryName,
+      description: source.description || "",
+      mainImage: source.mainImage || "",
+      pageImages: Array.isArray(source.pageImages) && source.pageImages.length ? source.pageImages : ["assets/bookshelf.svg"]
+    });
+
+    const normalizeBooks = (books, count, categoryName) => {
+      const sourceBooks = Array.isArray(books) ? books.filter(Boolean) : [];
+      const normalized = Array.from({ length: count }, (_, index) => ({
+        id: "",
+        title: "",
+        style: randomBookStyle(),
+        category: categoryName,
+        description: "",
+        mainImage: "",
+        pageImages: ["assets/bookshelf.svg"]
+      }));
+      const usedSlots = new Set();
+      const seenIds = new Set();
+
+      sourceBooks.forEach((source) => {
+        if (!source || !source.id || seenIds.has(source.id)) return;
+        seenIds.add(source.id);
+        let slot = hashString(`${categoryName}:${source.id}`) % count;
+        while (usedSlots.has(slot)) {
+          slot = (slot + 1) % count;
+        }
+        usedSlots.add(slot);
+        normalized[slot] = normalizeBook(source, categoryName);
+      });
+
+      return normalized;
+    };
+
+    const stylePalette = (styleName) => {
+      if (styleName === "obsidian") return { spine: "#1a1a1a", left: "#000000", right: "#333333", top: "#444444" };
+      if (styleName === "charcoal") return { spine: "#2a2a2a", left: "#111111", right: "#444444", top: "#555555" };
+      if (styleName === "graphite") return { spine: "#333333", left: "#1a1a1a", right: "#555555", top: "#666666" };
+      if (styleName === "slate") return { spine: "#444444", left: "#222222", right: "#666666", top: "#777777" };
+      if (styleName === "pewter") return { spine: "#666666", left: "#444444", right: "#888888", top: "#999999" };
+      if (styleName === "ivory") return { spine: "#dddddd", left: "#bbbbbb", right: "#ffffff", top: "#ffffff" };
+      return stylePalette(resolveBookStyle(styleName));
+    };
+
+    const buildShelfSvg = (width, height, books) => {
+      const shelvesCount = 5;
+      const frameW = Math.max(12, Math.floor(width * 0.055));
+      const topBottom = Math.max(12, Math.floor(height * 0.042));
+      const innerX = frameW;
+      const innerY = topBottom;
+      const innerW = Math.max(20, width - frameW * 2);
+      const innerH = Math.max(20, height - topBottom * 2);
+      const rowH = innerH / shelvesCount;
+      const booksPerRow = Math.max(10, Math.floor(width / 16));
+
+      let svg = "";
+      svg += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">`;
+      svg += `<rect x="0" y="0" width="${width}" height="${height}" fill="#101010"/>`;
+      svg += `<rect x="${innerX}" y="${innerY}" width="${innerW}" height="${innerH}" fill="#181818"/>`;
+      svg += `<rect x="0" y="0" width="${frameW}" height="${height}" fill="#0a0a0a"/>`;
+      svg += `<rect x="${width - frameW}" y="0" width="${frameW}" height="${height}" fill="#0a0a0a"/>`;
+      svg += `<rect x="0" y="0" width="${width}" height="${topBottom}" fill="#0b0b0b"/>`;
+      svg += `<rect x="0" y="${height - topBottom}" width="${width}" height="${topBottom}" fill="#0b0b0b"/>`;
+      svg += `<rect x="${innerX}" y="${innerY}" width="${innerW}" height="1" fill="#555" opacity="0.45"/>`;
+      svg += `<rect x="${innerX}" y="${innerY}" width="1" height="${innerH}" fill="#555" opacity="0.35"/>`;
+      svg += `<rect x="${innerX + innerW - 1}" y="${innerY}" width="1" height="${innerH}" fill="#555" opacity="0.35"/>`;
+      svg += `<defs>`;
+      svg += `<filter id="book-title-shadow" x="-120%" y="-120%" width="340%" height="340%">`;
+      svg += `<feDropShadow dx="0.4" dy="0.5" stdDeviation="0.55" flood-color="#1a1206" flood-opacity="0.95"/>`;
+      svg += `<feDropShadow dx="0.1" dy="0.1" stdDeviation="0.25" flood-color="#f8e4ad" flood-opacity="0.55"/>`;
+      svg += `</filter>`;
+      svg += `</defs>`;
+
+      let bookIndex = 0;
+      for (let row = 0; row < shelvesCount; row += 1) {
+        const shelfY = innerY + row * rowH;
+        const shelfLineY = shelfY + rowH - Math.max(5, Math.floor(height * 0.011));
+        svg += `<rect x="${innerX}" y="${shelfLineY}" width="${innerW}" height="4" fill="#666"/>`;
+        svg += `<rect x="${innerX}" y="${shelfLineY + 4}" width="${innerW}" height="1" fill="#a0a0a0" opacity="0.18"/>`;
+
+        let cursorX = innerX + 3;
+        const rowBottom = shelfLineY;
+        for (let col = 0; col < booksPerRow; col += 1) {
+          const slotIndex = bookIndex;
+          const b = books[slotIndex] || null;
+          bookIndex += 1;
+          const bookW = Math.max(6, Math.floor(innerW / booksPerRow) - 1);
+          const sizeSeed = b && b.id ? `${b.id}:${row}:${col}` : `${row}:${col}`;
+          const heightSeed = hashString(sizeSeed) % 1000;
+          const heightRatio = 0.58 + (heightSeed / 1000) * 0.34;
+          const bookH = Math.max(18, Math.floor(rowH * heightRatio));
+          const bookY = rowBottom - bookH;
+          const p = stylePalette(b && b.style ? b.style : "dark");
+          const leftW = Math.max(1.5, Math.floor(bookW * 0.16));
+          const rightW = Math.max(1, Math.floor(bookW * 0.08));
+          const topH = Math.max(1.5, Math.floor(bookH * 0.03));
+          const hasBook = Boolean(b && b.id);
+          if (hasBook) {
+            const safeBookId = escapeXml(String(b.id));
+            svg += `<g class="book-shape" data-book-id="${safeBookId}">`;
+          } else {
+            svg += "<g>";
+          }
+          svg += `<rect x="${cursorX}" y="${bookY}" width="${bookW}" height="${bookH}" rx="0.8" fill="${p.spine}"/>`;
+          svg += `<rect x="${cursorX}" y="${bookY}" width="${leftW}" height="${bookH}" fill="${p.left}" opacity="0.9"/>`;
+          svg += `<rect x="${cursorX + bookW - rightW}" y="${bookY}" width="${rightW}" height="${bookH}" fill="${p.right}" opacity="0.65"/>`;
+          svg += `<rect x="${cursorX}" y="${bookY}" width="${bookW}" height="${topH}" fill="${p.top}" opacity="0.45"/>`;
+          if (hasBook && b.title && bookH > 30 && bookW > 10) {
+            const safeTitle = escapeXml(String(b.title).toUpperCase());
+            const textX = cursorX + Math.floor(bookW * 0.55);
+            const textY = bookY + bookH - 4;
+            const titleSize = Math.max(3.2, Math.min(5, bookW * 0.33));
+            svg += `<text x="${textX}" y="${textY}" fill="#d4af37" stroke="#3b2a08" stroke-width="0.2" font-size="${titleSize}" transform="rotate(-90,${textX},${textY})" font-family="Georgia,serif" opacity="0.96" filter="url(#book-title-shadow)" letter-spacing="0.2">${safeTitle}</text>`;
+          }
+          svg += `</g>`;
+          cursorX += bookW + 1;
+        }
+      }
+
+      svg += "</svg>";
+      return svg;
+    };
+
+    const showContactsPreview = () => {
+      contactsPreview.classList.add("visible");
+      positionFloorPreview();
+    };
+
+    const hideContactsPreview = () => {
+      contactsPreview.classList.remove("visible");
+    };
+
+    const showFloorPreview = (book) => {
+      if (!book || !book.title) {
+        hideHoverPreview();
+        return;
+      }
+      hideContactsPreview();
+      if (book.mainImage) {
+        hoverPreviewImage.src = book.mainImage;
+        hoverPreviewImage.alt = book.title;
+        hoverPreviewImage.classList.remove("hidden");
+      } else {
+        hoverPreviewImage.removeAttribute("src");
+        hoverPreviewImage.alt = "";
+        hoverPreviewImage.classList.add("hidden");
+      }
+      hoverPreviewTitle.textContent = book.title;
+      hoverPreviewDescription.textContent = book.description || "";
+      positionFloorPreview();
+      hoverPreview.classList.add("visible");
+    };
+
+    const hideHoverPreview = () => {
+      hoverPreview.classList.remove("visible");
+      showContactsPreview();
+    };
+
+    const positionFloorPreview = () => {
+      const heroRect = document.querySelector(".hero").getBoundingClientRect();
+      const floorRect = floorElement.getBoundingClientRect();
+      const centerX = floorRect.left + floorRect.width * 0.4 - heroRect.left;
+      const centerY = floorRect.top + floorRect.height / 2 - heroRect.top;
+      hoverPreview.style.left = `${centerX}px`;
+      hoverPreview.style.top = `${centerY}px`;
+      contactsPreview.style.left = `${centerX}px`;
+      contactsPreview.style.top = `${centerY}px`;
+    };
+
+    const openBookModal = (book) => {
+      modalContent.innerHTML = "";
+      const pages = (book.pageImages || [])
+        .map((img) => `<img src="${img}" alt="${book.title} page image">`)
+        .join("");
+      modalContent.innerHTML = `
+        <h2>${book.title}</h2>
+        <div class="book-kv"><span>ID:</span>${book.id}</div>
+        <div class="book-kv"><span>Style:</span>${book.style}</div>
+        <div class="book-kv"><span>Category:</span>${book.category}</div>
+        <div class="book-kv"><span>Description:</span>${book.description}</div>
+        <img class="book-main-image" src="${book.mainImage}" alt="${book.title} main image">
+        <div class="book-kv"><span>Page images:</span></div>
+        <div class="book-pages">${pages}</div>
+      `;
+      modal.classList.add("open");
+    };
+
+    const setActiveHeaderSection = (categoryKey) => {
+      const buttons = headerSectionsRoot.querySelectorAll("[data-category-key]");
+      buttons.forEach((button) => {
+        const isActive = categoryKey && button.dataset.categoryKey === categoryKey;
+        button.classList.toggle("is-active", Boolean(isActive));
+      });
+    };
+
+    const clearActiveHeaderSection = () => {
+      setActiveHeaderSection("");
+    };
+
+    const createHeaderSections = (categories) => {
+      headerSectionsRoot.innerHTML = "";
+      categories.forEach((category) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "header-section-title";
+        button.dataset.categoryKey = category.key;
+        button.textContent = category.title;
+        button.addEventListener("mouseenter", () => setActiveHeaderSection(category.key));
+        button.addEventListener("mouseleave", clearActiveHeaderSection);
+        headerSectionsRoot.appendChild(button);
+      });
+    };
+
+    const createShelf = (categoryKey, categoryTitle, books) => {
+      const card = document.createElement("article");
+      card.className = "shelf-card";
+      card.setAttribute("aria-label", categoryTitle + " bookshelf");
+      card.dataset.categoryKey = categoryKey;
+      card.addEventListener("mouseenter", () => setActiveHeaderSection(categoryKey));
+      card.addEventListener("mouseleave", clearActiveHeaderSection);
+
+      const svgHolder = document.createElement("div");
+      svgHolder.className = "shelf-svg";
+      card.appendChild(svgHolder);
+
+      const renderSvgToCard = () => {
+        const bounds = card.getBoundingClientRect();
+        const w = Math.max(60, Math.floor(bounds.width));
+        const h = Math.max(80, Math.floor(bounds.height));
+        const shelvesCount = 5;
+        const booksPerRow = Math.max(10, Math.floor(w / 16));
+        const slotCount = shelvesCount * booksPerRow;
+        const normalizedBooks = normalizeBooks(books, slotCount, categoryKey);
+        const svg = buildShelfSvg(w, h, normalizedBooks);
+        svgHolder.innerHTML = svg;
+        const svgElement = svgHolder.querySelector("svg");
+        if (!svgElement) return;
+        const booksById = new Map(
+          normalizedBooks
+            .filter((book) => book && book.id)
+            .map((book) => [book.id, book])
+        );
+
+        svgElement.addEventListener("mousemove", (event) => {
+          const target = event.target.closest("[data-book-id]");
+          if (!target) {
+            hideHoverPreview();
+            return;
+          }
+          const id = target.getAttribute("data-book-id");
+          const book = id ? booksById.get(id) : null;
+          if (!book) {
+            hideHoverPreview();
+            return;
+          }
+          showFloorPreview(book);
         });
-
-        tl.to("#hero-bg", { scale: 3, filter: "blur(20px)", opacity: 0, duration: 1 })
-          .to(".diamond-logo, .hero-desc", { opacity: 0, y: -50, scale: 0.9, duration: 0.5 }, 0);
-
-        // 2. Magnetic Hover Effect on Grid Items
-        document.querySelectorAll('.grid-item').forEach(item => {
-            item.addEventListener('mousemove', (e) => {
-                const rect = item.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg tilt
-                const rotateY = ((x - centerX) / centerX) * 10;
-                
-                gsap.to(item, {
-                    rotationX: rotateX,
-                    rotationY: rotateY,
-                    transformPerspective: 1000,
-                    ease: "power2.out",
-                    duration: 0.5
-                });
-            });
-            item.addEventListener('mouseleave', () => {
-                gsap.to(item, { rotationX: 0, rotationY: 0, ease: "elastic.out(1, 0.3)", duration: 1 });
-            });
+        svgElement.addEventListener("mouseleave", hideHoverPreview);
+        svgElement.addEventListener("click", (event) => {
+          const target = event.target.closest("[data-book-id]");
+          if (!target) return;
+          const id = target.getAttribute("data-book-id");
+          const book = id ? booksById.get(id) : null;
+          if (!book) return;
+          showFloorPreview(book);
+          openBookModal(book);
         });
+      };
 
-        // 3. Test Gallery Data
-        const galleryData = {
-            painting: [
-                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvDAsHRJkKQQ5UhJDESVsIUUJgZ0Xo5g16gKUN95I7E0FwMP7BM_ymleKvZQNz9v8_D3SIfP9y5Wdos-WNqnDcYw-3YeCUdcgcesZYBQBtNol2O0-SPIRq1wx0ckFX6FQ-un96mWYzNBnUQeuJ3kbmHDtq54QkUbtaG4CpJpXBnQ7S2nn2tJjTkE60Aszok0gF5ZW_cvNcLIdiXQObrSa0yO6Md4XVauh4gXDe5xi4vLbeBx06ClMNiKmTwSmBhx2RM9g7EQSafq4", desc: "Abstract monochrome oil painting. Heavy impasto brushstrokes and dramatic contrast of deep black." },
-                { img: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&q=80&w=1000", desc: "" } // No description example
-            ],
-            tattoo: [
-                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1NPTWHUsL2Na899vL2yO80lI4K8AtYfnNcfgqUJTu-Fy988bVniUQoGynREtXyV0kYqUjGsgr9-pTGcn11BxK1zozpeEYzckZ81olnB8jzVEuIlVV8uEudi_C1tWJlPfVe_5O7G0XY7pLz9faJgkW8IhP_J2jUGpvML0ZWZUTr4ZaeA9C0Isp20loollVdaF8tbecZPHYopda0zk2SUY7AnKabp0bVorO6W29bSFvXXEQfh4HKnlmvUnejh53sypIM3ZYyVKRsqg", desc: "Delicate monochrome botanical fine line work on skin." },
-                { img: "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&q=80&w=1000", desc: "Symbolic shading technique." }
-            ],
-            illustration: [
-                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDj95HAQ5hIXwmCvTYqpyUwakqZUjglR0A39QMS0EhlX-uZ3KvGgRJnUTRoadsYqIslOfNInz_JkSEv4hYZ9DtiF_25srlNxL6NkaXSeyJT2qHFF5tC3jepp26iG-J5v8T3WV35EeaZquvAu2eq74f48N9raVE1ZERO5V3VWcUMcpqfZ9eO0-ZU0F3Mwd6M8WrsjooythF8Mn81Fs6RI4RuErfdhTioKE7jI53TDCw_8UKV1pRBbLPgGEtNL9loM6GW_1e8ASeUT0M", desc: "Surreal digital illustration featuring geometric shapes." },
-            ],
-            batik: [
-                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD64b5JzqQ35bYG77IOvlZWwpTLA1zUi4nwG9b_19nZojQHQt_1eB_qPGT0WdO71DhmFQei2ZiVcM35aQeqYawMcb9SpB-pf3KEBSm2PuZrx9EyKgDL2GnAkFa2A-OYMs1sY1y5NrCJ7IqordDMBnXWLoSqf7lh9btMXCGyz3XES2QCROlSAngPN51DOoB2yt5EPws-vlawFbt6iDaKyUUsdgr_8e-4GTAonj2LaKJCb8t9pj6K7VUmblfK_zf3kWP3xr08hu9DumM", desc: "Intricate black and white textile pattern." },
-            ],
-            mural: [
-                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDLNRASGBUVmwTri29SxWwE9aW_25wumTJM1f96k49K7IEy0B-T8buORBd3H7NYlxOZEZ6DSmkWjgZGPHgu6zcD10PDpoUm1TX_DrghS0pxjuDXEGGFYuw65OKG5-h5V-iMWznSqbnRrGhihn-SP_f41_n3-53utolVw28_4MwsenHAk83XeaXclXKYx6Jug90DQpa8g0HbmOI_xpGVptYAkMx5nASAn-2TqL4l-nplL453-bx7ySLKYdAsmgkz9oJjPMVDrw4rOBo", desc: "Large scale black and white wall mural painting with sweeping curves." },
-            ],
-            // Add fallback generic data for others like sketches
-            default: [
-                { img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=1000", desc: "Exploring form and negative space." },
-                { img: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&q=80&w=1000", desc: "" },
-                { img: "https://images.unsplash.com/photo-1560064603-60580eb5c792?auto=format&fit=crop&q=80&w=1000", desc: "A deeper look into the intricate details." }
-            ]
-        };
+      requestAnimationFrame(renderSvgToCard);
+      window.addEventListener("resize", renderSvgToCard);
+      return card;
+    };
 
-        // 4. Bad Ass Gallery Transition
-        const galleryView = document.getElementById('gallery-view');
-        const galleryScroll = document.getElementById('gallery-scroll');
-        const galleryTitle = document.getElementById('gallery-title');
+    const renderShelves = async () => {
+      shelvesRoot.innerHTML = "";
+      headerSectionsRoot.innerHTML = "";
+      try {
+        const response = await fetch("./data.json");
+        const data = await response.json();
+        const rawCategories = Array.isArray(data.categories) ? data.categories.slice(0, 5) : [];
+        const categories = rawCategories
+          .map((item) => {
+            const key = item.id || item.title || "";
+            if (!key) return null;
+            return {
+              key,
+              title: item.title || item.id || "",
+              books: Array.isArray(item.books) ? item.books : []
+            };
+          })
+          .filter(Boolean);
 
-        document.querySelectorAll('.grid-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                // If it's a contact or about circle, don't open gallery for now (or handle differently)
-                if(item.dataset.category === 'contact' || item.dataset.category === 'about') return;
+        createHeaderSections(categories);
 
-                const category = item.dataset.category;
-                const data = galleryData[category] || galleryData.default;
-                
-                // Populate gallery
-                galleryTitle.innerText = category.replace('-', ' ');
-                galleryScroll.innerHTML = data.map(d => `
-                    <div class="gallery-slide">
-                        <img src="${d.img}" alt="Artwork">
-                        ${d.desc ? `<div class="gallery-desc">${d.desc}</div>` : ''}
-                    </div>
-                `).join('');
-
-                // Ensure scroll is at the start
-                galleryScroll.scrollLeft = 0;
-
-                // Animation
-                galleryView.style.display = 'flex';
-                gsap.fromTo(galleryView, 
-                    { opacity: 0, y: 50 }, 
-                    { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }
-                );
-            });
+        categories.forEach((category) => {
+          shelvesRoot.appendChild(createShelf(category.key, category.title, category.books));
         });
+      } catch (_error) {
+        shelvesRoot.innerHTML = "";
+        headerSectionsRoot.innerHTML = "";
+      }
+    };
 
-        document.getElementById('close-gallery').addEventListener('click', () => {
-            gsap.to(galleryView, { 
-                opacity: 0, y: 50, duration: 0.4, ease: "power2.in",
-                onComplete: () => { galleryView.style.display = 'none'; }
-            });
-        });
+    renderShelves();
 
-    </script>
+    document.addEventListener("mousemove", (event) => {
+      if (!event.target.closest("[data-book-id]")) {
+        hideHoverPreview();
+      }
+    });
+
+    modalClose.addEventListener("click", () => {
+      modal.classList.remove("open");
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("open");
+      }
+    });
+
+    floorElement.addEventListener("error", () => {
+      if (!floorElement.dataset.fallbackTried) {
+        floorElement.dataset.fallbackTried = "true";
+        floorElement.src = "data/floor.png";
+        return;
+      }
+      floorElement.src = "";
+    });
+
+    floorElement.addEventListener("load", positionFloorPreview);
+    window.addEventListener("resize", positionFloorPreview);
+  </script>
 </body>
 </html>
