@@ -52,3 +52,17 @@ Do not run ./restart yourself; the server restarts after this command.'
 --- agent stderr ---
 --- restart stdout ---
 --- restart stderr ---
+
+==== 2026-03-30T20:57:28.196Z server start (ai-agent log) ====
+==== 2026-03-30T20:57:28.704Z START ====
+provider: cursor
+model: auto
+command: /home/superuser/.local/bin/cursor-agent --print --trust --force --workspace '/home/superuser/NINA' --model 'auto'  'change 3rd icon in social media to twitter
+
+Do not run ./restart yourself; the server restarts after this command.'
+--- agent stdout ---
+--- agent stderr ---
+--- restart stdout ---
+--- restart stderr ---
+
+==== 2026-03-30T20:58:37.515Z server start (ai-agent log) ====
